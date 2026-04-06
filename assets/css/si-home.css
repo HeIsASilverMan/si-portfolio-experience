@@ -313,12 +313,31 @@ body {
 /* ============================================================
    MARQUEE
    ============================================================ */
+@keyframes si-marquee {
+    from { transform: translateX( 0 ); }
+    to   { transform: translateX( -50% ); }
+}
+
 .si-scope.si-marquee {
     background: #111113 !important;
     border-top: 1px solid #2A2A2E;
     border-bottom: 1px solid #2A2A2E;
     padding: 0.875rem 0;
     overflow: hidden;
+    /* Fade edges */
+    -webkit-mask-image: linear-gradient( to right, transparent 0%, black 8%, black 92%, transparent 100% );
+    mask-image: linear-gradient( to right, transparent 0%, black 8%, black 92%, transparent 100% );
+}
+
+/* JS wraps both tracks in this element */
+.si-marquee-inner {
+    display: flex;
+    width: max-content;
+    animation: si-marquee 30s linear infinite;
+}
+
+.si-scope.si-marquee:hover .si-marquee-inner {
+    animation-play-state: paused;
 }
 
 .si-marquee-track {
@@ -326,6 +345,8 @@ body {
     align-items: center;
     gap: 3rem;
     white-space: nowrap;
+    flex-shrink: 0;
+    padding: 0 1.5rem;
 }
 
 .si-marquee-item {
@@ -341,6 +362,10 @@ body {
 .si-marquee-sep {
     color: #5C5A54;
     flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .si-marquee-inner { animation: none; }
 }
 
 /* ============================================================

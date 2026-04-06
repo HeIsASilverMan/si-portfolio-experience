@@ -85,9 +85,5 @@
 
     </div>
 
-    <div class="si-home-hero__scroll" aria-hidden="true">
-        <div class="si-home-hero__scroll-line"></div>
-        <span>Scroll</span>
-    </div>
 
 </section>

@@ -1,0 +1,522 @@
+/* ============================================================
+   COMPOSITION HERO
+   ============================================================ */
+.si-scope.si-composition-hero {
+    position: relative;
+    min-height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 2rem 6rem;
+    overflow: hidden;
+    background: #0D0D0F !important;
+}
+
+/* Sheet music line pattern */
+.si-composition-hero__lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 22px,
+        rgba(212, 168, 83, 0.04) 22px,
+        rgba(212, 168, 83, 0.04) 23px
+    );
+    pointer-events: none;
+}
+
+.si-composition-hero__orb {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(ellipse at center,
+        rgba(212, 168, 83, 0.07) 0%,
+        rgba(212, 168, 83, 0.03) 40%,
+        transparent 70%
+    );
+    pointer-events: none;
+}
+
+.si-composition-hero__inner {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    text-align: center;
+}
+
+.si-composition-hero__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 1.5rem;
+}
+
+.si-composition-hero__headline {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 2.5rem, 6vw, 5rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    line-height: 1.1;
+    margin: 0 0 1.75rem;
+    letter-spacing: -0.01em;
+}
+
+.si-composition-hero__sub {
+    font-size: clamp( 1rem, 2vw, 1.15rem );
+    color: #9B978E !important;
+    line-height: 1.75;
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+}
+
+.si-composition-hero__actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* ============================================================
+   BENEFITS LIST
+   ============================================================ */
+.si-scope.si-benefits-list {
+    padding: 6rem 2rem;
+    background: #111113 !important;
+}
+
+.si-benefits-list__inner {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.si-benefits-list__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.si-benefits-list__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 1rem;
+}
+
+.si-benefits-list__heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.75rem, 4vw, 2.75rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.si-benefits-list__items {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.si-benefits-list__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    gap: 0 1.5rem;
+    padding: 2rem 0;
+    position: relative;
+    transition-delay: calc( var( --item-i, 0 ) * 100ms );
+}
+
+.si-benefits-list__item + .si-benefits-list__item {
+    border-top: 1px solid #2A2A2E;
+}
+
+/* Animated gold underline on reveal */
+.si-benefits-list__line {
+    position: absolute;
+    bottom: 0;
+    left: 3rem;
+    right: 0;
+    height: 1px;
+    background: #D4A853;
+    transform: scaleX( 0 );
+    transform-origin: left;
+    transition: transform 0.6s cubic-bezier( 0.16, 1, 0.3, 1);
+}
+
+.si-benefits-list__item.visible .si-benefits-list__line {
+    transform: scaleX( 1 );
+    transition-delay: calc( var( --item-i, 0 ) * 100ms + 0.3s );
+}
+
+.si-benefits-list__num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #D4A853;
+    opacity: 0.6;
+    padding-top: 0.3rem;
+    letter-spacing: 0.05em;
+}
+
+.si-benefits-list__text {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.25rem, 2.5vw, 1.6rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0 0 0.5rem;
+    line-height: 1.25;
+}
+
+.si-benefits-list__detail {
+    font-size: 0.9rem;
+    color: #9B978E !important;
+    margin: 0;
+    line-height: 1.6;
+}
+
+/* ============================================================
+   PROCESS TIMELINE
+   ============================================================ */
+.si-scope.si-process-timeline {
+    padding: 6rem 2rem;
+    background: #0D0D0F !important;
+}
+
+.si-process-timeline__inner {
+    max-width: 680px;
+    margin: 0 auto;
+}
+
+.si-process-timeline__header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.si-process-timeline__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 1rem;
+}
+
+.si-process-timeline__heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.75rem, 4vw, 2.75rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.si-process-timeline__steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.si-process-timeline__step {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    gap: 0 1.75rem;
+    transition-delay: calc( var( --step-i, 0 ) * 80ms );
+}
+
+.si-process-timeline__connector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0.25rem;
+}
+
+.si-process-timeline__dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #D4A853;
+    border: 2px solid #D4A853;
+    box-shadow: 0 0 0 4px rgba( 212, 168, 83, 0.15 );
+    flex-shrink: 0;
+    transition: box-shadow 0.3s ease;
+}
+
+.si-process-timeline__step:hover .si-process-timeline__dot {
+    box-shadow: 0 0 0 6px rgba( 212, 168, 83, 0.25 );
+}
+
+.si-process-timeline__line {
+    width: 1px;
+    flex: 1;
+    min-height: 2.5rem;
+    background: linear-gradient( to bottom, #D4A853, rgba( 212, 168, 83, 0.15 ) );
+    margin: 6px 0;
+}
+
+.si-process-timeline__body {
+    padding-bottom: 2.5rem;
+}
+
+.si-process-timeline__num {
+    display: inline-block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    color: #D4A853;
+    opacity: 0.6;
+    margin-bottom: 0.35rem;
+}
+
+.si-process-timeline__title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0 0 0.5rem;
+}
+
+.si-process-timeline__desc {
+    font-size: 0.925rem;
+    color: #9B978E !important;
+    margin: 0;
+    line-height: 1.7;
+}
+
+/* ============================================================
+   AUDIO SHOWCASE
+   ============================================================ */
+.si-scope.si-audio-showcase {
+    padding: 6rem 2rem;
+    background: #111113 !important;
+}
+
+.si-audio-showcase__inner {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.si-audio-showcase__header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.si-audio-showcase__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 1rem;
+}
+
+.si-audio-showcase__heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.75rem, 4vw, 2.75rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0;
+}
+
+.si-audio-showcase__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    border: 1px solid #2A2A2E;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.si-audio-showcase__empty {
+    text-align: center;
+    padding: 3rem;
+    color: #5C5A54 !important;
+    font-style: italic;
+}
+
+/* ── Audio Card ──────────────────────────────────────────── */
+.si-audio-card {
+    background: #161619 !important;
+    padding: 1.5rem;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 1rem 2rem;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+
+.si-audio-card:hover {
+    background: #1E1E22 !important;
+}
+
+.si-audio-card + .si-audio-card {
+    border-top: 1px solid #2A2A2E;
+}
+
+@media ( max-width: 600px ) {
+    .si-audio-card {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Player controls */
+.si-audio-card__player {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.si-audio-card__play-btn {
+    flex-shrink: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba( 212, 168, 83, 0.12 );
+    border: 1px solid rgba( 212, 168, 83, 0.35 );
+    color: #D4A853;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+}
+
+.si-audio-card__play-btn:hover {
+    background: rgba( 212, 168, 83, 0.2 );
+    border-color: #D4A853;
+    transform: scale( 1.05 );
+}
+
+.si-audio-card__play-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Show/hide play vs pause icon */
+.si-pause-icon { display: none; }
+.si-audio-card.is-playing .si-play-icon  { display: none; }
+.si-audio-card.is-playing .si-pause-icon { display: block; }
+
+/* Waveform bars */
+.si-audio-card__waveform {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 36px;
+    flex: 1;
+}
+
+.si-audio-card__bar {
+    display: block;
+    width: 3px;
+    border-radius: 2px;
+    background: rgba( 212, 168, 83, 0.25 );
+    flex-shrink: 0;
+    transition: background 0.3s ease;
+}
+
+.si-audio-card.is-playing .si-audio-card__bar {
+    background: rgba( 212, 168, 83, 0.55 );
+    animation: si-bar-pulse 1.2s ease-in-out infinite;
+}
+
+.si-audio-card.is-playing .si-audio-card__bar:nth-child(2n)   { animation-delay: 0.15s; }
+.si-audio-card.is-playing .si-audio-card__bar:nth-child(3n)   { animation-delay: 0.3s; }
+.si-audio-card.is-playing .si-audio-card__bar:nth-child(5n)   { animation-delay: 0.45s; }
+
+@keyframes si-bar-pulse {
+    0%, 100% { opacity: 0.55; }
+    50%       { opacity: 1; }
+}
+
+/* Progress */
+.si-audio-card__progress-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    min-width: 120px;
+}
+
+.si-audio-card__progress-bg {
+    height: 3px;
+    background: rgba( 255, 255, 255, 0.08 );
+    border-radius: 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.si-audio-card__progress-bar {
+    height: 100%;
+    background: #D4A853;
+    border-radius: 2px;
+    width: 0%;
+    transition: width 0.1s linear;
+}
+
+.si-audio-card__time {
+    display: flex;
+    justify-content: space-between;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    color: #5C5A54 !important;
+    letter-spacing: 0.04em;
+}
+
+/* Meta */
+.si-audio-card__meta {
+    text-align: right;
+}
+
+@media ( max-width: 600px ) {
+    .si-audio-card__meta { text-align: left; }
+}
+
+.si-audio-card__title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.1rem;
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0 0 0.3rem;
+}
+
+.si-audio-card__credit {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 0.4rem;
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+@media ( max-width: 600px ) {
+    .si-audio-card__credit { justify-content: flex-start; }
+}
+
+.si-audio-card__year {
+    color: #5C5A54;
+}
+
+.si-audio-card__excerpt {
+    font-size: 0.82rem;
+    color: #9B978E !important;
+    margin: 0;
+    line-height: 1.5;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+    .si-audio-card__bar { animation: none !important; }
+}
