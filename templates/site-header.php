@@ -54,8 +54,6 @@
             <div class="si-nav__inner">
                 <ul class="si-nav__list" role="list">
                     <li><a href="/composition" class="si-nav__link">Composition</a></li>
-
-Expand 2 hidden lines
                     <li><a href="/contact" class="si-nav__link si-nav__link--cta">Get in Touch</a></li>
                 </ul>
             </div>
@@ -63,3 +61,4 @@ Expand 2 hidden lines
         </nav>
  
     </div>
+ 
