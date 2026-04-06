@@ -232,8 +232,6 @@
     }
  
     .si-nav.is-open {
-
-Expand 1 hidden line
         pointer-events: auto;
     }
  
@@ -323,6 +321,15 @@ Expand 1 hidden line
         color: #D4A853;
         text-shadow: none;
     }
+ 
+    .si-nav__link--cta:hover,
+    .si-nav__link--cta:focus-visible {
+        background: rgba(212, 168, 83, 0.18);
+        border-color: #E8C675;
+        color: #E8C675;
+        text-shadow: 0 0 20px rgba(232, 198, 117, 0.3);
+    }
+}
  
     .si-nav__link--cta:hover,
     .si-nav__link--cta:focus-visible {
