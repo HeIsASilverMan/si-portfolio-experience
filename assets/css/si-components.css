@@ -1,0 +1,74 @@
+/* ---- Buttons ---- */
+.si-scope .si-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    padding: 0.75em 1.5em;
+    border-radius: var(--si-radius-md);
+    font-family: var(--si-font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--si-dur-fast) var(--si-ease-out);
+    border: none;
+    text-decoration: none;
+}
+
+.si-scope .si-btn--primary {
+    background: var(--si-accent-warm);
+    color: #0D0D0F;
+}
+
+.si-scope .si-btn--primary:hover {
+    background: var(--si-accent-glow);
+    color: #0D0D0F;
+    transform: translateY(-2px);
+}
+
+.si-scope .si-btn--ghost {
+    background: transparent;
+    color: var(--si-text-primary);
+    border: 1px solid var(--si-border);
+}
+
+.si-scope .si-btn--ghost:hover {
+    border-color: var(--si-accent-warm);
+    color: var(--si-accent-warm);
+}
+
+.si-scope .si-btn__arrow {
+    transition: transform var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-btn:hover .si-btn__arrow {
+    transform: translateX(4px);
+}
+
+/* ---- Cards ---- */
+.si-scope .si-card {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-lg);
+    overflow: hidden;
+    transition: transform var(--si-dur-med) var(--si-ease-out),
+                box-shadow var(--si-dur-med) var(--si-ease-out);
+}
+
+.si-scope .si-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ---- Label / badge ---- */
+.si-scope .si-label {
+    display: inline-block;
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--si-accent-warm);
+    border: 1px solid var(--si-accent-warm);
+    border-radius: 4px;
+    padding: 0.25em 0.6em;
+}

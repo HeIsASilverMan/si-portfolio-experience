@@ -1,0 +1,28 @@
+:root {
+    --si-bg-deep:        #0D0D0F;
+    --si-bg-surface:     #161619;
+    --si-bg-elevated:    #1E1E22;
+    --si-accent-warm:    #D4A853;
+    --si-accent-glow:    #E8C675;
+    --si-text-primary:   #F0EDE6;
+    --si-text-secondary: #9B978E;
+    --si-text-dim:       #5C5A54;
+    --si-border:         #2A2A2E;
+    --si-success:        #7EC89B;
+
+    --si-font-display: 'Instrument Serif', Georgia, serif;
+    --si-font-body:    'DM Sans', system-ui, sans-serif;
+    --si-font-mono:    'JetBrains Mono', monospace;
+
+    --si-ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+    --si-ease-in-out:   cubic-bezier(0.65, 0, 0.35, 1);
+    --si-dur-fast:      200ms;
+    --si-dur-med:       400ms;
+    --si-dur-slow:      800ms;
+    --si-stagger:       80ms;
+
+    --si-radius-sm:  8px;
+    --si-radius-md:  12px;
+    --si-radius-lg:  20px;
+    --si-radius-xl:  32px;
+}

@@ -1,0 +1,64 @@
+/* Force dark background at every level */
+html,
+body {
+    background: #0D0D0F !important;
+    color: #F0EDE6;
+    margin: 0;
+    padding: 0;
+}
+
+.si-scope {
+    box-sizing: border-box;
+    color: #F0EDE6;
+    font-family: var(--si-font-body);
+    font-size: 1rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+.si-scope *,
+.si-scope *::before,
+.si-scope *::after {
+    box-sizing: inherit;
+}
+
+.si-scope h1,
+.si-scope h2,
+.si-scope h3,
+.si-scope h4 {
+    font-family: var(--si-font-display);
+    line-height: 1.15;
+    margin: 0 0 0.5em;
+    color: #F0EDE6 !important;
+}
+
+.si-scope p {
+    margin: 0 0 1em;
+    color: #9B978E !important;
+}
+
+.si-scope a {
+    color: var(--si-accent-warm);
+    text-decoration: none;
+}
+
+.si-scope img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.si-scope section {
+    background: #0D0D0F !important;
+}
+
+/* Kill any leftover theme wrappers */
+#page, #content, #main, .site, .site-content,
+.entry-content, .page-content, article, .hentry {
+    background: transparent !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: none !important;
+    border: none !important;
+    box-shadow: none !important;
+}
