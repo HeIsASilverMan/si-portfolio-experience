@@ -5,6 +5,7 @@ class SI_CPTs {
 
     public static function init() {
         add_action( 'init',       array( __CLASS__, 'register_portfolio' ) );
+        add_action( 'init',       array( __CLASS__, 'register_portfolio_taxonomy' ) );
         add_action( 'init',       array( __CLASS__, 'register_testimonials' ) );
         add_action( 'init',       array( __CLASS__, 'register_enquiries' ) );
         add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
@@ -27,6 +28,25 @@ class SI_CPTs {
             'menu_icon'    => 'dashicons-portfolio',
             'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
             'rewrite'      => array( 'slug' => 'portfolio' ),
+        ) );
+    }
+
+    public static function register_portfolio_taxonomy() {
+        $labels = array(
+            'name'          => 'Project Categories',
+            'singular_name' => 'Project Category',
+            'all_items'     => 'All Categories',
+            'edit_item'     => 'Edit Category',
+            'add_new_item'  => 'Add New Category',
+        );
+        register_taxonomy( 'si_portfolio_cat', 'si_portfolio', array(
+            'labels'            => $labels,
+            'public'            => false,
+            'show_ui'           => true,
+            'show_in_menu'      => true,
+            'hierarchical'      => false,
+            'show_admin_column' => true,
+            'rewrite'           => false,
         ) );
     }
 
@@ -72,6 +92,14 @@ class SI_CPTs {
             array( __CLASS__, 'render_project_meta_box' ),
             'si_portfolio',
             'side',
+            'high'
+        );
+        add_meta_box(
+            'si_ld_details',
+            'Learning Design Details',
+            array( __CLASS__, 'render_ld_meta_box' ),
+            'si_portfolio',
+            'normal',
             'high'
         );
         add_meta_box(
@@ -124,6 +152,31 @@ class SI_CPTs {
         echo '<p style="margin-top:10px;"><strong>Audio File URL (composition only)</strong></p>';
         $audio = get_post_meta( $post->ID, '_si_audio_file', true );
         echo '<input type="url" name="si_audio_file" value="' . esc_attr( $audio ) . '" style="width:100%" placeholder="https://">';
+    }
+
+    public static function render_ld_meta_box( $post ) {
+        wp_nonce_field( 'si_save_ld_meta', 'si_ld_nonce' );
+
+        $challenge  = get_post_meta( $post->ID, '_si_challenge', true );
+        $approach   = get_post_meta( $post->ID, '_si_approach', true );
+        $outcome    = get_post_meta( $post->ID, '_si_outcome', true );
+        $tools_used = get_post_meta( $post->ID, '_si_tools_used', true );
+
+        $ta_style = 'width:100%;height:80px;';
+
+        echo '<p style="color:#666;font-size:12px;margin-bottom:12px;">Used in the project modal on the Learning Design page. Leave blank if not applicable.</p>';
+
+        echo '<p><strong>The Challenge</strong></p>';
+        echo '<textarea name="si_challenge" style="' . esc_attr( $ta_style ) . '">' . esc_textarea( $challenge ) . '</textarea>';
+
+        echo '<p style="margin-top:10px;"><strong>The Approach</strong></p>';
+        echo '<textarea name="si_approach" style="' . esc_attr( $ta_style ) . '">' . esc_textarea( $approach ) . '</textarea>';
+
+        echo '<p style="margin-top:10px;"><strong>The Outcome</strong></p>';
+        echo '<textarea name="si_outcome" style="' . esc_attr( $ta_style ) . '">' . esc_textarea( $outcome ) . '</textarea>';
+
+        echo '<p style="margin-top:10px;"><strong>Tools Used</strong> <span style="color:#666;font-weight:normal;">(comma-separated, e.g. Articulate Storyline, Rise, After Effects)</span></p>';
+        echo '<input type="text" name="si_tools_used" value="' . esc_attr( $tools_used ) . '" style="width:100%" placeholder="Articulate Storyline, Rise, After Effects">';
     }
 
     public static function render_testimonial_meta_box( $post ) {
@@ -183,6 +236,26 @@ class SI_CPTs {
                 if ( isset( $_POST[ $input ] ) ) {
                     update_post_meta( $post_id, $meta_key, esc_url_raw( $_POST[ $input ] ) );
                 }
+            }
+        }
+
+        // Learning Design details
+        if ( isset( $_POST['si_ld_nonce'] ) &&
+             wp_verify_nonce( $_POST['si_ld_nonce'], 'si_save_ld_meta' ) ) {
+
+            $textarea_fields = array(
+                'si_challenge'  => '_si_challenge',
+                'si_approach'   => '_si_approach',
+                'si_outcome'    => '_si_outcome',
+            );
+            foreach ( $textarea_fields as $input => $meta_key ) {
+                if ( isset( $_POST[ $input ] ) ) {
+                    update_post_meta( $post_id, $meta_key, sanitize_textarea_field( $_POST[ $input ] ) );
+                }
+            }
+
+            if ( isset( $_POST['si_tools_used'] ) ) {
+                update_post_meta( $post_id, '_si_tools_used', sanitize_text_field( $_POST['si_tools_used'] ) );
             }
         }
 

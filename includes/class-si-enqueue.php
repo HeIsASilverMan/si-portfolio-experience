@@ -21,13 +21,16 @@ class SI_Enqueue {
         wp_enqueue_style( 'si-animations',   $url . 'css/si-animations.css',   array( 'si-base' ),       $v );
         wp_enqueue_style( 'si-layout',       $url . 'css/si-layout.css',       array( 'si-components' ), $v );
         wp_enqueue_style( 'si-home',         $url . 'css/si-home.css',         array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-composition',  $url . 'css/si-composition.css',  array( 'si-components' ), $v );
+        wp_enqueue_style( 'si-composition',      $url . 'css/si-composition.css',      array( 'si-components' ), $v );
+        wp_enqueue_style( 'si-learning-design',  $url . 'css/si-learning-design.css',  array( 'si-components' ), $v );
 
         wp_enqueue_script( 'si-scroll-observer', $url . 'js/si-scroll-observer.js', array(), $v, true );
         wp_enqueue_script( 'si-counters',        $url . 'js/si-counters.js',        array(), $v, true );
         wp_enqueue_script( 'si-marquee',         $url . 'js/si-marquee.js',         array(), $v, true );
         wp_enqueue_script( 'si-magnetic',        $url . 'js/si-magnetic-button.js', array(), $v, true );
         wp_enqueue_script( 'si-nav',             $url . 'js/si-nav.js',             array(), $v, true );
-        wp_enqueue_script( 'si-audio-player',    $url . 'js/si-audio-player.js',    array(), $v, true );
+        wp_enqueue_script( 'si-audio-player',      $url . 'js/si-audio-player.js',      array(), $v, true );
+        wp_enqueue_script( 'si-portfolio-filter',  $url . 'js/si-portfolio-filter.js',  array(), $v, true );
+        wp_enqueue_script( 'si-project-modal',     $url . 'js/si-project-modal.js',     array(), $v, true );
     }
 }

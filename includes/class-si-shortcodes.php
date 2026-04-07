@@ -15,6 +15,12 @@ class SI_Shortcodes {
             'si_benefits_list'      => 'benefits_list',
             'si_process_timeline'   => 'process_timeline',
             'si_audio_showcase'     => 'audio_showcase',
+            // Phase 3
+            'si_portfolio_grid'     => 'portfolio_grid',
+            'si_approach_cards'     => 'approach_cards',
+            'si_tools_grid'         => 'tools_grid',
+            'si_awards'             => 'awards',
+            'si_education_timeline' => 'education_timeline',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -74,5 +80,28 @@ class SI_Shortcodes {
 
     public static function audio_showcase( $atts ) {
         return self::render( 'audio-showcase' );
+    }
+
+    /* ── Phase 3 ─────────────────────────────────────────── */
+
+    public static function portfolio_grid( $atts ) {
+        $atts = shortcode_atts( array( 'type' => 'learning_design' ), $atts, 'si_portfolio_grid' );
+        return self::render( 'portfolio-grid', array( 'project_type' => $atts['type'] ) );
+    }
+
+    public static function approach_cards( $atts ) {
+        return self::render( 'approach-cards' );
+    }
+
+    public static function tools_grid( $atts ) {
+        return self::render( 'tools-grid' );
+    }
+
+    public static function awards( $atts ) {
+        return self::render( 'awards' );
+    }
+
+    public static function education_timeline( $atts ) {
+        return self::render( 'education-timeline' );
     }
 }
