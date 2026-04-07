@@ -7,8 +7,9 @@ Full design spec is in `shaneivers-plugin-plan.md`. Read it before starting any 
 | Phase | Status | Scope |
 |-------|--------|-------|
 | 1 | Complete | Scaffold, CPTs, design system, home hero, marquee, dual showcase, testimonials, CTA band, header, footer |
-| 2 | Next | Composition page: hero, benefits list, process timeline, audio player, audio showcase |
-| 3 | Pending | Learning Design: portfolio grid, project modal, tools grid, awards, approach cards |
+| 2 | Complete | Composition page: hero, benefits list, process timeline, audio player, audio showcase |
+| 2.5 | Complete | Settings page (`SI_Settings`) — editable front-end text and general config |
+| 3 | Next | Learning Design: portfolio grid, project modal, tools grid, awards, approach cards |
 | 4 | Pending | About page, connect section, polish |
 | 5 | Pending | Multi-step contact forms, AJAX, enquiry admin |
 
@@ -52,30 +53,77 @@ Always use straight ASCII quotes. Curly apostrophes in strings cause fatal parse
 - All `<img>` tags use `loading="lazy"`
 - User-facing strings wrapped in `esc_html_e()` / `__()` with domain `si-portfolio`
 
-## Design Tokens (quick ref)
+## Editable Text — Always Use SI_Settings
 
+**Every user-facing string that appears on the front end must be editable via the settings page.**
+This is a standing requirement for all future phases.
+
+### The pattern to follow in all templates:
+
+```php
+// At the top of any template, retrieve text via SI_Settings::get()
+$heading = SI_Settings::get( 'my_section_heading' );
+$sub     = SI_Settings::get( 'my_section_sub' );
+
+// Output with esc_html() for plain text
+echo esc_html( $heading );
+
+// For mailto links, use antispambot() on the email value
+$email = SI_Settings::get( 'contact_email' );
+<a href="mailto:<?php echo esc_attr( antispambot( $email ) ); ?>">
 ```
-Background:   #0D0D0F  (deep) / #161619 (surface) / #1E1E22 (elevated)
-Gold accent:  #D4A853  (primary) / #E8C675 (hover/glow)
-Text:         #F0EDE6  (primary) / #9B978E (secondary) / #5C5A54 (dim)
-Border:       #2A2A2E
-Fonts:        'Instrument Serif' (display) / 'DM Sans' (body) / 'JetBrains Mono' (labels)
-Ease:         cubic-bezier(0.16, 1, 0.3, 1)
-```
+
+### Adding a new setting:
+
+1. Add a default value to `SI_Settings::defaults()` in `includes/class-si-settings.php`
+2. Add a field to the appropriate tab in `SI_Settings::render_tab()`
+3. Use `SI_Settings::get( 'your_key' )` in the template
+
+### Current settings keys (v1.1.0):
+
+| Key | Tab | Description |
+|-----|-----|-------------|
+| `contact_email` | General | mailto: address used in CTA band |
+| `spotify_url` | General | Spotify profile URL |
+| `soundcloud_url` | General | SoundCloud profile URL |
+| `linkedin_url` | General | LinkedIn profile URL |
+| `patreon_url` | General | Patreon profile URL |
+| `comp_hero_label` | Composition | Hero eyebrow label |
+| `comp_hero_headline` | Composition | Hero main heading |
+| `comp_hero_sub` | Composition | Hero subtitle paragraph |
+| `comp_hero_cta1` | Composition | Primary button text |
+| `comp_hero_cta2` | Composition | Secondary button text |
+| `benefits_label` | Composition | Benefits section eyebrow |
+| `benefits_heading` | Composition | Benefits section heading |
+| `benefit_1_text` … `benefit_4_text` | Composition | Benefit item titles |
+| `benefit_1_detail` … `benefit_4_detail` | Composition | Benefit item descriptions |
+| `process_label` | Composition | Timeline section eyebrow |
+| `process_heading` | Composition | Timeline section heading |
+| `step_1_title` … `step_5_title` | Composition | Process step titles |
+| `step_1_body` … `step_5_body` | Composition | Process step descriptions |
+| `audio_label` | Composition | Audio showcase eyebrow |
+| `audio_heading` | Composition | Audio showcase heading |
+| `cta_heading` | CTA Band | CTA band main heading |
+| `cta_sub` | CTA Band | CTA band subtext |
+| `cta_btn` | CTA Band | CTA band button label |
+
+When adding Phase 3+ sections, add a new tab (e.g. `learning`) to `SI_Settings::render_tab()` and follow the same pattern.
 
 ## File Structure
 
 ```
 si-portfolio-experience/
-├── si-portfolio-experience.php   # Main plugin file
+├── si-portfolio-experience.php   # Main plugin file (v1.1.0)
 ├── includes/
 │   ├── class-si-enqueue.php      # All asset registration
 │   ├── class-si-cpts.php         # CPTs + meta boxes
-│   └── class-si-shortcodes.php   # Shortcode registration
+│   ├── class-si-shortcodes.php   # Shortcode registration
+│   └── class-si-settings.php     # Admin settings page + SI_Settings::get() helper
 ├── assets/
 │   ├── css/                      # si-variables, si-base, si-components,
-│   │                             # si-animations, si-layout, si-home, etc.
-│   ├── js/                       # si-scroll-observer, si-nav, si-marquee, etc.
+│   │                             # si-animations, si-layout, si-home, si-composition, etc.
+│   ├── js/                       # si-scroll-observer, si-nav, si-marquee,
+│   │                             # si-audio-player, si-magnetic-button, si-counters
 │   └── svg/                      # shane-ivers-logo.svg
 └── templates/                    # One PHP file per shortcode
 ```
@@ -88,11 +136,11 @@ si-portfolio-experience/
 | `[si_marquee]` | marquee.php | Done |
 | `[si_dual_showcase]` | dual-showcase.php | Done |
 | `[si_testimonials]` | testimonial-ticker.php | Done |
-| `[si_cta_band]` | cta-band.php | Done |
-| `[si_composition_hero]` | composition-hero.php | Phase 2 |
-| `[si_benefits_list]` | benefits-list.php | Phase 2 |
-| `[si_process_timeline]` | process-timeline.php | Phase 2 |
-| `[si_audio_showcase]` | audio-showcase.php | Phase 2 |
+| `[si_cta_band]` | cta-band.php | Done — text editable via settings |
+| `[si_composition_hero]` | composition-hero.php | Done — text editable via settings |
+| `[si_benefits_list]` | benefits-list.php | Done — text editable via settings |
+| `[si_process_timeline]` | process-timeline.php | Done — text editable via settings |
+| `[si_audio_showcase]` | audio-showcase.php | Done — text editable via settings |
 | `[si_portfolio_grid]` | portfolio-grid.php | Phase 3 |
 | `[si_approach_cards]` | approach-cards.php | Phase 3 |
 | `[si_tools_grid]` | tools-grid.php | Phase 3 |
