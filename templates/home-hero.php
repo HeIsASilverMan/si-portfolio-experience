@@ -15,12 +15,12 @@
 
                 <!-- Box outline draws first -->
                 <rect class="si-logo-box"
-                    x="1" y="1" width="125.3" height="125.3"
+                    x="3" y="3" width="121.3" height="121.3"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="1.5"
-                    stroke-dasharray="502"
-                    stroke-dashoffset="502"/>
+                    stroke-width="6"
+                    stroke-dasharray="486"
+                    stroke-dashoffset="486"/>
 
                 <!-- S curve - left organic shape -->
                 <g class="si-logo-part si-logo-s">

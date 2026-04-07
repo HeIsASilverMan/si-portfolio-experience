@@ -42,17 +42,20 @@
     align-items: center;
     text-decoration: none;
     flex-shrink: 0;
-    color: #D4A853;
-    transition: color 0.2s ease;
+    transition: opacity 0.2s ease;
+    margin-right: auto;
 }
 
 .si-site-header__logo:hover {
-    color: #E8C675;
+    opacity: 0.75;
 }
 
 .si-site-header__logo svg {
-    height: 36px;
+    height: 18px;
     width: auto;
+    display: block;
+    color: #D4A853;
+    fill: currentColor;
 }
 
 .si-site-header__logo-text {

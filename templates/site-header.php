@@ -2,7 +2,17 @@
  
 <header class="si-scope si-site-header" role="banner">
     <div class="si-site-header__inner">
- 
+
+        <a href="/" class="si-site-header__logo" aria-label="Shane Ivers — Home">
+            <?php
+            $logo_file = SI_PLUGIN_DIR . 'assets/svg/shane-ivers-logo.svg';
+            if ( file_exists( $logo_file ) ) {
+                // phpcs:ignore WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents
+                echo file_get_contents( $logo_file );
+            }
+            ?>
+        </a>
+
         <button class="si-nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="si-nav">
             <span></span><span></span><span></span>
         </button>
