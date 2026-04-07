@@ -21,10 +21,16 @@ class SI_Shortcodes {
             'si_tools_grid'         => 'tools_grid',
             'si_awards'             => 'awards',
             'si_education_timeline' => 'education_timeline',
+            // Phase 4
+            'si_ld_hero'            => 'ld_hero',
+            'si_about_story'        => 'about_story',
+            'si_connect'            => 'connect',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
         }
+        // Wrapping shortcode registered separately (needs $content param)
+        add_shortcode( 'si_section', array( __CLASS__, 'section_wrap' ) );
     }
 
     public static function render( $template, $data = array() ) {
@@ -103,5 +109,48 @@ class SI_Shortcodes {
 
     public static function education_timeline( $atts ) {
         return self::render( 'education-timeline' );
+    }
+
+    /* ── Phase 4 ─────────────────────────────────────────── */
+
+    public static function ld_hero( $atts ) {
+        return self::render( 'ld-hero' );
+    }
+
+    public static function about_story( $atts ) {
+        return self::render( 'about-story' );
+    }
+
+    public static function connect( $atts ) {
+        return self::render( 'connect' );
+    }
+
+    /* ── Utility: content wrapper ────────────────────────── */
+
+    public static function section_wrap( $atts, $content = '' ) {
+        $atts = shortcode_atts(
+            array(
+                'bg'      => 'dark',
+                'width'   => '800',
+                'align'   => 'left',
+                'padding' => 'normal',
+                'label'   => '',
+                'title'   => '',
+            ),
+            $atts,
+            'si_section'
+        );
+        return self::render(
+            'section-wrap',
+            array(
+                'bg'      => $atts['bg'],
+                'width'   => $atts['width'],
+                'align'   => $atts['align'],
+                'padding' => $atts['padding'],
+                'label'   => $atts['label'],
+                'title'   => $atts['title'],
+                'content' => $content,
+            )
+        );
     }
 }

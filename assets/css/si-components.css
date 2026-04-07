@@ -72,3 +72,94 @@
     border-radius: 4px;
     padding: 0.25em 0.6em;
 }
+
+/* ============================================================
+   SI SECTION — General content wrapper [si_section]
+   ============================================================ */
+
+/* Label */
+.si-scope.si-section .si-section__label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #D4A853;
+    margin: 0 0 1rem;
+}
+
+/* Section title */
+.si-scope.si-section .si-section__title {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.75rem, 4vw, 2.75rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0 0 2rem;
+    line-height: 1.2;
+}
+
+/* Body text inside a section wrap */
+.si-scope.si-section .si-section__content p {
+    color: #9B978E !important;
+    line-height: 1.8;
+    max-width: 72ch;
+    margin: 0 0 1.25em;
+}
+
+.si-scope.si-section .si-section__content p:last-child {
+    margin-bottom: 0;
+}
+
+.si-scope.si-section .si-section__content h1,
+.si-scope.si-section .si-section__content h2,
+.si-scope.si-section .si-section__content h3,
+.si-scope.si-section .si-section__content h4 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    line-height: 1.2;
+    margin: 1.5em 0 0.5em;
+}
+
+.si-scope.si-section .si-section__content h2 { font-size: clamp( 1.5rem, 3.5vw, 2.25rem ); }
+.si-scope.si-section .si-section__content h3 { font-size: clamp( 1.2rem, 2.5vw, 1.6rem ); }
+.si-scope.si-section .si-section__content h4 { font-size: 1.1rem; }
+
+.si-scope.si-section .si-section__content a {
+    color: #D4A853;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.si-scope.si-section .si-section__content a:hover {
+    color: #E8C675;
+}
+
+.si-scope.si-section .si-section__content ul,
+.si-scope.si-section .si-section__content ol {
+    color: #9B978E !important;
+    line-height: 1.8;
+    padding-left: 1.5em;
+    margin: 0 0 1.25em;
+}
+
+.si-scope.si-section .si-section__content li + li {
+    margin-top: 0.4em;
+}
+
+/* Gold left-border pull quote */
+.si-scope.si-section .si-section__content blockquote {
+    border-left: 3px solid #D4A853;
+    margin: 2em 0;
+    padding: 0.5em 1.5em;
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: 1.2em;
+    font-style: italic;
+    color: #F0EDE6 !important;
+}
+
+/* Horizontal rule */
+.si-scope.si-section .si-section__content hr {
+    border: none;
+    border-top: 1px solid #2A2A2E;
+    margin: 2.5em 0;
+}

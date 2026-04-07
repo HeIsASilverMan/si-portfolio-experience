@@ -23,6 +23,7 @@ class SI_Enqueue {
         wp_enqueue_style( 'si-home',         $url . 'css/si-home.css',         array( 'si-components' ), $v );
         wp_enqueue_style( 'si-composition',      $url . 'css/si-composition.css',      array( 'si-components' ), $v );
         wp_enqueue_style( 'si-learning-design',  $url . 'css/si-learning-design.css',  array( 'si-components' ), $v );
+        wp_enqueue_style( 'si-about',            $url . 'css/si-about.css',            array( 'si-components' ), $v );
 
         wp_enqueue_script( 'si-scroll-observer', $url . 'js/si-scroll-observer.js', array(), $v, true );
         wp_enqueue_script( 'si-counters',        $url . 'js/si-counters.js',        array(), $v, true );
