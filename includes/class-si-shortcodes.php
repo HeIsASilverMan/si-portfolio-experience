@@ -34,6 +34,7 @@ class SI_Shortcodes {
         }
         // Wrapping shortcode registered separately (needs $content param)
         add_shortcode( 'si_section', array( __CLASS__, 'section_wrap' ) );
+        add_shortcode( 'si_button',  array( __CLASS__, 'button' ) );
     }
 
     public static function render( $template, $data = array() ) {
@@ -136,6 +137,70 @@ class SI_Shortcodes {
 
     public static function form_learning_design( $atts ) {
         return self::render( 'form-learning-design' );
+    }
+
+    /* ── Utility: CTA button ────────────────────────────── */
+
+    /**
+     * [si_button url="/page" text="Label" style="primary|ghost" size="normal|large"
+     *            align="left|center|right" target="_self|_blank" magnetic="true|false"]
+     */
+    public static function button( $atts ) {
+        $atts = shortcode_atts(
+            array(
+                'url'      => '#',
+                'text'     => 'Get in Touch',
+                'style'    => 'primary',   // primary | ghost
+                'size'     => 'normal',    // normal | large
+                'align'    => '',          // left | center | right — wraps in div when set
+                'target'   => '_self',
+                'magnetic' => 'false',
+                'icon'     => 'true',      // show arrow icon
+            ),
+            $atts,
+            'si_button'
+        );
+
+        $classes = array( 'si-btn' );
+
+        if ( 'ghost' === $atts['style'] ) {
+            $classes[] = 'si-btn--ghost';
+        } else {
+            $classes[] = 'si-btn--primary';
+        }
+
+        if ( 'large' === $atts['size'] ) {
+            $classes[] = 'si-btn--large';
+        }
+
+        if ( 'true' === $atts['magnetic'] ) {
+            $classes[] = 'si-btn--magnetic';
+        }
+
+        $rel    = '_blank' === $atts['target'] ? ' rel="noopener noreferrer"' : '';
+        $target = in_array( $atts['target'], array( '_self', '_blank' ), true ) ? $atts['target'] : '_self';
+
+        $icon_svg = '';
+        if ( 'true' === $atts['icon'] ) {
+            $icon_svg = '<svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">'
+                . '<path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>'
+                . '</svg>';
+        }
+
+        $btn = '<a href="' . esc_url( $atts['url'] ) . '"'
+            . ' class="' . esc_attr( implode( ' ', $classes ) ) . '"'
+            . ' target="' . esc_attr( $target ) . '"'
+            . $rel . '>'
+            . esc_html( $atts['text'] )
+            . $icon_svg
+            . '</a>';
+
+        if ( $atts['align'] ) {
+            $safe_align = in_array( $atts['align'], array( 'left', 'center', 'right' ), true ) ? $atts['align'] : 'left';
+            return '<div class="si-scope" style="text-align:' . esc_attr( $safe_align ) . ';padding:0.5rem 0;">' . $btn . '</div>';
+        }
+
+        return '<span class="si-scope">' . $btn . '</span>';
     }
 
     /* ── Utility: content wrapper ────────────────────────── */

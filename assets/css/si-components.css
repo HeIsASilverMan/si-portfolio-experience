@@ -36,6 +36,11 @@
     color: var(--si-accent-warm);
 }
 
+.si-scope .si-btn--large {
+    font-size: 1.1rem;
+    padding: 0.9em 2em;
+}
+
 .si-scope .si-btn__arrow {
     transition: transform var(--si-dur-fast) var(--si-ease-out);
 }
