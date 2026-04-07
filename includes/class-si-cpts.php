@@ -10,6 +10,10 @@ class SI_CPTs {
         add_action( 'init',       array( __CLASS__, 'register_enquiries' ) );
         add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
         add_action( 'save_post',  array( __CLASS__, 'save_meta' ) );
+        // Enquiry admin columns
+        add_filter( 'manage_si_enquiry_posts_columns',       array( __CLASS__, 'enquiry_columns' ) );
+        add_action( 'manage_si_enquiry_posts_custom_column', array( __CLASS__, 'enquiry_column_content' ), 10, 2 );
+        add_filter( 'manage_edit-si_enquiry_sortable_columns', array( __CLASS__, 'enquiry_sortable_columns' ) );
     }
 
     public static function register_portfolio() {
@@ -68,9 +72,13 @@ class SI_CPTs {
 
     public static function register_enquiries() {
         $labels = array(
-            'name'          => 'Enquiries',
-            'singular_name' => 'Enquiry',
-            'all_items'     => 'All Enquiries',
+            'name'               => 'Enquiries',
+            'singular_name'      => 'Enquiry',
+            'all_items'          => 'All Enquiries',
+            'view_item'          => 'View Enquiry',
+            'search_items'       => 'Search Enquiries',
+            'not_found'          => 'No enquiries yet.',
+            'not_found_in_trash' => 'No enquiries in trash.',
         );
         register_post_type( 'si_enquiry', array(
             'labels'       => $labels,
@@ -78,7 +86,64 @@ class SI_CPTs {
             'show_ui'      => true,
             'show_in_menu' => 'edit.php?post_type=si_portfolio',
             'supports'     => array( 'title' ),
+            'capabilities' => array(
+                'create_posts' => 'do_not_allow',
+            ),
+            'map_meta_cap' => true,
         ) );
+    }
+
+    // -------------------------------------------------------
+    // Enquiry admin columns
+    // -------------------------------------------------------
+
+    public static function enquiry_columns( $cols ) {
+        return array(
+            'cb'              => $cols['cb'],
+            'title'           => 'Subject',
+            'si_enq_type'     => 'Type',
+            'si_enq_name'     => 'Name',
+            'si_enq_email'    => 'Email',
+            'si_enq_status'   => 'Status',
+            'date'            => 'Received',
+        );
+    }
+
+    public static function enquiry_column_content( $col, $post_id ) {
+        switch ( $col ) {
+            case 'si_enq_type':
+                $type = get_post_meta( $post_id, '_si_enquiry_type', true );
+                echo 'composition' === $type ? 'Composition' : 'Learning Design';
+                break;
+            case 'si_enq_name':
+                echo esc_html( get_post_meta( $post_id, '_si_contact_name', true ) );
+                break;
+            case 'si_enq_email':
+                $e = get_post_meta( $post_id, '_si_contact_email', true );
+                if ( $e ) {
+                    echo '<a href="mailto:' . esc_attr( $e ) . '">' . esc_html( $e ) . '</a>';
+                }
+                break;
+            case 'si_enq_status':
+                $status = get_post_meta( $post_id, '_si_enquiry_status', true );
+                $labels = array(
+                    'new'     => '<span style="color:#D4A853;font-weight:600;">New</span>',
+                    'replied' => '<span style="color:#7DC97D;">Replied</span>',
+                    'closed'  => '<span style="color:#888;">Closed</span>',
+                );
+                if ( isset( $labels[ $status ] ) ) {
+                    echo wp_kses( $labels[ $status ], array( 'span' => array( 'style' => array() ) ) );
+                } else {
+                    echo esc_html( $status );
+                }
+                break;
+        }
+    }
+
+    public static function enquiry_sortable_columns( $cols ) {
+        $cols['si_enq_status'] = 'si_enq_status';
+        $cols['si_enq_type']   = 'si_enq_type';
+        return $cols;
     }
 
     // -------------------------------------------------------
@@ -107,6 +172,22 @@ class SI_CPTs {
             'Testimonial Details',
             array( __CLASS__, 'render_testimonial_meta_box' ),
             'si_testimonial',
+            'normal',
+            'high'
+        );
+        add_meta_box(
+            'si_enquiry_status',
+            'Status',
+            array( __CLASS__, 'render_enquiry_status_box' ),
+            'si_enquiry',
+            'side',
+            'high'
+        );
+        add_meta_box(
+            'si_enquiry_details',
+            'Enquiry Details',
+            array( __CLASS__, 'render_enquiry_details_box' ),
+            'si_enquiry',
             'normal',
             'high'
         );
@@ -194,6 +275,63 @@ class SI_CPTs {
         echo '<p style="margin-top:10px;color:#666;font-size:12px;">The quote text goes in the main editor above.</p>';
     }
 
+    public static function render_enquiry_status_box( $post ) {
+        wp_nonce_field( 'si_save_enquiry_status', 'si_enquiry_status_nonce' );
+        $status  = get_post_meta( $post->ID, '_si_enquiry_status', true );
+        $options = array(
+            'new'     => 'New',
+            'replied' => 'Replied',
+            'closed'  => 'Closed',
+        );
+        echo '<select name="si_enquiry_status" style="width:100%;">';
+        foreach ( $options as $val => $label ) {
+            $sel = selected( $status, $val, false );
+            echo '<option value="' . esc_attr( $val ) . '" ' . $sel . '>' . esc_html( $label ) . '</option>';
+        }
+        echo '</select>';
+    }
+
+    public static function render_enquiry_details_box( $post ) {
+        $name    = get_post_meta( $post->ID, '_si_contact_name',    true );
+        $email   = get_post_meta( $post->ID, '_si_contact_email',   true );
+        $phone   = get_post_meta( $post->ID, '_si_contact_phone',   true );
+        $company = get_post_meta( $post->ID, '_si_contact_company', true );
+        $role    = get_post_meta( $post->ID, '_si_contact_role',    true );
+        $data    = get_post_meta( $post->ID, '_si_form_data',       true );
+
+        echo '<table style="width:100%;border-collapse:collapse;font-size:13px;">';
+
+        $contact_rows = array(
+            'Name'    => $name,
+            'Email'   => $email ? '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>' : '',
+            'Phone'   => $phone,
+            'Company' => $company,
+            'Role'    => $role,
+        );
+
+        foreach ( $contact_rows as $label => $val ) {
+            if ( ! $val ) continue;
+            echo '<tr style="border-bottom:1px solid #eee;">';
+            echo '<th style="text-align:left;padding:8px 4px;color:#666;font-weight:normal;width:110px;">' . esc_html( $label ) . '</th>';
+            echo '<td style="padding:8px 4px;">' . wp_kses( $val, array( 'a' => array( 'href' => array() ) ) ) . '</td>';
+            echo '</tr>';
+        }
+
+        if ( is_array( $data ) ) {
+            echo '<tr><td colspan="2" style="padding:12px 0 4px;font-weight:600;color:#333;">Form Answers</td></tr>';
+            foreach ( $data as $key => $val ) {
+                if ( ! $val ) continue;
+                $key_label = ucwords( str_replace( '_', ' ', $key ) );
+                echo '<tr style="border-bottom:1px solid #eee;">';
+                echo '<th style="text-align:left;padding:8px 4px;color:#666;font-weight:normal;vertical-align:top;">' . esc_html( $key_label ) . '</th>';
+                echo '<td style="padding:8px 4px;">' . nl2br( esc_html( $val ) ) . '</td>';
+                echo '</tr>';
+            }
+        }
+
+        echo '</table>';
+    }
+
     // -------------------------------------------------------
     // Save meta
     // -------------------------------------------------------
@@ -270,6 +408,19 @@ class SI_CPTs {
             foreach ( $fields as $input => $meta_key ) {
                 if ( isset( $_POST[ $input ] ) ) {
                     update_post_meta( $post_id, $meta_key, sanitize_text_field( $_POST[ $input ] ) );
+                }
+            }
+        }
+
+        // Enquiry status
+        if ( isset( $_POST['si_enquiry_status_nonce'] ) &&
+             wp_verify_nonce( $_POST['si_enquiry_status_nonce'], 'si_save_enquiry_status' ) ) {
+
+            if ( isset( $_POST['si_enquiry_status'] ) ) {
+                $allowed = array( 'new', 'replied', 'closed' );
+                $status  = sanitize_key( $_POST['si_enquiry_status'] );
+                if ( in_array( $status, $allowed, true ) ) {
+                    update_post_meta( $post_id, '_si_enquiry_status', $status );
                 }
             }
         }

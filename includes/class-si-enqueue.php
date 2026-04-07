@@ -24,6 +24,7 @@ class SI_Enqueue {
         wp_enqueue_style( 'si-composition',      $url . 'css/si-composition.css',      array( 'si-components' ), $v );
         wp_enqueue_style( 'si-learning-design',  $url . 'css/si-learning-design.css',  array( 'si-components' ), $v );
         wp_enqueue_style( 'si-about',            $url . 'css/si-about.css',            array( 'si-components' ), $v );
+        wp_enqueue_style( 'si-forms',            $url . 'css/si-forms.css',            array( 'si-components' ), $v );
 
         wp_enqueue_script( 'si-scroll-observer', $url . 'js/si-scroll-observer.js', array(), $v, true );
         wp_enqueue_script( 'si-counters',        $url . 'js/si-counters.js',        array(), $v, true );
@@ -33,5 +34,10 @@ class SI_Enqueue {
         wp_enqueue_script( 'si-audio-player',      $url . 'js/si-audio-player.js',      array(), $v, true );
         wp_enqueue_script( 'si-portfolio-filter',  $url . 'js/si-portfolio-filter.js',  array(), $v, true );
         wp_enqueue_script( 'si-project-modal',     $url . 'js/si-project-modal.js',     array(), $v, true );
+        wp_enqueue_script( 'si-forms',             $url . 'js/si-forms.js',             array(), $v, true );
+        wp_localize_script( 'si-forms', 'siFormsConfig', array(
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( 'si_form_nonce' ),
+        ) );
     }
 }

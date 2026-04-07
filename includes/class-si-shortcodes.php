@@ -25,6 +25,9 @@ class SI_Shortcodes {
             'si_ld_hero'            => 'ld_hero',
             'si_about_story'        => 'about_story',
             'si_connect'            => 'connect',
+            // Phase 5
+            'si_form_composition'        => 'form_composition',
+            'si_form_learning_design'    => 'form_learning_design',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -123,6 +126,16 @@ class SI_Shortcodes {
 
     public static function connect( $atts ) {
         return self::render( 'connect' );
+    }
+
+    /* ── Phase 5 ─────────────────────────────────────────── */
+
+    public static function form_composition( $atts ) {
+        return self::render( 'form-composition' );
+    }
+
+    public static function form_learning_design( $atts ) {
+        return self::render( 'form-learning-design' );
     }
 
     /* ── Utility: content wrapper ────────────────────────── */

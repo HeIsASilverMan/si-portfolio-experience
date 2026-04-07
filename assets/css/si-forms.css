@@ -1,0 +1,649 @@
+/* ============================================================
+   SI MULTI-STEP FORMS
+   si-forms.css
+   ============================================================ */
+
+/* ── Outer wrapper ───────────────────────────────────────── */
+.si-scope.si-form {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #07070A !important;
+    overflow: hidden;
+}
+
+/* ── Progress bar ────────────────────────────────────────── */
+.si-form__progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: #2A2A2E;
+    z-index: 200;
+}
+
+.si-form__progress-fill {
+    height: 100%;
+    background: #D4A853;
+    width: 0%;
+    transition: width 0.5s cubic-bezier( 0.16, 1, 0.3, 1 );
+}
+
+/* ── Top bar (step counter + back button) ────────────────── */
+.si-form__topbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 190;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 2rem;
+    background: linear-gradient( to bottom, rgba(7,7,10,0.9) 0%, transparent 100% );
+    pointer-events: none;
+}
+
+.si-form__back-btn {
+    pointer-events: auto;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    color: #9B978E;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    cursor: pointer;
+    padding: 0.5rem 0.75rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    line-height: 1;
+}
+
+.si-form__back-btn:hover {
+    color: #F0EDE6;
+    background: rgba(255,255,255,0.06);
+}
+
+.si-form__back-btn[hidden] {
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.si-form__back-arrow {
+    display: block;
+    width: 18px;
+    height: 18px;
+}
+
+.si-form__step-indicator {
+    pointer-events: none;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    color: #5C5A54;
+}
+
+.si-form__step-indicator .si-form__step-current {
+    color: #D4A853;
+}
+
+/* ── Steps wrapper ───────────────────────────────────────── */
+.si-form__steps-wrap {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 2rem 5rem;
+    position: relative;
+    min-height: 100vh;
+}
+
+/* ── Individual step ─────────────────────────────────────── */
+.si-form__step {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 7rem 2rem 5rem;
+    opacity: 0;
+    transform: translateX( 60px );
+    transition:
+        opacity 0.45s cubic-bezier( 0.16, 1, 0.3, 1 ),
+        transform 0.45s cubic-bezier( 0.16, 1, 0.3, 1 );
+    pointer-events: none;
+}
+
+.si-form__step.is-active {
+    opacity: 1;
+    transform: translateX( 0 );
+    pointer-events: auto;
+    position: relative;
+    inset: auto;
+}
+
+.si-form__step.is-exiting {
+    opacity: 0;
+    transform: translateX( -60px );
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+}
+
+/* ── Question text ───────────────────────────────────────── */
+.si-form__question {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.65rem, 4vw, 2.75rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    text-align: center;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+    max-width: 640px;
+}
+
+.si-form__question-sub {
+    font-size: 0.9rem;
+    color: #5C5A54 !important;
+    text-align: center;
+    margin: 0 0 2.75rem;
+    font-family: 'DM Sans', sans-serif;
+    line-height: 1.5;
+}
+
+/* ── Card-select options ─────────────────────────────────── */
+.si-form__options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    max-width: 640px;
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.si-form__option {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid #2A2A2E;
+    border-radius: 10px;
+    color: #F0EDE6;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    padding: 0.9rem 1.4rem;
+    text-align: left;
+    transition:
+        border-color 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease,
+        color 0.2s ease;
+    line-height: 1.3;
+}
+
+.si-form__option:hover,
+.si-form__option:focus-visible {
+    border-color: rgba(212, 168, 83, 0.5);
+    background: rgba(212, 168, 83, 0.06);
+    color: #F0EDE6;
+    outline: none;
+}
+
+.si-form__option.is-selected {
+    border-color: #D4A853;
+    background: rgba(212, 168, 83, 0.12);
+    box-shadow: 0 0 0 1px #D4A853;
+    color: #F0EDE6;
+}
+
+/* ── Radio options ───────────────────────────────────────── */
+.si-form__options--radio {
+    flex-direction: column;
+    align-items: stretch;
+    max-width: 480px;
+}
+
+.si-form__options--radio .si-form__option {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.85rem 1.25rem;
+}
+
+.si-form__option-radio {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid #2A2A2E;
+    flex-shrink: 0;
+    transition: border-color 0.2s ease, background 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.si-form__option.is-selected .si-form__option-radio {
+    border-color: #D4A853;
+    background: #D4A853;
+}
+
+.si-form__option-radio::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #07070A;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.si-form__option.is-selected .si-form__option-radio::after {
+    opacity: 1;
+}
+
+/* ── Textarea ────────────────────────────────────────────── */
+.si-form__textarea-wrap {
+    width: 100%;
+    max-width: 580px;
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.si-form__textarea {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #2A2A2E;
+    color: #F0EDE6;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    padding: 0.75rem 0;
+    resize: none;
+    outline: none;
+    min-height: 120px;
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+}
+
+.si-form__textarea::placeholder {
+    color: #5C5A54;
+}
+
+.si-form__textarea:focus {
+    border-bottom-color: #D4A853;
+}
+
+.si-form__textarea-hint {
+    position: absolute;
+    bottom: -1.5rem;
+    right: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: #5C5A54;
+    pointer-events: none;
+}
+
+/* ── Text inputs (step 7 — details) ─────────────────────── */
+.si-form__fields {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+    max-width: 480px;
+    margin-bottom: 2rem;
+}
+
+.si-form__field {
+    position: relative;
+}
+
+.si-form__label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5C5A54;
+    margin-bottom: 0.5rem;
+}
+
+.si-form__input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid #2A2A2E;
+    color: #F0EDE6;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1.1rem;
+    padding: 0.6rem 0;
+    outline: none;
+    transition: border-color 0.25s ease;
+    box-sizing: border-box;
+}
+
+.si-form__input::placeholder {
+    color: #5C5A54;
+}
+
+.si-form__input:focus {
+    border-bottom-color: #D4A853;
+}
+
+/* ── Navigation ──────────────────────────────────────────── */
+.si-form__nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 0.5rem;
+}
+
+.si-form__continue-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #D4A853;
+    border: none;
+    border-radius: 8px;
+    color: #07070A;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 0.85rem 1.75rem;
+    transition: background 0.2s ease, transform 0.15s ease;
+    line-height: 1;
+}
+
+.si-form__continue-btn:hover {
+    background: #E8C675;
+    transform: translateY( -1px );
+}
+
+.si-form__continue-btn:active {
+    transform: translateY( 0 );
+}
+
+.si-form__continue-btn:disabled {
+    opacity: 0.35;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.si-form__skip-btn {
+    background: none;
+    border: none;
+    color: #5C5A54;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    padding: 0.5rem;
+    transition: color 0.2s ease;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.si-form__skip-btn:hover {
+    color: #9B978E;
+}
+
+/* ── Submit button ───────────────────────────────────────── */
+.si-form__submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: #D4A853;
+    border: none;
+    border-radius: 8px;
+    color: #07070A;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 1rem 2.25rem;
+    transition: background 0.2s ease, transform 0.15s ease;
+    margin-top: 2rem;
+    line-height: 1;
+}
+
+.si-form__submit-btn:hover {
+    background: #E8C675;
+    transform: translateY( -1px );
+}
+
+.si-form__submit-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.si-form__submit-spinner {
+    display: none;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(0,0,0,0.2);
+    border-top-color: #07070A;
+    border-radius: 50%;
+    animation: si-spin 0.7s linear infinite;
+}
+
+.si-form--submitting .si-form__submit-spinner {
+    display: block;
+}
+
+.si-form--submitting .si-form__submit-arrow {
+    display: none;
+}
+
+@keyframes si-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── Review step ─────────────────────────────────────────── */
+.si-form__step--review {
+    align-items: center;
+}
+
+.si-form__review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 580px;
+    border: 1px solid #2A2A2E;
+    border-radius: 12px;
+    overflow: hidden;
+    margin: 1.5rem 0 0;
+}
+
+.si-form__review-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 0.5rem 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #111113;
+    align-items: start;
+}
+
+.si-form__review-item + .si-form__review-item {
+    border-top: 1px solid #2A2A2E;
+}
+
+.si-form__review-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #5C5A54;
+    margin-bottom: 0.2rem;
+    display: block;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.si-form__review-value {
+    font-size: 0.9rem;
+    color: #F0EDE6;
+    line-height: 1.5;
+    grid-column: 1;
+    grid-row: 2;
+    word-break: break-word;
+}
+
+.si-form__review-edit {
+    grid-column: 2;
+    grid-row: 1 / 3;
+    align-self: center;
+    background: none;
+    border: 1px solid #2A2A2E;
+    border-radius: 5px;
+    color: #5C5A54;
+    cursor: pointer;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    padding: 0.3em 0.65em;
+    transition: border-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+}
+
+.si-form__review-edit:hover {
+    border-color: #D4A853;
+    color: #D4A853;
+}
+
+/* ── Success state ───────────────────────────────────────── */
+.si-form__success {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #07070A;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+    padding: 2rem;
+    text-align: center;
+}
+
+.si-form__success.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.si-form__success-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid #D4A853;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 2rem;
+}
+
+.si-form__success-check {
+    stroke-dasharray: 80;
+    stroke-dashoffset: 80;
+}
+
+.si-form__success.is-visible .si-form__success-check {
+    animation: si-draw-check 0.7s 0.25s cubic-bezier( 0.16, 1, 0.3, 1 ) forwards;
+}
+
+@keyframes si-draw-check {
+    to { stroke-dashoffset: 0; }
+}
+
+.si-form__success-heading {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp( 1.5rem, 4vw, 2.25rem );
+    font-weight: 400;
+    color: #F0EDE6 !important;
+    margin: 0 0 0.75rem;
+}
+
+.si-form__success-sub {
+    font-size: 1rem;
+    color: #9B978E !important;
+    line-height: 1.7;
+    max-width: 420px;
+    margin: 0;
+}
+
+/* ── Error message ───────────────────────────────────────── */
+.si-form__error {
+    font-size: 0.82rem;
+    color: #e07070 !important;
+    text-align: center;
+    margin-top: 0.75rem;
+    min-height: 1.2em;
+    font-family: 'DM Sans', sans-serif;
+}
+
+/* ── Background decoration ───────────────────────────────── */
+.si-form__bg {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+}
+
+.si-form__bg-lines {
+    position: absolute;
+    inset: 0;
+    background-image: repeating-linear-gradient(
+        to bottom,
+        transparent 0px,
+        transparent 60px,
+        rgba(212, 168, 83, 0.025) 60px,
+        rgba(212, 168, 83, 0.025) 61px
+    );
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+@media ( prefers-reduced-motion: reduce ) {
+    .si-form__step,
+    .si-form__progress-fill,
+    .si-form__success,
+    .si-form__continue-btn,
+    .si-form__submit-btn {
+        transition: none;
+    }
+    .si-form__success.is-visible .si-form__success-check {
+        animation: none;
+        stroke-dashoffset: 0;
+    }
+    .si-form__submit-spinner {
+        animation: none;
+    }
+}
+
+/* ── Mobile tweaks ───────────────────────────────────────── */
+@media ( max-width: 600px ) {
+    .si-form__question {
+        font-size: clamp( 1.4rem, 7vw, 2rem );
+    }
+
+    .si-form__options {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .si-form__topbar {
+        padding: 1rem;
+    }
+}
