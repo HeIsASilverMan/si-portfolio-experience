@@ -11,7 +11,8 @@
             <a href="/composition">Composition</a>
             <a href="/learning-design">Learning Design</a>
             <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+            <a href="https://shaneivers.com/terms-and-conditions/" target="_blank" rel="noopener noreferrer">Terms</a>
+            <a href="https://shaneivers.com/privacy-policy/" target="_blank" rel="noopener noreferrer">Privacy</a>
         </nav>
 
         <p class="si-site-footer__copy">

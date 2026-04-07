@@ -12,11 +12,12 @@ class SI_Enqueue {
         $v   = SI_VERSION;
 
         wp_enqueue_style( 'si-fonts-instrument',
-            'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap',
+            'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap',
             array(), null );
 
         wp_enqueue_style( 'si-variables',    $url . 'css/si-variables.css',    array(),                  $v );
         wp_enqueue_style( 'si-base',         $url . 'css/si-base.css',         array( 'si-variables' ),  $v );
+        wp_enqueue_style( 'si-blocks',       $url . 'css/si-blocks.css',       array( 'si-base' ),       $v );
         wp_enqueue_style( 'si-components',   $url . 'css/si-components.css',   array( 'si-base' ),       $v );
         wp_enqueue_style( 'si-animations',   $url . 'css/si-animations.css',   array( 'si-base' ),       $v );
         wp_enqueue_style( 'si-layout',       $url . 'css/si-layout.css',       array( 'si-components' ), $v );

@@ -1,0 +1,286 @@
+/* ============================================================
+   STANDARD GUTENBERG BLOCK INTEGRATION
+   Re-applies the plugin design system to native WP blocks that
+   appear alongside plugin shortcodes in the page content area.
+   si-base.css strips max-width from .entry-content so plugin
+   sections can go edge-to-edge; this file constrains the blocks
+   back to a readable column.
+   ============================================================ */
+
+/* ── Content column constraints ─────────────────────────── */
+
+/* Direct children of content area that are NOT plugin shortcodes
+   get a sensible reading width and horizontal centering */
+.entry-content > *:not(.si-scope),
+.page-content > *:not(.si-scope) {
+    max-width: 820px;
+    margin-left: auto  !important;
+    margin-right: auto !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Wide alignment overrides */
+.entry-content > .alignwide:not(.si-scope),
+.page-content  > .alignwide:not(.si-scope) {
+    max-width: 1100px;
+}
+
+.entry-content > .alignfull:not(.si-scope),
+.page-content  > .alignfull:not(.si-scope) {
+    max-width: none;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+
+.entry-content p,
+.page-content  p,
+.si-section__content p {
+    color: #9B978E;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    margin: 0 0 1.25em;
+}
+
+.entry-content h1, .entry-content h2, .entry-content h3,
+.entry-content h4, .entry-content h5, .entry-content h6,
+.page-content  h1, .page-content  h2, .page-content  h3,
+.page-content  h4, .page-content  h5, .page-content  h6,
+.si-section__content h1, .si-section__content h2,
+.si-section__content h3, .si-section__content h4 {
+    font-family: 'Instrument Serif', Georgia, serif;
+    color: #F0EDE6;
+    line-height: 1.2;
+    margin: 1.75em 0 0.5em;
+}
+
+.entry-content h1, .page-content h1 { font-size: clamp(2rem, 5vw, 3rem); }
+.entry-content h2, .page-content h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); }
+.entry-content h3, .page-content h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem); }
+.entry-content h4, .page-content h4 { font-size: 1.1rem; }
+
+.entry-content a,
+.page-content  a,
+.si-section__content a {
+    color: #D4A853;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-color: rgba(212,168,83,0.4);
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+.entry-content a:hover,
+.page-content  a:hover,
+.si-section__content a:hover {
+    color: #E8C675;
+    text-decoration-color: rgba(232,198,117,0.6);
+}
+
+/* ── Lists ───────────────────────────────────────────────── */
+
+.entry-content ul, .entry-content ol,
+.page-content  ul, .page-content  ol,
+.si-section__content ul, .si-section__content ol {
+    color: #9B978E;
+    padding-left: 1.5rem;
+    margin: 0 0 1.25em;
+}
+
+.entry-content li,
+.page-content  li,
+.si-section__content li {
+    line-height: 1.7;
+    margin-bottom: 0.4em;
+}
+
+.entry-content ul li::marker,
+.page-content  ul li::marker,
+.si-section__content ul li::marker {
+    color: #D4A853;
+}
+
+/* ── Images ──────────────────────────────────────────────── */
+
+.entry-content .wp-block-image img,
+.page-content  .wp-block-image img,
+.si-section__content .wp-block-image img {
+    border-radius: 12px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.entry-content .wp-block-image figcaption,
+.page-content  .wp-block-image figcaption,
+.si-section__content .wp-block-image figcaption {
+    color: #5C5A54;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-align: center;
+    margin-top: 0.75rem;
+}
+
+/* ── Blockquote ──────────────────────────────────────────── */
+
+.entry-content blockquote,
+.entry-content .wp-block-quote,
+.page-content  blockquote,
+.page-content  .wp-block-quote,
+.si-section__content blockquote,
+.si-section__content .wp-block-quote {
+    border-left: 2px solid #D4A853;
+    padding: 0.75rem 1.5rem;
+    margin: 2rem 0;
+    background: rgba(212,168,83,0.04);
+    border-radius: 0 8px 8px 0;
+}
+
+.entry-content .wp-block-quote p,
+.page-content  .wp-block-quote p,
+.si-section__content .wp-block-quote p {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-style: italic;
+    font-size: 1.15rem;
+    color: #F0EDE6;
+    margin: 0;
+}
+
+.entry-content .wp-block-quote cite,
+.page-content  .wp-block-quote cite,
+.si-section__content .wp-block-quote cite {
+    display: block;
+    margin-top: 0.75rem;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #D4A853;
+    font-style: normal;
+}
+
+/* ── Separator ───────────────────────────────────────────── */
+
+.entry-content .wp-block-separator,
+.page-content  .wp-block-separator,
+.si-section__content .wp-block-separator {
+    border: none;
+    border-top: 1px solid #2A2A2E;
+    margin: 3rem auto;
+    max-width: 80px;
+}
+
+/* ── Code ────────────────────────────────────────────────── */
+
+.entry-content code,
+.entry-content pre,
+.page-content  code,
+.page-content  pre,
+.si-section__content code,
+.si-section__content pre {
+    font-family: 'JetBrains Mono', monospace;
+    background: #161619;
+    border: 1px solid #2A2A2E;
+    border-radius: 6px;
+    color: #D4A853;
+}
+
+.entry-content code,
+.page-content  code,
+.si-section__content code { font-size: 0.85em; padding: 0.15em 0.45em; }
+
+.entry-content pre,
+.page-content  pre,
+.si-section__content pre { font-size: 0.82rem; padding: 1.25rem; overflow-x: auto; line-height: 1.6; }
+
+/* ── Table ───────────────────────────────────────────────── */
+
+.entry-content table,
+.page-content  table,
+.si-section__content table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    color: #9B978E;
+}
+
+.entry-content th,
+.page-content  th,
+.si-section__content th {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.63rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #D4A853;
+    border-bottom: 1px solid #2A2A2E;
+    padding: 0.75rem 1rem;
+    text-align: left;
+}
+
+.entry-content td,
+.page-content  td,
+.si-section__content td {
+    border-bottom: 1px solid #2A2A2E;
+    padding: 0.75rem 1rem;
+    vertical-align: top;
+}
+
+/* ── Columns ─────────────────────────────────────────────── */
+
+.entry-content .wp-block-columns,
+.page-content  .wp-block-columns {
+    gap: 2rem;
+}
+
+/* ── Cover block ─────────────────────────────────────────── */
+
+.entry-content .wp-block-cover,
+.page-content  .wp-block-cover {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* ── Buttons block ───────────────────────────────────────── */
+
+.entry-content .wp-block-button__link,
+.page-content  .wp-block-button__link {
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: #D4A853;
+    color: #0D0D0F;
+    padding: 0.7em 1.8em;
+    text-decoration: none;
+    transition: background 0.2s ease, color 0.2s ease;
+}
+
+.entry-content .wp-block-button__link:hover,
+.page-content  .wp-block-button__link:hover {
+    background: #E8C675;
+    color: #0D0D0F;
+}
+
+.entry-content .wp-block-button.is-style-outline .wp-block-button__link,
+.page-content  .wp-block-button.is-style-outline .wp-block-button__link {
+    background: transparent;
+    color: #D4A853;
+    border: 1px solid rgba(212,168,83,0.5);
+}
+
+.entry-content .wp-block-button.is-style-outline .wp-block-button__link:hover,
+.page-content  .wp-block-button.is-style-outline .wp-block-button__link:hover {
+    background: rgba(212,168,83,0.1);
+    border-color: #D4A853;
+}
+
+/* ── Reduced motion ──────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+    .entry-content a,
+    .page-content  a { transition: none; }
+}
