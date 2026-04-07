@@ -23,13 +23,11 @@
         </p>
 
         <h1 class="si-composition-hero__headline si-reveal">
-            <span class="si-composition-hero__word"><?php esc_html_e( 'Every Project Deserves', 'si-portfolio' ); ?></span>
-            <br aria-hidden="true">
-            <span class="si-composition-hero__word si-composition-hero__word--accent"><?php esc_html_e( 'Its Own Sound', 'si-portfolio' ); ?></span>
+            <span class="si-composition-hero__word"><?php echo esc_html( si_setting( 'comp_hero_headline', 'Every Project Deserves Its Own Sound' ) ); ?></span>
         </h1>
 
         <p class="si-composition-hero__sub si-reveal">
-            <?php esc_html_e( 'No templates. No stock. Every piece composed from scratch &mdash; shaped to your story, your audience, and the feeling you need to leave behind.', 'si-portfolio' ); ?>
+            <?php echo esc_html( si_setting( 'comp_hero_sub', 'No templates. No stock. Every piece composed from scratch — shaped to your story, your audience, and the feeling you need to leave behind.' ) ); ?>
         </p>
 
         <div class="si-composition-hero__actions si-reveal">

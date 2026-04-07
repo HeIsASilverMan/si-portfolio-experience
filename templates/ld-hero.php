@@ -18,12 +18,11 @@
         </p>
 
         <h1 class="si-ld-hero__headline si-reveal">
-            <?php esc_html_e( 'Learning Experiences', 'si-portfolio' ); ?><br>
-            <span class="si-ld-hero__headline--accent"><?php esc_html_e( 'That Actually Work', 'si-portfolio' ); ?></span>
+            <?php echo esc_html( si_setting( 'ld_hero_headline', 'Learning Experiences That Actually Work' ) ); ?>
         </h1>
 
         <p class="si-ld-hero__sub si-reveal">
-            <?php esc_html_e( 'Blending instructional science with design craft to build e-learning, animation, and programmes that engage learners and deliver measurable outcomes.', 'si-portfolio' ); ?>
+            <?php echo esc_html( si_setting( 'ld_hero_sub', 'Blending instructional science with design craft to build e-learning, animation, and programmes that engage learners and deliver measurable outcomes.' ) ); ?>
         </p>
 
         <!-- Animated stat counters -->

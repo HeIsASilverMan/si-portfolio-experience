@@ -119,7 +119,7 @@ class SI_Forms {
     // -------------------------------------------------------
 
     private static function send_notification( $post_id, $form_type, $name, $email, $data ) {
-        $admin_email = get_option( 'admin_email' );
+        $admin_email = si_setting( 'notify_email', get_option( 'admin_email' ) );
         $site_name   = get_bloginfo( 'name' );
         $label       = 'composition' === $form_type ? 'Composition Commission' : 'Learning Design Enquiry';
         $admin_url   = admin_url( 'post.php?post=' . $post_id . '&action=edit' );

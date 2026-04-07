@@ -33,7 +33,7 @@
             <p class="si-about-story__label si-reveal"><?php esc_html_e( 'The Human', 'si-portfolio' ); ?></p>
 
             <h1 class="si-about-story__headline si-reveal">
-                <?php esc_html_e( 'Composer. Learning Designer. Obsessive Perfectionist.', 'si-portfolio' ); ?>
+                <?php echo esc_html( si_setting( 'about_tagline', 'Composer. Learning Designer. Obsessive Perfectionist.' ) ); ?>
             </h1>
 
             <div class="si-about-story__body si-reveal">

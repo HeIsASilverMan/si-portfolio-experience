@@ -302,7 +302,7 @@
             </svg>
         </div>
         <h2 class="si-form__success-heading" tabindex="-1"><?php esc_html_e( "You're in.", 'si-portfolio' ); ?></h2>
-        <p class="si-form__success-sub"><?php esc_html_e( "Thanks for reaching out. I'll review your brief and be in touch within 2 working days.", 'si-portfolio' ); ?></p>
+        <p class="si-form__success-sub"><?php echo esc_html( si_setting( 'form_ld_success', "Thanks for reaching out. I'll review your brief and be in touch within 2 working days." ) ); ?></p>
     </div>
 
     <!-- Honeypot -->
