@@ -2,22 +2,25 @@
 
 $benefits = array(
     array(
-        'text'   => 'Music that complements, never overpowers',
-        'detail' => 'The score should serve your story &mdash; not compete with it. I compose with your project playing, not in isolation.',
+        'text'   => SI_Settings::get( 'benefit_1_text' ),
+        'detail' => SI_Settings::get( 'benefit_1_detail' ),
     ),
     array(
-        'text'   => 'Music that makes people remember your story',
-        'detail' => 'The best scores are invisible in the moment and unforgettable afterwards. That&rsquo;s the target.',
+        'text'   => SI_Settings::get( 'benefit_2_text' ),
+        'detail' => SI_Settings::get( 'benefit_2_detail' ),
     ),
     array(
-        'text'   => 'Music that enhances professionalism',
-        'detail' => 'Broadcast-ready masters in every format you need &mdash; stems, sync-ready mixes, the lot.',
+        'text'   => SI_Settings::get( 'benefit_3_text' ),
+        'detail' => SI_Settings::get( 'benefit_3_detail' ),
     ),
     array(
-        'text'   => 'Music that just sounds awesome',
-        'detail' => 'Life&rsquo;s too short for music that&rsquo;s merely adequate.',
+        'text'   => SI_Settings::get( 'benefit_4_text' ),
+        'detail' => SI_Settings::get( 'benefit_4_detail' ),
     ),
 );
+
+$label   = SI_Settings::get( 'benefits_label' );
+$heading = SI_Settings::get( 'benefits_heading' );
 ?>
 
 <section class="si-scope si-benefits-list" aria-labelledby="si-benefits-heading">
@@ -25,9 +28,9 @@ $benefits = array(
     <div class="si-benefits-list__inner">
 
         <div class="si-benefits-list__header si-reveal">
-            <p class="si-benefits-list__label">What You Get</p>
+            <p class="si-benefits-list__label"><?php echo esc_html( $label ); ?></p>
             <h2 id="si-benefits-heading" class="si-benefits-list__heading">
-                Music built for your project,<br>not borrowed from a library
+                <?php echo esc_html( $heading ); ?>
             </h2>
         </div>
 
@@ -36,8 +39,8 @@ $benefits = array(
             <li class="si-benefits-list__item si-reveal" style="--item-i: <?php echo esc_attr( $i ); ?>;">
                 <div class="si-benefits-list__num" aria-hidden="true"><?php echo sprintf( '%02d', $i + 1 ); ?></div>
                 <div class="si-benefits-list__content">
-                    <p class="si-benefits-list__text"><?php echo wp_kses( $b['text'], array() ); ?></p>
-                    <p class="si-benefits-list__detail"><?php echo wp_kses( $b['detail'], array() ); ?></p>
+                    <p class="si-benefits-list__text"><?php echo esc_html( $b['text'] ); ?></p>
+                    <p class="si-benefits-list__detail"><?php echo esc_html( $b['detail'] ); ?></p>
                 </div>
                 <div class="si-benefits-list__line" aria-hidden="true"></div>
             </li>

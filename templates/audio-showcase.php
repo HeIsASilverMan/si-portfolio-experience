@@ -1,5 +1,8 @@
 <?php defined( 'ABSPATH' ) || exit;
 
+$label   = SI_Settings::get( 'audio_label' );
+$heading = SI_Settings::get( 'audio_heading' );
+
 $query = new WP_Query( array(
     'post_type'      => 'si_portfolio',
     'posts_per_page' => 12,
@@ -19,8 +22,8 @@ $query = new WP_Query( array(
     <div class="si-audio-showcase__inner">
 
         <div class="si-audio-showcase__header si-reveal">
-            <p class="si-audio-showcase__label">Portfolio</p>
-            <h2 id="si-audio-heading" class="si-audio-showcase__heading">Hear the Work</h2>
+            <p class="si-audio-showcase__label"><?php echo esc_html( $label ); ?></p>
+            <h2 id="si-audio-heading" class="si-audio-showcase__heading"><?php echo esc_html( $heading ); ?></h2>
         </div>
 
         <?php if ( $query->have_posts() ) : ?>
