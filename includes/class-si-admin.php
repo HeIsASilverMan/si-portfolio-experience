@@ -17,6 +17,21 @@ class SI_Admin {
         add_action( 'admin_menu',    array( __CLASS__, 'add_page' ) );
         add_action( 'admin_init',    array( __CLASS__, 'register_settings' ) );
         add_action( 'admin_enqueue_scripts', array( __CLASS__, 'admin_styles' ) );
+        add_action( 'wp_head',       array( __CLASS__, 'output_custom_css' ) );
+    }
+
+    // -------------------------------------------------------
+    // Output custom CSS in <head>
+    // -------------------------------------------------------
+
+    public static function output_custom_css() {
+        $css = self::get( 'custom_css', '' );
+        if ( '' === $css ) {
+            return;
+        }
+        // Strip any </style> attempts before output
+        $css = str_replace( '</style', '', $css );
+        echo '<style id="si-custom-css">' . "\n" . $css . "\n" . '</style>' . "\n";
     }
 
     // -------------------------------------------------------
@@ -70,6 +85,7 @@ class SI_Admin {
 
         // Plain text / short strings
         $text_fields = array(
+            'home_tagline',
             'comp_hero_headline', 'comp_hero_sub',
             'ld_hero_headline',   'ld_hero_sub',
             'cta_headline',       'cta_sub',       'cta_button_text',
@@ -78,6 +94,13 @@ class SI_Admin {
         );
         foreach ( $text_fields as $f ) {
             $clean[ $f ] = isset( $input[ $f ] ) ? sanitize_text_field( $input[ $f ] ) : '';
+        }
+
+        // Custom CSS — preserve whitespace and valid CSS characters; strip </ to prevent injection
+        if ( isset( $input['custom_css'] ) ) {
+            $clean['custom_css'] = str_replace( '</', '', $input['custom_css'] );
+        } else {
+            $clean['custom_css'] = '';
         }
 
         return $clean;
@@ -102,6 +125,8 @@ class SI_Admin {
             #si-settings-wrap input[type=url],
             #si-settings-wrap input[type=email] { width: 100%; max-width: 480px; }
             .si-save-bar { position: sticky; bottom: 0; background: #f0f0f1; border-top: 1px solid #ddd; padding: .75rem 1.5rem; margin: 0 -20px; display: flex; align-items: center; gap: 1rem; z-index: 10; }
+            #si-settings-wrap textarea.si-css-editor { width: 100%; height: 320px; font-family: monospace; font-size: 12px; line-height: 1.6; background: #1e1e1e; color: #d4d4d4; border: 1px solid #555; border-radius: 4px; padding: .75rem; resize: vertical; tab-size: 4; }
+            #si-settings-wrap .si-css-hint { display: block; color: #666; font-size: 11px; margin-top: .5rem; }
         </style>';
     }
 
@@ -120,6 +145,17 @@ class SI_Admin {
 
             <form method="post" action="options.php">
                 <?php settings_fields( self::OPTION_GROUP ); ?>
+
+                <!-- ── Home Hero ────────────────────────────────── -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Home Hero', 'si-portfolio' ); ?></h2>
+
+                    <?php self::field_text(
+                        $s, 'home_tagline', 'Tagline',
+                        'Bespoke music and scores, lovingly crafted to your exact requirements. Learning experiences that actually work.',
+                        'The paragraph shown beneath your name on the home page.'
+                    ); ?>
+                </div>
 
                 <!-- ── Social & Contact ─────────────────────────── -->
                 <div class="si-section">
@@ -215,6 +251,12 @@ class SI_Admin {
                     ); ?>
                 </div>
 
+                <!-- ── Custom CSS ───────────────────────────────── -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Custom CSS', 'si-portfolio' ); ?></h2>
+                    <?php self::field_css( $s ); ?>
+                </div>
+
                 <!-- ── Sticky save bar ───────────────────────────── -->
                 <div class="si-save-bar">
                     <?php submit_button( 'Save Settings', 'primary', 'submit', false ); ?>
@@ -271,6 +313,17 @@ class SI_Admin {
         if ( $hint ) {
             echo '<span class="si-hint">' . esc_html( $hint ) . '</span>';
         }
+        echo '</div>';
+    }
+
+    private static function field_css( $s ) {
+        $val = isset( $s['custom_css'] ) ? $s['custom_css'] : '';
+        $key = self::OPTION_KEY . '[custom_css]';
+        echo '<div class="si-row">';
+        echo '<label for="si_custom_css">Additional CSS</label>';
+        echo '<textarea id="si_custom_css" class="si-css-editor" name="' . esc_attr( $key ) . '" spellcheck="false">'
+            . esc_textarea( $val ) . '</textarea>';
+        echo '<span class="si-css-hint">Injected into &lt;head&gt; on every front-end page. Targets the plugin\'s <code>.si-scope</code> wrapper to avoid theme conflicts.</span>';
         echo '</div>';
     }
 

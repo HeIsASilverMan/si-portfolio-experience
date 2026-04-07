@@ -91,6 +91,11 @@
     background: rgba(255, 255, 255, 0.05);
 }
 
+/* Active state — double class for specificity over single-class colour rules */
+.si-nav__link.si-nav__link--active {
+    color: #D4A853;
+}
+
 .si-nav__link--cta {
     color: #D4A853;
     border: 1px solid rgba(212, 168, 83, 0.4);
@@ -332,6 +337,11 @@
     .si-nav__link:focus-visible {
         color: #D4A853;
         background: transparent;
+        text-shadow: 0 0 28px rgba(212, 168, 83, 0.35);
+    }
+
+    .si-nav__link.si-nav__link--active {
+        color: #D4A853;
         text-shadow: 0 0 28px rgba(212, 168, 83, 0.35);
     }
 

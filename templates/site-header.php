@@ -1,9 +1,22 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
- 
+<?php defined( 'ABSPATH' ) || exit;
+
+// Detect current page for active nav state
+$si_active = '';
+if ( function_exists( 'is_page' ) ) {
+    if ( is_page( 'composition' ) )     { $si_active = 'composition'; }
+    elseif ( is_page( 'learning-design' ) ) { $si_active = 'learning-design'; }
+    elseif ( is_page( 'about' ) )       { $si_active = 'about'; }
+}
+
+function si_nav_active( $slug, $active ) {
+    return ( $slug === $active ) ? ' si-nav__link--active' : '';
+}
+?>
+
 <header class="si-scope si-site-header" role="banner">
     <div class="si-site-header__inner">
 
-        <a href="/" class="si-site-header__logo" aria-label="Shane Ivers — Home">
+        <a href="/" class="si-site-header__logo" aria-label="Shane Ivers &#8212; Home">
             <?php
             $logo_file = SI_PLUGIN_DIR . 'assets/svg/shane-ivers-logo.svg';
             if ( file_exists( $logo_file ) ) {
@@ -16,9 +29,9 @@
         <button class="si-nav-toggle" aria-label="Open navigation" aria-expanded="false" aria-controls="si-nav">
             <span></span><span></span><span></span>
         </button>
- 
+
         <nav class="si-nav" id="si-nav" role="navigation" aria-label="Primary navigation">
- 
+
             <div class="si-nav__overlay-bg" aria-hidden="true">
                 <svg class="si-nav__swirl-canvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
                     <defs>
@@ -60,15 +73,15 @@
                     </g>
                 </svg>
             </div>
- 
+
             <div class="si-nav__inner">
                 <ul class="si-nav__list" role="list">
-                    <li><a href="/composition" class="si-nav__link">Composition</a></li>
-                    <li><a href="/learning-design" class="si-nav__link">Learning Design</a></li>
-                    <li><a href="/about" class="si-nav__link">About</a></li>
+                    <li><a href="/composition"    class="si-nav__link<?php echo si_nav_active( 'composition',      $si_active ); ?>">Composition</a></li>
+                    <li><a href="/learning-design" class="si-nav__link<?php echo si_nav_active( 'learning-design', $si_active ); ?>">Learning Design</a></li>
+                    <li><a href="/about"           class="si-nav__link<?php echo si_nav_active( 'about',           $si_active ); ?>">About</a></li>
                 </ul>
             </div>
- 
+
         </nav>
 
     </div>

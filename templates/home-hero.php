@@ -1,10 +1,27 @@
-<?php defined( 'ABSPATH' ) || exit; ?>
+<?php defined( 'ABSPATH' ) || exit;
+
+$tagline = si_setting(
+    'home_tagline',
+    'Bespoke music and scores, lovingly crafted to your exact requirements. Learning experiences that actually work.'
+);
+?>
 
 <section class="si-scope si-home-hero" aria-label="Introduction">
 
+    <!-- Ambient background orbs -->
     <div class="si-home-hero__bg" aria-hidden="true">
         <div class="si-home-hero__orb si-home-hero__orb--left"></div>
         <div class="si-home-hero__orb si-home-hero__orb--right"></div>
+    </div>
+
+    <!-- Split identity panels — appear after 2s, purely decorative -->
+    <div class="si-home-hero__split" aria-hidden="true">
+        <div class="si-home-hero__half si-home-hero__half--left">
+            <span class="si-home-hero__half-label">Composition</span>
+        </div>
+        <div class="si-home-hero__half si-home-hero__half--right">
+            <span class="si-home-hero__half-label">Learning Design</span>
+        </div>
     </div>
 
     <div class="si-home-hero__inner">
@@ -63,9 +80,11 @@
             </svg>
         </div>
 
+        <!-- Name — centrepiece -->
+        <h1 class="si-home-hero__name">Shane Ivers</h1>
+
         <p class="si-home-hero__tagline">
-            Bespoke music and scores, lovingly crafted to your exact requirements.
-            Learning experiences that actually work.
+            <?php echo esc_html( $tagline ); ?>
         </p>
 
         <div class="si-home-hero__actions">
@@ -85,5 +104,21 @@
 
     </div>
 
+    <div class="si-home-hero__scroll" aria-hidden="true">
+        <span class="si-home-hero__scroll-line"></span>
+        <span>scroll</span>
+    </div>
 
 </section>
+
+<script>
+( function () {
+    var hero = document.querySelector( '.si-home-hero' );
+    if ( ! hero ) { return; }
+    if ( window.matchMedia && window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches ) {
+        hero.classList.add( 'is-split' );
+        return;
+    }
+    setTimeout( function () { hero.classList.add( 'is-split' ); }, 2200 );
+} )();
+</script>

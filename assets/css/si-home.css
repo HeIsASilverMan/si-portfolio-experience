@@ -64,9 +64,10 @@
 
 .si-home-hero__orb--right {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, #7EC89B 0%, transparent 70%);
+    background: radial-gradient(circle, #D4A853 0%, transparent 70%);
     bottom: -100px; right: -120px;
     animation-delay: -8s;
+    opacity: 0.08;
 }
 
 .si-home-hero__inner {
@@ -128,6 +129,20 @@
 /* ============================================================
    HERO TEXT
    ============================================================ */
+/* ============================================================
+   HERO NAME
+   ============================================================ */
+.si-home-hero__name {
+    font-family: 'Instrument Serif', Georgia, serif;
+    font-size: clamp(2.8rem, 9vw, 5.5rem);
+    color: #F0EDE6;
+    margin: 0;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    opacity: 0;
+    animation: si-hero-fade 0.8s cubic-bezier(0.16,1,0.3,1) 1.7s forwards;
+}
+
 .si-home-hero__tagline {
     font-size: clamp(1rem, 2.5vw, 1.15rem);
     color: #9B978E !important;
@@ -136,6 +151,60 @@
     line-height: 1.7;
     opacity: 0;
     animation: si-hero-fade 0.8s cubic-bezier(0.16,1,0.3,1) 1.9s forwards;
+}
+
+/* ============================================================
+   SPLIT IDENTITY PANELS
+   ============================================================ */
+.si-home-hero__split {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.si-home-hero__half {
+    flex: 1;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 5rem;
+    opacity: 0;
+    transition: opacity 1.2s cubic-bezier(0.16,1,0.3,1);
+}
+
+.si-home-hero.is-split .si-home-hero__half {
+    opacity: 1;
+}
+
+.si-home-hero__half--left {
+    background: linear-gradient(to right, rgba(212,168,83,0.07) 0%, transparent 100%);
+    border-right: 1px solid rgba(212,168,83,0.08);
+    transition-delay: 0s;
+}
+
+.si-home-hero__half--right {
+    background: linear-gradient(to left, rgba(212,168,83,0.04) 0%, transparent 100%);
+    transition-delay: 0.25s;
+}
+
+.si-home-hero__half-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: #D4A853;
+    opacity: 0.5;
+}
+
+/* ============================================================
+   LOGO — hide on home page, show in nav overlay
+   ============================================================ */
+.home .si-site-header__logo {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
 }
 
 .si-home-hero__actions {
@@ -639,9 +708,11 @@ body {
     .si-logo-s,
     .si-logo-bridge,
     .si-logo-bar,
+    .si-home-hero__name,
     .si-home-hero__tagline,
     .si-home-hero__actions,
     .si-home-hero__scroll,
     .si-home-hero__orb { animation: none; opacity: 1; clip-path: none; stroke-dashoffset: 0; }
+    .si-home-hero__half { opacity: 1; transition: none; }
     .si-reveal { opacity: 1; transform: none; transition: none; }
 }
