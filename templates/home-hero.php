@@ -104,11 +104,6 @@ $tagline = si_setting(
 
     </div>
 
-    <div class="si-home-hero__scroll" aria-hidden="true">
-        <span class="si-home-hero__scroll-line"></span>
-        <span>scroll</span>
-    </div>
-
 </section>
 
 <script>

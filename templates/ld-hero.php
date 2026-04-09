@@ -52,7 +52,7 @@
         <!-- Tool badges -->
         <div class="si-ld-hero__tools si-reveal" role="list" aria-label="<?php esc_attr_e( 'Tools and platforms', 'si-portfolio' ); ?>">
             <?php
-            $tools = array( 'Articulate Storyline', 'Articulate Rise', 'After Effects', 'Vyond', 'Camtasia' );
+            $tools = array( 'Articulate Storyline', 'Articulate Rise', 'After Effects', 'Vyond', 'Camtasia', 'AI Integration' );
             foreach ( $tools as $tool ) :
             ?>
             <span class="si-ld-hero__tool" role="listitem"><?php echo esc_html( $tool ); ?></span>
