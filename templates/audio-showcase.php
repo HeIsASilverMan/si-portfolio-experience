@@ -76,7 +76,6 @@ $query = new WP_Query( array(
                 </div>
 
                 <div class="si-audio-card__meta">
-                    <h3 class="si-audio-card__title"><?php the_title(); ?></h3>
                     <?php if ( $client_name || $year ) : ?>
                     <p class="si-audio-card__credit">
                         <?php if ( $client_name ) : ?>
@@ -87,9 +86,7 @@ $query = new WP_Query( array(
                         <?php endif; ?>
                     </p>
                     <?php endif; ?>
-                    <?php if ( has_excerpt() ) : ?>
-                    <p class="si-audio-card__excerpt"><?php echo esc_html( get_the_excerpt() ); ?></p>
-                    <?php endif; ?>
+                    <p class="si-audio-card__description"><?php echo esc_html( has_excerpt() ? get_the_excerpt() : get_the_title() ); ?></p>
                 </div>
 
             </article>

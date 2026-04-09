@@ -369,3 +369,21 @@
         text-shadow: 0 0 20px rgba(232, 198, 117, 0.3);
     }
 }
+
+/* ============================================================
+   SCROLL PROGRESS BAR
+   Created by JS in si-scroll-observer.js, styled here.
+   ============================================================ */
+.si-scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(to right, #D4A853, #E8C675);
+    transform: scaleX(0);
+    transform-origin: left center;
+    z-index: 2000;
+    pointer-events: none;
+    will-change: transform;
+}

@@ -180,7 +180,6 @@
 
 .si-home-hero__half--left {
     background: linear-gradient(to right, rgba(212,168,83,0.07) 0%, transparent 100%);
-    border-right: 1px solid rgba(212,168,83,0.08);
     transition-delay: 0s;
 }
 
@@ -247,6 +246,7 @@
 .si-scope.si-site-header {
     position: fixed;
     top: 0;
+    left: 0;
     right: 0;
     z-index: 1000;
     padding: 0;
@@ -254,11 +254,18 @@
     border: none;
 }
 
+/* Header inner: fixed 64px height, horizontal padding only — no vertical
+   padding so the 44px toggle fits without overflow, and both elements
+   sit on a shared vertical centre line. */
 .si-site-header__inner {
     display: flex;
     align-items: center;
-    justify-content: flex-end;
-    padding: 1rem 1.25rem;
+    justify-content: space-between;
+    height: 64px;
+    padding: 0 1.25rem;
+    gap: 1rem;
+    max-width: none;
+    margin: 0;
 }
 
 .si-nav-toggle {
@@ -634,14 +641,24 @@ body {
    ============================================================ */
 .si-reveal {
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
-                transform 0.7s cubic-bezier(0.16,1,0.3,1);
+    transform: translateY(48px);
+    transition: opacity 0.85s cubic-bezier(0.16,1,0.3,1),
+                transform 0.85s cubic-bezier(0.16,1,0.3,1);
+    will-change: transform, opacity;
 }
 .si-reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* Directional variants */
+.si-reveal--left  { transform: translateX(-48px); }
+.si-reveal--right { transform: translateX(48px);  }
+.si-reveal--left.is-visible,
+.si-reveal--right.is-visible { transform: translateX(0); }
+
+.si-reveal--scale { transform: scale(0.93); }
+.si-reveal--scale.is-visible { transform: scale(1); }
 
 /* ============================================================
    SITE FOOTER
@@ -714,5 +731,12 @@ body {
     .si-home-hero__scroll,
     .si-home-hero__orb { animation: none; opacity: 1; clip-path: none; stroke-dashoffset: 0; }
     .si-home-hero__half { opacity: 1; transition: none; }
-    .si-reveal { opacity: 1; transform: none; transition: none; }
+    .si-reveal,
+    .si-reveal--left,
+    .si-reveal--right,
+    .si-reveal--scale { opacity: 1; transform: none; transition: none; }
+    .si-home-hero__bg,
+    .si-home-hero__inner,
+    .si-home-hero__split { transform: none !important; opacity: 1 !important; }
+    .si-scroll-progress { display: none; }
 }

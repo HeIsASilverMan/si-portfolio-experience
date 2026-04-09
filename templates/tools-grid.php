@@ -49,6 +49,18 @@ $tools = array(
         'detail'  => 'Wireframes, prototypes &amp; design systems',
         'color'   => '#A259FF',
     ),
+    array(
+        'name'    => 'AI Integration',
+        'abbr'    => 'AI',
+        'detail'  => 'ChatGPT, Claude &amp; custom workflows for scripting, rapid prototyping &amp; personalised content',
+        'color'   => '#8B5CF6',
+    ),
+    array(
+        'name'    => 'Adobe Creative Suite',
+        'abbr'    => 'CC',
+        'detail'  => 'Premiere Pro, Audition &amp; Photoshop for media production &amp; design',
+        'color'   => '#FF0000',
+    ),
 );
 ?>
 

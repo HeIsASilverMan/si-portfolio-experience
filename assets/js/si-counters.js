@@ -1,32 +1,41 @@
-document.addEventListener('DOMContentLoaded', function () {
-    if (!window.IntersectionObserver) return;
+( function () {
+    'use strict';
 
-    var counters = document.querySelectorAll('[data-si-counter]');
-    if (!counters.length) return;
+    if ( window.siCountersReady ) { return; }
+    window.siCountersReady = true;
 
-    var observer = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-            if (!entry.isIntersecting) return;
-            observer.unobserve(entry.target);
+    if ( ! window.IntersectionObserver ) { return; }
 
-            var el      = entry.target;
-            var target  = parseFloat(el.dataset.siCounter);
-            var dur     = 2000;
-            var start   = null;
+    var counters = document.querySelectorAll( '.si-counter[data-target]' );
+    if ( ! counters.length ) { return; }
 
-            function step(ts) {
-                if (!start) start = ts;
-                var p   = Math.min((ts - start) / dur, 1);
-                var val = target * (1 - Math.pow(1 - p, 3));
-                el.textContent = Number.isInteger(target)
-                    ? Math.round(val)
-                    : val.toFixed(1);
-                if (p < 1) requestAnimationFrame(step);
-                else el.textContent = target;
+    var observer = new IntersectionObserver( function ( entries ) {
+        entries.forEach( function ( entry ) {
+            if ( ! entry.isIntersecting ) { return; }
+            observer.unobserve( entry.target );
+
+            var el     = entry.target;
+            var target = parseFloat( el.dataset.target );
+            var suffix = el.dataset.suffix || '';
+            var dur    = 2000;
+            var start  = null;
+
+            function step( ts ) {
+                if ( ! start ) { start = ts; }
+                var p   = Math.min( ( ts - start ) / dur, 1 );
+                var val = target * ( 1 - Math.pow( 1 - p, 3 ) );
+                el.textContent = ( Number.isInteger( target )
+                    ? Math.round( val )
+                    : val.toFixed( 1 ) ) + suffix;
+                if ( p < 1 ) {
+                    requestAnimationFrame( step );
+                } else {
+                    el.textContent = target + suffix;
+                }
             }
-            requestAnimationFrame(step);
-        });
-    }, { threshold: 0.5 });
+            requestAnimationFrame( step );
+        } );
+    }, { threshold: 0.5 } );
 
-    counters.forEach(function (el) { observer.observe(el); });
-});
+    counters.forEach( function ( el ) { observer.observe( el ); } );
+} )();

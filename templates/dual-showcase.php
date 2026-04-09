@@ -56,8 +56,9 @@ $cards = array(
 
         <?php foreach ( $cards as $card ) :
             $post     = $card['post'];
-            $title    = $post ? get_the_title( $post )    : $card['default_title'];
-            $excerpt  = $post ? get_the_excerpt( $post )  : $card['default_excerpt'];
+            $raw_title = $post ? get_the_title( $post )   : $card['default_title'];
+            $title     = wp_trim_words( $raw_title, 9, '&hellip;' );
+            $excerpt   = $post ? get_the_excerpt( $post ) : $card['default_excerpt'];
             $thumb    = $post ? get_the_post_thumbnail_url( $post, 'large' ) : '';
             $link     = $post ? get_permalink( $post )    : $card['url'];
         ?>
