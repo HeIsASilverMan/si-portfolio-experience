@@ -32,6 +32,12 @@ $tools = array(
         'color'   => '#D3D3D3',
     ),
     array(
+        'name'    => 'Web Developement',
+        'abbr'    => 'WD',
+        'detail'  => 'Bespoke HTML, CSS, and JS elements for total customisation.',
+        'color'   => '#F88379',
+    ),
+    array(
         'name'    => 'Professional Voiceover',
         'abbr'    => 'PV',
         'detail'  => 'Clear and engaging narration',
@@ -64,7 +70,7 @@ $tools = array(
     array(
         'name'    => 'AI Integration',
         'abbr'    => 'AI',
-        'detail'  => 'ChatGPT, Claude &amp; custom workflows for scripting, rapid prototyping &amp; personalised content',
+        'detail'  => 'Custom workflows for scripting, rapid prototyping &amp; personalised content',
         'color'   => '#8B5CF6',
     ),
     array(
@@ -84,6 +90,12 @@ $tools = array(
         'abbr'    => 'PS',
         'detail'  => 'Professional photo editing, and composite work',
         'color'   => '#40D0FB',
+    ),
+    array(
+        'name'    => 'Automation',
+        'abbr'    => 'AU',
+        'detail'  => 'Enterprise-grade API integrations and custom workflow tools',
+        'color'   => '#0BDA51',
     ),
 );
 ?>
