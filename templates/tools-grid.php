@@ -26,6 +26,18 @@ $tools = array(
         'color'   => '#F5A623',
     ),
     array(
+        'name'    => 'Audio Production',
+        'abbr'    => 'AP',
+        'detail'  => 'Professional studio-grade sounds',
+        'color'   => '#D3D3D3',
+    ),
+    array(
+        'name'    => 'Professional Voiceover',
+        'abbr'    => 'PV',
+        'detail'  => 'Clear and engaging narration',
+        'color'   => '#BE5103',
+    ),
+    array(
         'name'    => 'Camtasia',
         'abbr'    => 'CA',
         'detail'  => 'Screen capture, software demos &amp; video editing',
@@ -44,10 +56,10 @@ $tools = array(
         'color'   => '#7EC89B',
     ),
     array(
-        'name'    => 'Figma',
-        'abbr'    => 'FG',
-        'detail'  => 'Wireframes, prototypes &amp; design systems',
-        'color'   => '#A259FF',
+        'name'    => 'Adobe Premier Pro',
+        'abbr'    => 'PR',
+        'detail'  => 'Engaging video editing, and acessibility',
+        'color'   => '#CC8899',
     ),
     array(
         'name'    => 'AI Integration',
@@ -56,10 +68,22 @@ $tools = array(
         'color'   => '#8B5CF6',
     ),
     array(
-        'name'    => 'Adobe Creative Suite',
-        'abbr'    => 'CC',
-        'detail'  => 'Premiere Pro, Audition &amp; Photoshop for media production &amp; design',
+        'name'    => 'Adobe Illustrator',
+        'abbr'    => 'AI',
+        'detail'  => 'Custom, visually striking vector graphics',
+        'color'   => '#FF9A00',
+    ),
+    array(
+        'name'    => 'Authoring Tools',
+        'abbr'    => 'AT',
+        'detail'  => 'Lectora, DominKnow, Elucidat, I will use any tool',
         'color'   => '#FF0000',
+    ),
+    array(
+        'name'    => 'Adobe Photoshop',
+        'abbr'    => 'PS',
+        'detail'  => 'Professional photo editing, and composite work',
+        'color'   => '#40D0FB',
     ),
 );
 ?>
