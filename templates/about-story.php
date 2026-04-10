@@ -68,15 +68,15 @@
                         'text' => __( 'Began composing professionally &mdash; film, games, commercial', 'si-portfolio' ),
                     ),
                     array(
-                        'year' => '2018',
+                        'year' => '2012',
                         'text' => __( "Master's in Electronic Composition, University of Liverpool", 'si-portfolio' ),
                     ),
                     array(
-                        'year' => '2021',
+                        'year' => '2019',
                         'text' => __( 'Gold Stevie Award &mdash; CHATS Programme, Raytheon', 'si-portfolio' ),
                     ),
                     array(
-                        'year' => '2023',
+                        'year' => '2025',
                         'text' => __( 'L5 Digital Learning Design Apprenticeship &mdash; Distinction', 'si-portfolio' ),
                     ),
                     array(
