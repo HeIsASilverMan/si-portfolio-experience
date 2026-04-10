@@ -29,14 +29,14 @@
         <div class="si-ld-hero__stats si-reveal" role="list" aria-label="<?php esc_attr_e( 'Key statistics', 'si-portfolio' ); ?>">
 
             <div class="si-ld-hero__stat" role="listitem">
-                <span class="si-ld-hero__stat-num si-counter" data-target="8" data-suffix="+"><?php esc_html_e( '0', 'si-portfolio' ); ?></span>
+                <span class="si-ld-hero__stat-num si-counter" data-target="10" data-suffix="+"><?php esc_html_e( '0', 'si-portfolio' ); ?></span>
                 <span class="si-ld-hero__stat-label"><?php esc_html_e( 'Years Experience', 'si-portfolio' ); ?></span>
             </div>
 
             <span class="si-ld-hero__stat-divider" aria-hidden="true"></span>
 
             <div class="si-ld-hero__stat" role="listitem">
-                <span class="si-ld-hero__stat-num si-counter" data-target="50" data-suffix="+"><?php esc_html_e( '0', 'si-portfolio' ); ?></span>
+                <span class="si-ld-hero__stat-num si-counter" data-target="100" data-suffix="+"><?php esc_html_e( '0', 'si-portfolio' ); ?></span>
                 <span class="si-ld-hero__stat-label"><?php esc_html_e( 'Projects Delivered', 'si-portfolio' ); ?></span>
             </div>
 
