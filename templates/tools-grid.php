@@ -32,9 +32,9 @@ $tools = array(
         'color'   => '#D3D3D3',
     ),
     array(
-        'name'    => 'Web Developement',
+        'name'    => 'Web Development',
         'abbr'    => 'WD',
-        'detail'  => 'Bespoke HTML, CSS, and JS elements for total customisation.',
+        'detail'  => 'Bespoke HTML, CSS, and JS elements for total customisation',
         'color'   => '#F88379',
     ),
     array(
@@ -62,9 +62,9 @@ $tools = array(
         'color'   => '#7EC89B',
     ),
     array(
-        'name'    => 'Adobe Premier Pro',
+        'name'    => 'Adobe Premiere Pro',
         'abbr'    => 'PR',
-        'detail'  => 'Engaging video editing, and acessibility',
+        'detail'  => 'Engaging video editing with accessibility in mind',
         'color'   => '#CC8899',
     ),
     array(
@@ -75,14 +75,14 @@ $tools = array(
     ),
     array(
         'name'    => 'Adobe Illustrator',
-        'abbr'    => 'AI',
+        'abbr'    => 'IL',
         'detail'  => 'Custom, visually striking vector graphics',
         'color'   => '#FF9A00',
     ),
     array(
         'name'    => 'Authoring Tools',
         'abbr'    => 'AT',
-        'detail'  => 'Lectora, DominKnow, Elucidat, I will use any tool',
+        'detail'  => 'Lectora, DominKnow, Elucidat &amp; more &mdash; tool-agnostic by design',
         'color'   => '#FF0000',
     ),
     array(

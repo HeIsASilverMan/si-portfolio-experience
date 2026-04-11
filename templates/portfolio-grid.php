@@ -21,14 +21,29 @@ $query = new WP_Query( array(
     'order'   => 'ASC',
 ) );
 
-// Collect all taxonomy terms used by these posts for filter pills.
-$filter_terms = array();
+// Collect filter pills — prefer taxonomy terms; fall back to tools_used meta.
+$filter_terms    = array();
+$filter_use_cats = false;
 if ( $query->have_posts() ) {
     foreach ( $query->posts as $p ) {
         $terms = get_the_terms( $p->ID, 'si_portfolio_cat' );
         if ( $terms && ! is_wp_error( $terms ) ) {
             foreach ( $terms as $term ) {
                 $filter_terms[ $term->slug ] = $term->name;
+                $filter_use_cats = true;
+            }
+        }
+    }
+    // No taxonomy terms found — build filter from tools_used meta instead.
+    if ( ! $filter_use_cats ) {
+        foreach ( $query->posts as $p ) {
+            $tools_raw = get_post_meta( $p->ID, '_si_tools_used', true );
+            if ( $tools_raw ) {
+                foreach ( array_map( 'trim', explode( ',', $tools_raw ) ) as $tool ) {
+                    if ( $tool ) {
+                        $filter_terms[ sanitize_title( $tool ) ] = $tool;
+                    }
+                }
             }
         }
     }
@@ -73,11 +88,16 @@ if ( $query->have_posts() ) {
                 $ext_url    = get_post_meta( $post_id, '_si_external_url', true );
 
                 // Taxonomy terms for this post (for data-cats attribute).
-                $post_terms     = get_the_terms( $post_id, 'si_portfolio_cat' );
+                $post_terms      = get_the_terms( $post_id, 'si_portfolio_cat' );
                 $post_term_slugs = '';
                 if ( $post_terms && ! is_wp_error( $post_terms ) ) {
                     $slugs           = wp_list_pluck( $post_terms, 'slug' );
                     $post_term_slugs = implode( ' ', $slugs );
+                }
+                // When using tools-based filter, also populate data-cats from tools_used.
+                if ( ! $filter_use_cats && $tools_raw ) {
+                    $tool_slugs      = array_filter( array_map( 'sanitize_title', array_map( 'trim', explode( ',', $tools_raw ) ) ) );
+                    $post_term_slugs = trim( $post_term_slugs . ' ' . implode( ' ', $tool_slugs ) );
                 }
 
                 $thumb_url = '';
@@ -198,6 +218,22 @@ if ( $query->have_posts() ) :
         </p>
         <?php endif; ?>
 
+        <?php if ( $ext_url ) : ?>
+        <div class="si-modal-data__launch">
+            <a href="<?php echo esc_url( $ext_url ); ?>"
+               class="si-btn si-btn--primary si-modal-data__launch-btn"
+               target="_blank"
+               rel="noopener noreferrer">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                <?php esc_html_e( 'Launch this experience', 'si-portfolio' ); ?>
+            </a>
+        </div>
+        <?php endif; ?>
+
         <?php if ( $challenge ) : ?>
         <div class="si-modal-data__section">
             <h3 class="si-modal-data__section-heading">The Challenge</h3>
@@ -230,16 +266,6 @@ if ( $query->have_posts() ) :
         </div>
         <?php endif; ?>
 
-        <?php if ( $ext_url ) : ?>
-        <div class="si-modal-data__actions">
-            <a href="<?php echo esc_url( $ext_url ); ?>"
-               class="si-btn si-btn--primary"
-               target="_blank"
-               rel="noopener noreferrer">
-                Launch Project <span class="si-btn__arrow" aria-hidden="true">&rarr;</span>
-            </a>
-        </div>
-        <?php endif; ?>
 
     </div>
 
