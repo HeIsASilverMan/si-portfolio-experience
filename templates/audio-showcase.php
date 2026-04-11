@@ -35,12 +35,10 @@ $query = new WP_Query( array(
 
                 <div class="si-audio-stage__body">
 
-                    <!-- Left: meta + description -->
+                    <!-- Left: genre tag + description/brief -->
                     <div class="si-audio-stage__meta">
                         <span class="si-audio-stage__genre" id="si-stage-genre"></span>
-                        <h3 class="si-audio-stage__title" id="si-stage-title">Select a track</h3>
-                        <p class="si-audio-stage__credit" id="si-stage-credit"></p>
-                        <p class="si-audio-stage__description" id="si-stage-desc">Choose a track from the list below to hear the work and read about the brief it was composed for.</p>
+                        <p class="si-audio-stage__description" id="si-stage-desc"><?php esc_html_e( 'Choose a track from the list below to hear the work and read about the brief it was composed for.', 'si-portfolio' ); ?></p>
                     </div>
 
                     <!-- Right: waveform + controls -->
@@ -101,7 +99,10 @@ $query = new WP_Query( array(
                     $year        = get_post_meta( get_the_ID(), '_si_year', true );
                     $genre       = get_post_meta( get_the_ID(), '_si_project_genre', true );
                     $thumb_url   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium' ) : '';
-                    $description = has_excerpt() ? get_the_excerpt() : '';
+                    $description = get_post_meta( get_the_ID(), '_si_brief', true );
+                    if ( ! $description ) {
+                        $description = has_excerpt() ? get_the_excerpt() : '';
+                    }
                     $num_str     = str_pad( $track_num, 2, '0', STR_PAD_LEFT );
                 ?>
                 <div class="si-track-item"

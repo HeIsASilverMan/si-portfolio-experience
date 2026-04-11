@@ -96,6 +96,13 @@ class SI_Admin {
             $clean[ $f ] = isset( $input[ $f ] ) ? sanitize_text_field( $input[ $f ] ) : '';
         }
 
+        // Marquee phrases — one per line, textarea
+        if ( isset( $input['marquee_phrases'] ) ) {
+            $clean['marquee_phrases'] = sanitize_textarea_field( $input['marquee_phrases'] );
+        } else {
+            $clean['marquee_phrases'] = '';
+        }
+
         // Custom CSS — preserve whitespace and valid CSS characters; strip </ to prevent injection
         if ( isset( $input['custom_css'] ) ) {
             $clean['custom_css'] = str_replace( '</', '', $input['custom_css'] );
@@ -155,6 +162,20 @@ class SI_Admin {
                         'Bespoke music and scores, lovingly crafted to your exact requirements. Learning experiences that actually work.',
                         'The paragraph shown beneath your name on the home page.'
                     ); ?>
+                </div>
+
+                <!-- ── Ticker / Marquee ─────────────────────────── -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Ticker / Marquee', 'si-portfolio' ); ?></h2>
+                    <?php
+                    $marquee_val = isset( $s['marquee_phrases'] ) ? $s['marquee_phrases'] : '';
+                    $marquee_key = self::OPTION_KEY . '[marquee_phrases]';
+                    echo '<div class="si-row">';
+                    echo '<label for="si_marquee_phrases">Scrolling phrases</label>';
+                    echo '<textarea id="si_marquee_phrases" name="' . esc_attr( $marquee_key ) . '" style="width:100%;height:120px;" placeholder="Music is culture&#10;Learning should transform&#10;Obsessed with craft">' . esc_textarea( $marquee_val ) . '</textarea>';
+                    echo '<span class="si-hint">One phrase per line. Leave blank to use the built-in defaults.</span>';
+                    echo '</div>';
+                    ?>
                 </div>
 
                 <!-- ── Social & Contact ─────────────────────────── -->

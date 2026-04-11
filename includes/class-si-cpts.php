@@ -233,6 +233,15 @@ class SI_CPTs {
         echo '<p style="margin-top:10px;"><strong>Audio File URL (composition only)</strong></p>';
         $audio = get_post_meta( $post->ID, '_si_audio_file', true );
         echo '<input type="url" name="si_audio_file" value="' . esc_attr( $audio ) . '" style="width:100%" placeholder="https://">';
+
+        echo '<p style="margin-top:10px;"><strong>Genre / Style Tag</strong> <span style="color:#666;font-weight:normal;">(composition only, e.g. Cinematic, Corporate)</span></p>';
+        $genre = get_post_meta( $post->ID, '_si_project_genre', true );
+        echo '<input type="text" name="si_project_genre" value="' . esc_attr( $genre ) . '" style="width:100%" placeholder="e.g. Cinematic, Corporate, Ambient">';
+
+        echo '<p style="margin-top:10px;"><strong>Brief / Context</strong> <span style="color:#666;font-weight:normal;">(composition only &mdash; shown in the audio showcase)</span></p>';
+        echo '<p style="color:#666;font-size:12px;margin:-4px 0 6px;">Describe the use-case this piece was composed for. e.g. &ldquo;Perfect for YouTube reviews that need a modern, funky background track.&rdquo;</p>';
+        $brief = get_post_meta( $post->ID, '_si_brief', true );
+        echo '<textarea name="si_brief" style="width:100%;height:80px;">' . esc_textarea( $brief ) . '</textarea>';
     }
 
     public static function render_ld_meta_box( $post ) {
@@ -357,8 +366,9 @@ class SI_CPTs {
             }
 
             $text_fields = array(
-                'si_client_name'  => '_si_client_name',
-                'si_year'         => '_si_year',
+                'si_client_name'   => '_si_client_name',
+                'si_year'          => '_si_year',
+                'si_project_genre' => '_si_project_genre',
             );
             foreach ( $text_fields as $input => $meta_key ) {
                 if ( isset( $_POST[ $input ] ) ) {
@@ -374,6 +384,10 @@ class SI_CPTs {
                 if ( isset( $_POST[ $input ] ) ) {
                     update_post_meta( $post_id, $meta_key, esc_url_raw( $_POST[ $input ] ) );
                 }
+            }
+
+            if ( isset( $_POST['si_brief'] ) ) {
+                update_post_meta( $post_id, '_si_brief', sanitize_textarea_field( $_POST['si_brief'] ) );
             }
         }
 

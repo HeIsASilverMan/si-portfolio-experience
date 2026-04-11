@@ -1,90 +1,137 @@
 <?php defined( 'ABSPATH' ) || exit;
 
+// ── Composition: first track with an audio file ──────────
 $comp_args = array(
     'post_type'      => 'si_portfolio',
     'posts_per_page' => 1,
     'post_status'    => 'publish',
     'meta_query'     => array(
+        'relation' => 'AND',
         array(
-            'key'     => '_si_project_type',
-            'value'   => 'composition',
-            'compare' => '=',
+            'key'   => '_si_project_type',
+            'value' => 'composition',
+        ),
+        array(
+            'key'     => '_si_audio_file',
+            'value'   => '',
+            'compare' => '!=',
         ),
     ),
+    'orderby' => 'menu_order date',
+    'order'   => 'ASC',
 );
+$comp_query = new WP_Query( $comp_args );
+$comp_post  = $comp_query->have_posts() ? $comp_query->posts[0] : null;
 
+$comp_audio = $comp_post ? get_post_meta( $comp_post->ID, '_si_audio_file', true ) : '';
+$comp_title = $comp_post ? get_the_title( $comp_post ) : '';
+
+// ── Learning Design: up to 9 posts ────────────────────────
 $ld_args = array(
     'post_type'      => 'si_portfolio',
-    'posts_per_page' => 1,
+    'posts_per_page' => 9,
     'post_status'    => 'publish',
     'meta_query'     => array(
         array(
-            'key'     => '_si_project_type',
-            'value'   => 'learning_design',
-            'compare' => '=',
+            'key'   => '_si_project_type',
+            'value' => 'learning_design',
         ),
     ),
+    'orderby' => 'menu_order date',
+    'order'   => 'ASC',
 );
-
-$comp_query = new WP_Query( $comp_args );
-$ld_query   = new WP_Query( $ld_args );
-
-$cards = array(
-    array(
-        'type'    => 'composition',
-        'label'   => 'Composition',
-        'post'    => $comp_query->have_posts() ? $comp_query->posts[0] : null,
-        'default_title'   => 'Bespoke Music',
-        'default_excerpt' => 'Music that complements, never overpowers. Hear the work.',
-        'cta'     => 'Hear the Work',
-        'url'     => '/composition',
-    ),
-    array(
-        'type'    => 'learning_design',
-        'label'   => 'Learning Design',
-        'post'    => $ld_query->have_posts() ? $ld_query->posts[0] : null,
-        'default_title'   => 'Learning Experiences',
-        'default_excerpt' => 'Eight years. A Gold Stevie Award. Learning that actually works.',
-        'cta'     => 'See the Project',
-        'url'     => '/learning-design',
-    ),
-);
+$ld_query = new WP_Query( $ld_args );
 ?>
 
 <section class="si-scope si-dual-showcase" aria-label="Featured Work">
     <div class="si-dual-showcase__inner">
 
-        <?php foreach ( $cards as $card ) :
-            $post     = $card['post'];
-            $raw_title = $post ? get_the_title( $post )   : $card['default_title'];
-            $title     = wp_trim_words( $raw_title, 9, '&hellip;' );
-            $excerpt   = $post ? get_the_excerpt( $post ) : $card['default_excerpt'];
-            $thumb    = $post ? get_the_post_thumbnail_url( $post, 'large' ) : '';
-            $link     = $post ? get_permalink( $post )    : $card['url'];
-        ?>
-        <article class="si-dual-showcase__card si-reveal" aria-label="<?php echo esc_attr( $card['label'] ); ?>">
-
-            <div class="si-dual-showcase__thumb si-dual-showcase__thumb--<?php echo esc_attr( $card['type'] ); ?>">
-                <?php if ( $thumb ) : ?>
-                <img src="<?php echo esc_url( $thumb ); ?>" alt="" loading="lazy" decoding="async">
-                <?php endif; ?>
-                <div class="si-dual-showcase__thumb-overlay"></div>
-            </div>
-
+        <!-- ── Composition card ───────────────────────────── -->
+        <article class="si-dual-showcase__card si-dual-showcase__card--comp si-reveal" aria-label="Composition">
             <div class="si-dual-showcase__body">
-                <span class="si-dual-showcase__label"><?php echo esc_html( $card['label'] ); ?></span>
-                <h3 class="si-dual-showcase__title"><?php echo esc_html( $title ); ?></h3>
-                <p class="si-dual-showcase__excerpt"><?php echo esc_html( $excerpt ); ?></p>
-                <a href="<?php echo esc_url( $link ); ?>" class="si-btn si-btn--ghost si-dual-showcase__cta">
-                    <?php echo esc_html( $card['cta'] ); ?>
+
+                <span class="si-dual-showcase__label"><?php esc_html_e( 'Composition', 'si-portfolio' ); ?></span>
+                <h3 class="si-dual-showcase__title"><?php esc_html_e( 'Every project deserves its own sound', 'si-portfolio' ); ?></h3>
+                <p class="si-dual-showcase__sub"><?php esc_html_e( 'No templates. No stock. Bespoke music for every brief.', 'si-portfolio' ); ?></p>
+
+                <?php if ( $comp_audio ) : ?>
+                <div class="si-home-player" id="si-home-player">
+
+                    <audio id="si-home-audio"
+                           src="<?php echo esc_url( $comp_audio ); ?>"
+                           preload="none"
+                           aria-hidden="true"></audio>
+
+                    <button class="si-home-player__btn" id="si-home-play"
+                            aria-label="<?php esc_attr_e( 'Play', 'si-portfolio' ); ?>">
+                        <svg class="si-play-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                            <path d="M8 5.14v14l11-7-11-7z"/>
+                        </svg>
+                        <svg class="si-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                    </button>
+
+                    <div class="si-home-player__track">
+                        <?php if ( $comp_title ) : ?>
+                        <span class="si-home-player__title"><?php echo esc_html( $comp_title ); ?></span>
+                        <?php endif; ?>
+                        <div class="si-home-player__bar" aria-hidden="true">
+                            <div class="si-home-player__fill" id="si-home-fill"></div>
+                        </div>
+                    </div>
+
+                    <span class="si-home-player__time" id="si-home-time" aria-live="off">0:00</span>
+
+                </div>
+                <?php endif; ?>
+
+                <a href="/composition" class="si-btn si-btn--ghost si-dual-showcase__cta">
+                    <?php esc_html_e( 'Hear the full portfolio', 'si-portfolio' ); ?>
                     <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                         <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </a>
-            </div>
 
+            </div>
         </article>
-        <?php endforeach; ?>
+
+        <!-- ── Learning Design card (entire card = link) ──── -->
+        <a class="si-dual-showcase__card si-dual-showcase__card--ld si-reveal"
+           href="/learning-design#si-portfolio-grid"
+           aria-label="<?php esc_attr_e( 'Learning Design portfolio', 'si-portfolio' ); ?>">
+
+            <div class="si-dual-showcase__body">
+
+                <span class="si-dual-showcase__label"><?php esc_html_e( 'Learning Design', 'si-portfolio' ); ?></span>
+
+                <?php if ( $ld_query->have_posts() ) : ?>
+                <div class="si-dual-showcase__grid" aria-hidden="true">
+                    <?php
+                    $ld_count = 0;
+                    while ( $ld_query->have_posts() && $ld_count < 9 ) :
+                        $ld_query->the_post();
+                        $ld_count++;
+                        $ld_thumb = get_the_post_thumbnail_url( get_the_ID(), 'medium' );
+                    ?>
+                    <div class="si-dual-showcase__grid-item">
+                        <?php if ( $ld_thumb ) : ?>
+                        <img src="<?php echo esc_url( $ld_thumb ); ?>" alt="" loading="lazy" decoding="async">
+                        <?php endif; ?>
+                    </div>
+                    <?php endwhile; wp_reset_postdata(); ?>
+                </div>
+                <?php endif; ?>
+
+                <p class="si-dual-showcase__cta-line">
+                    <?php esc_html_e( 'See the Portfolio', 'si-portfolio' ); ?>
+                    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                        <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </p>
+
+            </div>
+        </a>
 
     </div>
 </section>

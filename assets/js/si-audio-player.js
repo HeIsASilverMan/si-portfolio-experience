@@ -33,7 +33,7 @@
     var currentAudio = null;
 
     // ── DOM refs ───────────────────────────────────────────
-    var stage, stageBg, stageGenre, stageTitle, stageCredit, stageDesc;
+    var stage, stageBg, stageGenre, stageDesc;
     var stageWaveform, stagePlay, stageScrub, stageFill, stageThumb;
     var stageCurrent, stageDuration;
     var miniPlayer;
@@ -135,20 +135,11 @@
 
         // Stage text
         if ( stageGenre ) {
-            stageGenre.textContent  = track.genre;
+            stageGenre.textContent   = track.genre;
             stageGenre.style.display = track.genre ? '' : 'none';
         }
-        if ( stageTitle   ) { stageTitle.textContent   = track.title; }
-        if ( stageCredit  ) {
-            var parts = [];
-            if ( track.client ) { parts.push( track.client ); }
-            if ( track.year   ) { parts.push( track.year   ); }
-            stageCredit.textContent  = parts.join( ' \u00b7 ' );
-            stageCredit.style.display = parts.length ? '' : 'none';
-        }
         if ( stageDesc ) {
-            stageDesc.textContent  = track.description;
-            stageDesc.style.display = track.description ? '' : 'none';
+            stageDesc.textContent = track.description;
         }
 
         // Waveform
@@ -213,8 +204,6 @@
 
         stageBg       = document.getElementById( 'si-stage-bg'       );
         stageGenre    = document.getElementById( 'si-stage-genre'    );
-        stageTitle    = document.getElementById( 'si-stage-title'    );
-        stageCredit   = document.getElementById( 'si-stage-credit'   );
         stageDesc     = document.getElementById( 'si-stage-desc'     );
         stageWaveform = document.getElementById( 'si-stage-waveform' );
         stagePlay     = document.getElementById( 'si-stage-play'     );
@@ -319,9 +308,59 @@
         if ( tracks.length ) { loadTrack( 0, false ); }
     }
 
+    // ── Home page mini player ──────────────────────────────
+    function initHomePlayer() {
+        var player = document.getElementById( 'si-home-player' );
+        if ( ! player ) { return; }
+
+        var audio = document.getElementById( 'si-home-audio' );
+        var btn   = document.getElementById( 'si-home-play'  );
+        var fill  = document.getElementById( 'si-home-fill'  );
+        var time  = document.getElementById( 'si-home-time'  );
+        var bar   = player.querySelector( '.si-home-player__bar' );
+
+        if ( ! audio || ! btn ) { return; }
+
+        btn.addEventListener( 'click', function () {
+            if ( audio.paused ) {
+                audio.play().then( function () {
+                    player.classList.add( 'is-playing' );
+                    btn.setAttribute( 'aria-label', 'Pause' );
+                } ).catch( function () {} );
+            } else {
+                audio.pause();
+                player.classList.remove( 'is-playing' );
+                btn.setAttribute( 'aria-label', 'Play' );
+            }
+        } );
+
+        audio.addEventListener( 'timeupdate', function () {
+            var pct = audio.duration ? ( audio.currentTime / audio.duration ) * 100 : 0;
+            if ( fill ) { fill.style.width    = pct + '%'; }
+            if ( time ) { time.textContent    = formatTime( audio.currentTime ); }
+        } );
+
+        audio.addEventListener( 'ended', function () {
+            player.classList.remove( 'is-playing' );
+            btn.setAttribute( 'aria-label', 'Play' );
+            if ( fill ) { fill.style.width = '0%'; }
+            if ( time ) { time.textContent = '0:00'; }
+        } );
+
+        if ( bar ) {
+            bar.addEventListener( 'click', function ( e ) {
+                if ( ! audio.duration ) { return; }
+                var r = bar.getBoundingClientRect();
+                audio.currentTime = ( ( e.clientX - r.left ) / r.width ) * audio.duration;
+            } );
+        }
+    }
+
     if ( document.readyState === 'loading' ) {
         document.addEventListener( 'DOMContentLoaded', init );
+        document.addEventListener( 'DOMContentLoaded', initHomePlayer );
     } else {
         init();
+        initHomePlayer();
     }
 } )();

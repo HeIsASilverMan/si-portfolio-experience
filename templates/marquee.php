@@ -12,7 +12,12 @@ $default_items = array(
 if ( ! empty( $text ) ) {
     $items = array_map( 'trim', explode( '|', $text ) );
 } else {
-    $items = $default_items;
+    $setting_phrases = si_setting( 'marquee_phrases', '' );
+    if ( ! empty( $setting_phrases ) ) {
+        $items = array_values( array_filter( array_map( 'trim', explode( "\n", $setting_phrases ) ) ) );
+    } else {
+        $items = $default_items;
+    }
 }
 ?>
 
