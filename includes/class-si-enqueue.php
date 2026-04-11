@@ -5,6 +5,39 @@ class SI_Enqueue {
 
     public static function init() {
         add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
+        add_action( 'wp_footer',          array( __CLASS__, 'preloader' ) );
+    }
+
+    public static function preloader() {
+        ?>
+        <div class="si-preloader" id="si-preloader" aria-hidden="true">
+            <div class="si-preloader__inner">
+                <svg class="si-preloader__logo" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+                    <circle cx="24" cy="24" r="22" stroke="#D4A853" stroke-width="1.5" opacity="0.4"/>
+                    <text x="24" y="29" font-family="'Instrument Serif', Georgia, serif" font-size="18" fill="#D4A853" text-anchor="middle">SI</text>
+                </svg>
+                <div class="si-preloader__track" aria-hidden="true">
+                    <div class="si-preloader__fill"></div>
+                </div>
+            </div>
+        </div>
+        <script>
+        ( function () {
+            var el = document.getElementById( 'si-preloader' );
+            if ( ! el ) return;
+            function done() {
+                el.classList.add( 'is-done' );
+                setTimeout( function () { el.style.display = 'none'; }, 600 );
+            }
+            if ( document.readyState === 'complete' ) {
+                setTimeout( done, 200 );
+            } else {
+                window.addEventListener( 'load', function () { setTimeout( done, 200 ); } );
+                setTimeout( done, 2000 ); // hard cap
+            }
+        } )();
+        </script>
+        <?php
     }
 
     public static function enqueue() {

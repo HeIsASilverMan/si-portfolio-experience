@@ -387,3 +387,111 @@
     pointer-events: none;
     will-change: transform;
 }
+
+/* ============================================================
+   PAGE PRELOADER
+   ============================================================ */
+.si-preloader {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    background: #0D0D0F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.si-preloader.is-done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.si-preloader__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.si-preloader__logo {
+    animation: si-preloader-pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes si-preloader-pulse {
+    0%, 100% { opacity: 0.5; transform: scale(1); }
+    50%       { opacity: 1;   transform: scale(1.05); }
+}
+
+.si-preloader__track {
+    width: 120px;
+    height: 2px;
+    background: rgba( 212, 168, 83, 0.15 );
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.si-preloader__fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient( to right, #D4A853, #E8C675 );
+    border-radius: 2px;
+    animation: si-preloader-fill 1.8s ease-out forwards;
+}
+
+@keyframes si-preloader-fill {
+    0%   { width: 0%;   opacity: 1; }
+    80%  { width: 85%;  opacity: 1; }
+    100% { width: 100%; opacity: 0.5; }
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+    .si-preloader { display: none !important; }
+}
+
+/* ============================================================
+   MODAL IMAGE — launch overlay
+   ============================================================ */
+.si-modal-data__image-link {
+    display: block;
+    position: relative;
+    overflow: hidden;
+}
+
+.si-modal-data__image-link img {
+    display: block;
+    width: 100%;
+    transition: transform 0.4s ease;
+}
+
+.si-modal-data__image-link:hover img {
+    transform: scale( 1.02 );
+}
+
+.si-modal-data__image-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba( 13, 13, 15, 0.65 );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    color: #F0EDE6;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.si-modal-data__image-link:hover .si-modal-data__image-overlay,
+.si-modal-data__image-link:focus-visible .si-modal-data__image-overlay {
+    opacity: 1;
+}
+
+.si-modal-data__image-overlay span {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #D4A853;
+}

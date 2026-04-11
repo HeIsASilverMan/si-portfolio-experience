@@ -189,9 +189,25 @@ if ( $query->have_posts() ) :
 
     <?php if ( $thumb_url ) : ?>
     <div class="si-modal-data__image">
+        <?php if ( $ext_url ) : ?>
+        <a href="<?php echo esc_url( $ext_url ); ?>" target="_blank" rel="noopener noreferrer" class="si-modal-data__image-link" aria-label="<?php echo esc_attr( sprintf( __( 'Launch %s', 'si-portfolio' ), get_the_title() ) ); ?>">
+            <img src="<?php echo esc_url( $thumb_url ); ?>"
+                 alt="<?php echo esc_attr( get_the_title() ); ?>"
+                 loading="lazy">
+            <div class="si-modal-data__image-overlay" aria-hidden="true">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15 3 21 3 21 9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                </svg>
+                <span><?php esc_html_e( 'Launch experience', 'si-portfolio' ); ?></span>
+            </div>
+        </a>
+        <?php else : ?>
         <img src="<?php echo esc_url( $thumb_url ); ?>"
              alt="<?php echo esc_attr( get_the_title() ); ?>"
              loading="lazy">
+        <?php endif; ?>
     </div>
     <?php endif; ?>
 
