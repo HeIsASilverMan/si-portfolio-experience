@@ -73,63 +73,6 @@
 
     </div><!-- /.si-ld-hero__inner -->
 
-    <!-- Animated device mockup — decorative, desktop only -->
-    <div class="si-ld-hero__device" aria-hidden="true">
-        <div class="si-ld-hero__device-frame">
-            <div class="si-ld-hero__device-bar">
-                <span></span><span></span><span></span>
-            </div>
-            <div class="si-ld-hero__device-screen">
-                <div class="si-ld-hero__screen si-ld-hero__screen--1">
-                    <div class="si-ld-screen__progress-bar"><span style="width:72%"></span></div>
-                    <div class="si-ld-screen__module si-ld-screen__module--active">
-                        <span class="si-ld-screen__module-icon">&#9654;</span>
-                        <span>Module 1: Introduction</span>
-                        <span class="si-ld-screen__check">&#10003;</span>
-                    </div>
-                    <div class="si-ld-screen__module">
-                        <span class="si-ld-screen__module-icon">&#9654;</span>
-                        <span>Module 2: Core Concepts</span>
-                        <span class="si-ld-screen__check">&#10003;</span>
-                    </div>
-                    <div class="si-ld-screen__module si-ld-screen__module--current">
-                        <span class="si-ld-screen__module-icon">&#9654;</span>
-                        <span>Module 3: Application</span>
-                    </div>
-                    <div class="si-ld-screen__module si-ld-screen__module--locked">
-                        <span class="si-ld-screen__module-icon">&#128274;</span>
-                        <span>Module 4: Assessment</span>
-                    </div>
-                    <div class="si-ld-screen__btn">Continue Learning &rarr;</div>
-                </div>
-                <div class="si-ld-hero__screen si-ld-hero__screen--2">
-                    <div class="si-ld-screen__slide-header">Scenario: The Decision</div>
-                    <div class="si-ld-screen__scene">
-                        <div class="si-ld-screen__character"></div>
-                        <div class="si-ld-screen__bubble">What would you do in this situation?</div>
-                    </div>
-                    <div class="si-ld-screen__choices">
-                        <div class="si-ld-screen__choice">A. Escalate to manager</div>
-                        <div class="si-ld-screen__choice si-ld-screen__choice--selected">B. Address it directly</div>
-                        <div class="si-ld-screen__choice">C. Document and wait</div>
-                    </div>
-                </div>
-                <div class="si-ld-hero__screen si-ld-hero__screen--3">
-                    <div class="si-ld-screen__result-icon">&#127942;</div>
-                    <div class="si-ld-screen__result-title">Assessment Complete</div>
-                    <div class="si-ld-screen__score">
-                        <span class="si-ld-screen__score-num">94</span>
-                        <span class="si-ld-screen__score-pct">%</span>
-                    </div>
-                    <div class="si-ld-screen__result-label">Distinction</div>
-                    <div class="si-ld-screen__bars">
-                        <div class="si-ld-screen__bar-row"><span>Knowledge</span><div><span style="width:95%"></span></div></div>
-                        <div class="si-ld-screen__bar-row"><span>Application</span><div><span style="width:90%"></span></div></div>
-                        <div class="si-ld-screen__bar-row"><span>Analysis</span><div><span style="width:96%"></span></div></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+</section>
 
 </section>
