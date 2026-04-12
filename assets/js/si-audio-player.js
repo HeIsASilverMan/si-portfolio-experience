@@ -99,7 +99,7 @@
     // ── Waveform render ────────────────────────────────────
     function renderWaveform( seed ) {
         if ( ! stageWaveform ) { return; }
-        var heights = waveHeights( seed, 60 );
+        var heights = waveHeights( seed, 80 );
         stageWaveform.innerHTML = '';
         heights.forEach( function ( h ) {
             var s = document.createElement( 'span' );

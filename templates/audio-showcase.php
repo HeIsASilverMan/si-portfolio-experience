@@ -46,10 +46,12 @@ $query = new WP_Query( array(
 
                         <div class="si-audio-stage__waveform" id="si-stage-waveform" aria-hidden="true">
                             <?php
-                            /* Static seed bars — JS will replace these, but they render immediately */
+                            /* Static seed bars — 80 bars, JS replaces on load */
                             $seed_heights = array( 30,55,80,45,90,60,75,40,85,65,50,95,55,70,38,82,
                                                    60,72,48,88,62,44,78,56,70,46,92,58,76,40,52,84,
-                                                   38,68,90,44,72,58,80,36,64,88,48,76,54,82,40,66 );
+                                                   38,68,90,44,72,58,80,36,64,88,48,76,54,82,40,66,
+                                                   35,72,50,88,60,42,78,55,80,45,90,62,48,75,38,84,
+                                                   52,70,44,86,58,40,76,52,88,48,65,80,42,70,56,90 );
                             foreach ( $seed_heights as $h ) :
                             ?>
                             <span style="height: <?php echo esc_attr( $h ); ?>%"></span>
@@ -128,8 +130,8 @@ $query = new WP_Query( array(
 
                     <div class="si-track-item__info">
                         <span class="si-track-item__title"><?php the_title(); ?></span>
-                        <?php if ( $client_name ) : ?>
-                        <span class="si-track-item__credit"><?php echo esc_html( $client_name ); ?><?php if ( $year ) : ?> &middot; <?php echo esc_html( $year ); ?><?php endif; ?></span>
+                        <?php if ( $description ) : ?>
+                        <span class="si-track-item__brief"><?php echo esc_html( wp_trim_words( $description, 14, '&hellip;' ) ); ?></span>
                         <?php endif; ?>
                     </div>
 

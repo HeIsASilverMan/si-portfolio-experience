@@ -626,16 +626,16 @@
 .si-audio-stage__waveform {
     display: flex;
     align-items: flex-end;
-    gap: 2.5px;
+    gap: 2px;
     height: 80px;
     overflow: hidden;
+    width: 100%;
 }
 
 .si-audio-stage__waveform span {
     display: block;
     flex: 1;
-    min-width: 2px;
-    max-width: 6px;
+    min-width: 1px;
     border-radius: 2px 2px 0 0;
     background: rgba( 212, 168, 83, 0.22 );
     transform-origin: bottom center;
@@ -766,9 +766,9 @@
 
 .si-track-item {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
-    padding: 0.95rem 2rem;
+    padding: 0.85rem 2rem;
     border-bottom: 1px solid rgba( 42, 42, 46, 0.6 );
     cursor: pointer;
     transition: background 0.2s ease;
@@ -796,6 +796,7 @@
     width: 1.8rem;
     text-align: right;
     transition: opacity 0.2s ease;
+    padding-top: 0.2rem;
 }
 
 .si-track-item.is-active .si-track-item__num,
@@ -833,6 +834,19 @@
     text-overflow: ellipsis;
 }
 
+.si-track-item__brief {
+    font-size: 0.78rem;
+    color: #9B978E;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 1.4;
+    margin-top: 0.1rem;
+    transition: color 0.2s ease;
+}
+
+.si-track-item.is-active .si-track-item__brief { color: #B89E6B; }
+
 /* Duration */
 .si-track-item__dur {
     font-family: 'JetBrains Mono', monospace;
@@ -840,6 +854,7 @@
     color: #5C5A54;
     letter-spacing: 0.06em;
     flex-shrink: 0;
+    padding-top: 0.2rem;
 }
 
 /* Animated bars indicator (replaces track number when active/playing) */
