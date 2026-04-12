@@ -33,7 +33,7 @@
     var currentAudio = null;
 
     // ── DOM refs ───────────────────────────────────────────
-    var stage, stageBg, stageGenre, stageDesc;
+    var stage, stageBg, stageGenre, stageDesc, stageTitle, stageDiscArt;
     var stageWaveform, stagePlay, stageScrub, stageFill, stageThumb;
     var stageCurrent, stageDuration;
     var miniPlayer;
@@ -134,12 +134,24 @@
         }
 
         // Stage text
+        if ( stageTitle ) {
+            stageTitle.textContent = track.title;
+        }
         if ( stageGenre ) {
             stageGenre.textContent   = track.genre;
             stageGenre.style.display = track.genre ? '' : 'none';
         }
         if ( stageDesc ) {
             stageDesc.textContent = track.description;
+        }
+
+        // Disc artwork
+        if ( stageDiscArt ) {
+            if ( track.thumb ) {
+                stageDiscArt.style.backgroundImage = 'url(' + track.thumb + ')';
+            } else {
+                stageDiscArt.style.backgroundImage = 'none';
+            }
         }
 
         // Waveform
@@ -205,6 +217,8 @@
         stageBg       = document.getElementById( 'si-stage-bg'       );
         stageGenre    = document.getElementById( 'si-stage-genre'    );
         stageDesc     = document.getElementById( 'si-stage-desc'     );
+        stageTitle    = document.getElementById( 'si-stage-title'    );
+        stageDiscArt  = document.getElementById( 'si-stage-disc-art' );
         stageWaveform = document.getElementById( 'si-stage-waveform' );
         stagePlay     = document.getElementById( 'si-stage-play'     );
         stageScrub    = document.getElementById( 'si-stage-scrub'    );
@@ -308,52 +322,72 @@
         if ( tracks.length ) { loadTrack( 0, false ); }
     }
 
-    // ── Home page mini player ──────────────────────────────
+    // ── Home page mini players (multiple) ───────────────────
+    var activeHomeAudio = null;
+
     function initHomePlayer() {
-        var player = document.getElementById( 'si-home-player' );
-        if ( ! player ) { return; }
+        var players = document.querySelectorAll( '[data-si-home-player]' );
+        if ( ! players.length ) { return; }
 
-        var audio = document.getElementById( 'si-home-audio' );
-        var btn   = document.getElementById( 'si-home-play'  );
-        var fill  = document.getElementById( 'si-home-fill'  );
-        var time  = document.getElementById( 'si-home-time'  );
-        var bar   = player.querySelector( '.si-home-player__bar' );
+        players.forEach( function ( player ) {
+            var audio = player.querySelector( '[data-si-home-audio]' );
+            var btn   = player.querySelector( '[data-si-home-play]'  );
+            var fill  = player.querySelector( '[data-si-home-fill]'  );
+            var time  = player.querySelector( '[data-si-home-time]'  );
+            var bar   = player.querySelector( '.si-home-player__bar' );
 
-        if ( ! audio || ! btn ) { return; }
+            if ( ! audio || ! btn ) { return; }
 
-        btn.addEventListener( 'click', function () {
-            if ( audio.paused ) {
-                audio.play().then( function () {
-                    player.classList.add( 'is-playing' );
-                    btn.setAttribute( 'aria-label', 'Pause' );
-                } ).catch( function () {} );
-            } else {
-                audio.pause();
+            btn.addEventListener( 'click', function () {
+                if ( audio.paused ) {
+                    // Stop any other home player first
+                    if ( activeHomeAudio && activeHomeAudio !== audio ) {
+                        activeHomeAudio.pause();
+                        activeHomeAudio.currentTime = 0;
+                        var prev = activeHomeAudio.closest( '[data-si-home-player]' );
+                        if ( prev ) {
+                            prev.classList.remove( 'is-playing' );
+                            var prevBtn = prev.querySelector( '[data-si-home-play]' );
+                            if ( prevBtn ) { prevBtn.setAttribute( 'aria-label', 'Play' ); }
+                            var prevFill = prev.querySelector( '[data-si-home-fill]' );
+                            if ( prevFill ) { prevFill.style.width = '0%'; }
+                            var prevTime = prev.querySelector( '[data-si-home-time]' );
+                            if ( prevTime ) { prevTime.textContent = '0:00'; }
+                        }
+                    }
+                    activeHomeAudio = audio;
+                    audio.play().then( function () {
+                        player.classList.add( 'is-playing' );
+                        btn.setAttribute( 'aria-label', 'Pause' );
+                    } ).catch( function () {} );
+                } else {
+                    audio.pause();
+                    player.classList.remove( 'is-playing' );
+                    btn.setAttribute( 'aria-label', 'Play' );
+                }
+            } );
+
+            audio.addEventListener( 'timeupdate', function () {
+                var pct = audio.duration ? ( audio.currentTime / audio.duration ) * 100 : 0;
+                if ( fill ) { fill.style.width    = pct + '%'; }
+                if ( time ) { time.textContent    = formatTime( audio.currentTime ); }
+            } );
+
+            audio.addEventListener( 'ended', function () {
                 player.classList.remove( 'is-playing' );
                 btn.setAttribute( 'aria-label', 'Play' );
+                if ( fill ) { fill.style.width = '0%'; }
+                if ( time ) { time.textContent = '0:00'; }
+            } );
+
+            if ( bar ) {
+                bar.addEventListener( 'click', function ( e ) {
+                    if ( ! audio.duration ) { return; }
+                    var r = bar.getBoundingClientRect();
+                    audio.currentTime = ( ( e.clientX - r.left ) / r.width ) * audio.duration;
+                } );
             }
         } );
-
-        audio.addEventListener( 'timeupdate', function () {
-            var pct = audio.duration ? ( audio.currentTime / audio.duration ) * 100 : 0;
-            if ( fill ) { fill.style.width    = pct + '%'; }
-            if ( time ) { time.textContent    = formatTime( audio.currentTime ); }
-        } );
-
-        audio.addEventListener( 'ended', function () {
-            player.classList.remove( 'is-playing' );
-            btn.setAttribute( 'aria-label', 'Play' );
-            if ( fill ) { fill.style.width = '0%'; }
-            if ( time ) { time.textContent = '0:00'; }
-        } );
-
-        if ( bar ) {
-            bar.addEventListener( 'click', function ( e ) {
-                if ( ! audio.duration ) { return; }
-                var r = bar.getBoundingClientRect();
-                audio.currentTime = ( ( e.clientX - r.left ) / r.width ) * audio.duration;
-            } );
-        }
     }
 
     if ( document.readyState === 'loading' ) {

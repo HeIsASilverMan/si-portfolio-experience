@@ -8,6 +8,7 @@ $contact_email  = si_setting( 'contact_email', 'shane@shaneivers.com' );
 ?>
 
 <section class="si-scope si-connect" aria-label="Connect with Shane">
+    <?php $variant = 'glow'; include SI_PLUGIN_DIR . 'templates/partials/stave-motif.php'; ?>
 
     <div class="si-connect__inner">
 

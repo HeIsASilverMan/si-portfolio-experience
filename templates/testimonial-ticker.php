@@ -30,6 +30,7 @@ if ( $query->have_posts() ) {
 ?>
 
 <section class="si-scope si-testimonials" aria-label="Testimonials">
+    <?php $variant = 'glow'; include SI_PLUGIN_DIR . 'templates/partials/stave-motif.php'; ?>
     <div class="si-testimonials__inner">
         <div
             class="si-testimonials__track"

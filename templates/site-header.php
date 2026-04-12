@@ -75,6 +75,18 @@ function si_nav_active( $slug, $active ) {
             </div>
 
             <div class="si-nav__inner">
+                <!-- Centred logo mark in overlay -->
+                <div class="si-nav__logo" aria-hidden="true">
+                    <svg viewBox="0 0 127.3 127.3" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" fill="currentColor" d="M54.34,71.54C38.76,49.86,38.02,21.96,50.12,0H0v127.3h45.65c17.57-13.05,21.5-37.92,8.69-55.76Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M93.66,127.3c0-42.43,0-84.86,0-127.3h-8.67c-17.73,13.01-21.74,37.99-8.88,55.89,15.54,21.63,16.31,49.46,4.3,71.4h13.24Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M99.45,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M105.25,127.3h-2.89c0-42.43,0-84.86,0-127.3h2.89v127.3Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M111.05,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M116.84,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                        <path fill-rule="evenodd" fill="currentColor" d="M119.75,0c0,42.43,0,84.86,0,127.3h7.55V0h-7.55Z"/>
+                    </svg>
+                </div>
                 <ul class="si-nav__list" role="list">
                     <li><a href="/composition"    class="si-nav__link<?php echo si_nav_active( 'composition',      $si_active ); ?>">Composition</a></li>
                     <li><a href="/learning-design" class="si-nav__link<?php echo si_nav_active( 'learning-design', $si_active ); ?>">Learning Design</a></li>

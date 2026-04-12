@@ -203,8 +203,10 @@
    CONNECT — [si_connect]
    ============================================================ */
 .si-scope.si-connect {
+    position: relative;
     padding: 6rem 2rem;
     background: var(--si-bg-surface) !important;
+    overflow: hidden;
 }
 
 .si-connect__inner {

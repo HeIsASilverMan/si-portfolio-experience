@@ -33,20 +33,41 @@ $query = new WP_Query( array(
                 <!-- Blurred background (populated by JS from active track thumb) -->
                 <div class="si-audio-stage__bg" id="si-stage-bg" aria-hidden="true"></div>
 
+                <!-- Decorative musical staff lines -->
+                <div class="si-audio-stage__staff" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span>
+                </div>
+
                 <div class="si-audio-stage__body">
 
-                    <!-- Left: genre tag + description/brief -->
-                    <div class="si-audio-stage__meta">
-                        <span class="si-audio-stage__genre" id="si-stage-genre"></span>
-                        <p class="si-audio-stage__description" id="si-stage-desc"><?php esc_html_e( 'Choose a track from the list below to hear the work and read about the brief it was composed for.', 'si-portfolio' ); ?></p>
+                    <!-- Left column: disc + play button -->
+                    <div class="si-audio-stage__disc-col">
+                        <div class="si-audio-stage__disc" aria-hidden="true">
+                            <div class="si-audio-stage__disc-art" id="si-stage-disc-art"></div>
+                            <div class="si-audio-stage__disc-groove"></div>
+                            <div class="si-audio-stage__disc-center"></div>
+                        </div>
+                        <button class="si-audio-stage__play-btn" id="si-stage-play" aria-label="<?php esc_attr_e( 'Play', 'si-portfolio' ); ?>">
+                            <svg class="si-play-icon" viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
+                                <path d="M8 5.14v14l11-7-11-7z"/>
+                            </svg>
+                            <svg class="si-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="28" height="28" aria-hidden="true">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
                     </div>
 
-                    <!-- Right: waveform + controls -->
-                    <div class="si-audio-stage__right">
+                    <!-- Right column: track info + waveform + controls -->
+                    <div class="si-audio-stage__info-col">
+
+                        <div class="si-audio-stage__meta">
+                            <span class="si-audio-stage__genre" id="si-stage-genre"></span>
+                            <h3 class="si-audio-stage__now-playing" id="si-stage-title"><?php esc_html_e( 'Select a Track', 'si-portfolio' ); ?></h3>
+                            <p class="si-audio-stage__description" id="si-stage-desc"><?php esc_html_e( 'Choose a track from the list below to hear the work and read about the brief it was composed for.', 'si-portfolio' ); ?></p>
+                        </div>
 
                         <div class="si-audio-stage__waveform" id="si-stage-waveform" aria-hidden="true">
                             <?php
-                            /* Static seed bars — 80 bars, JS replaces on load */
                             $seed_heights = array( 30,55,80,45,90,60,75,40,85,65,50,95,55,70,38,82,
                                                    60,72,48,88,62,44,78,56,70,46,92,58,76,40,52,84,
                                                    38,68,90,44,72,58,80,36,64,88,48,76,54,82,40,66,
@@ -58,28 +79,15 @@ $query = new WP_Query( array(
                             <?php endforeach; ?>
                         </div>
 
-                        <div class="si-audio-stage__controls">
-
-                            <button class="si-audio-stage__play-btn" id="si-stage-play" aria-label="<?php esc_attr_e( 'Play', 'si-portfolio' ); ?>">
-                                <svg class="si-play-icon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
-                                    <path d="M8 5.14v14l11-7-11-7z"/>
-                                </svg>
-                                <svg class="si-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="24" height="24" aria-hidden="true">
-                                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                                </svg>
-                            </button>
-
-                            <div class="si-audio-stage__scrub-wrap">
-                                <div class="si-audio-stage__scrub" id="si-stage-scrub" role="slider" aria-label="<?php esc_attr_e( 'Playback position', 'si-portfolio' ); ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
-                                    <div class="si-audio-stage__scrub-fill" id="si-stage-fill"></div>
-                                    <div class="si-audio-stage__scrub-thumb" id="si-stage-thumb"></div>
-                                </div>
-                                <div class="si-audio-stage__time">
-                                    <span id="si-stage-current">0:00</span>
-                                    <span id="si-stage-duration">--:--</span>
-                                </div>
+                        <div class="si-audio-stage__scrub-wrap">
+                            <div class="si-audio-stage__scrub" id="si-stage-scrub" role="slider" aria-label="<?php esc_attr_e( 'Playback position', 'si-portfolio' ); ?>" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+                                <div class="si-audio-stage__scrub-fill" id="si-stage-fill"></div>
+                                <div class="si-audio-stage__scrub-thumb" id="si-stage-thumb"></div>
                             </div>
-
+                            <div class="si-audio-stage__time">
+                                <span id="si-stage-current">0:00</span>
+                                <span id="si-stage-duration">--:--</span>
+                            </div>
                         </div>
 
                     </div>
