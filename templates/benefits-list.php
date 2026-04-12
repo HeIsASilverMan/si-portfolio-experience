@@ -21,6 +21,7 @@ $benefits = array(
 ?>
 
 <section class="si-scope si-benefits-list" aria-labelledby="si-benefits-heading">
+    <?php $variant = 'subtle'; include SI_PLUGIN_DIR . 'templates/partials/stave-motif.php'; ?>
 
     <div class="si-benefits-list__inner">
 

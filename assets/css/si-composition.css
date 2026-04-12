@@ -265,8 +265,10 @@
    BENEFITS LIST
    ============================================================ */
 .si-scope.si-benefits-list {
+    position: relative;
     padding: 6rem 2rem;
     background: var(--si-bg-surface) !important;
+    overflow: hidden;
 }
 
 .si-benefits-list__inner {
@@ -516,16 +518,16 @@
 /* ── Player shell ───────────────────────────────────────── */
 .si-audio-player {
     border: 1px solid var(--si-border);
-    border-radius: 20px;
+    border-radius: 24px;
     overflow: hidden;
-    background: #111115;
+    background: var(--si-bg-surface);
 }
 
 /* ── Stage ──────────────────────────────────────────────── */
 .si-audio-stage {
     position: relative;
     overflow: hidden;
-    padding: 2.5rem 2.5rem 2rem;
+    padding: 3rem 3rem 2.5rem;
 }
 
 @media ( max-width: 720px ) {
@@ -535,12 +537,12 @@
 /* Blurred album art background */
 .si-audio-stage__bg {
     position: absolute;
-    inset: -20px;
+    inset: -40px;
     background-size: cover;
     background-position: center;
-    filter: blur( 60px ) saturate( 0.6 ) brightness( 0.35 );
+    filter: blur( 80px ) saturate( 0.5 ) brightness( 0.25 );
     opacity: 0;
-    transition: opacity 0.6s ease, background-image 0.6s ease;
+    transition: opacity 0.8s ease, background-image 0.8s ease;
     z-index: 0;
     pointer-events: none;
 }
@@ -551,27 +553,228 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(
-        135deg,
-        rgba( 7,7,10,0.88 ) 0%,
-        rgba( 7,7,10,0.55 ) 100%
+        160deg,
+        rgba( 13, 13, 15, 0.92 ) 0%,
+        rgba( 13, 13, 15, 0.65 ) 50%,
+        rgba( 13, 13, 15, 0.88 ) 100%
     );
     z-index: 1;
     pointer-events: none;
 }
 
-.si-audio-stage__body {
-    position: relative;
+/* Decorative musical staff lines behind content */
+.si-audio-stage__staff {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 80px;
     z-index: 2;
+    pointer-events: none;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    opacity: 0.04;
+}
+
+.si-audio-stage__staff span {
+    display: block;
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(
+        to right,
+        transparent 2%,
+        var(--si-accent-warm) 15%,
+        var(--si-accent-warm) 85%,
+        transparent 98%
+    );
+}
+
+.si-audio-stage__body {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+@media ( max-width: 640px ) {
+    .si-audio-stage__body {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* ── Disc / artwork column ─────────────────────────────── */
+.si-audio-stage__disc-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     gap: 1.5rem;
 }
 
-/* ── Stage meta (full-width top row) ────────────────────── */
+@media ( max-width: 640px ) {
+    .si-audio-stage__disc-col {
+        flex-direction: row;
+        gap: 1.25rem;
+    }
+}
+
+/* Vinyl disc */
+.si-audio-stage__disc {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    position: relative;
+    background: linear-gradient(
+        135deg,
+        rgba(22, 22, 25, 1) 0%,
+        rgba(30, 30, 34, 1) 100%
+    );
+    box-shadow:
+        0 0 0 1px rgba(212, 168, 83, 0.1),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    transition: box-shadow 0.5s ease;
+    flex-shrink: 0;
+}
+
+@media ( max-width: 640px ) {
+    .si-audio-stage__disc {
+        width: 100px;
+        height: 100px;
+    }
+}
+
+.si-audio-stage.is-playing .si-audio-stage__disc {
+    box-shadow:
+        0 0 0 1px rgba(212, 168, 83, 0.25),
+        0 0 40px rgba(212, 168, 83, 0.12),
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        inset 0 1px 0 rgba(255, 255, 255, 0.03);
+    animation: si-disc-spin 8s linear infinite;
+}
+
+@keyframes si-disc-spin {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* Album art inside disc */
+.si-audio-stage__disc-art {
+    position: absolute;
+    inset: 12%;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center;
+    background-color: rgba(30, 30, 34, 0.8);
+}
+
+/* Vinyl groove ring */
+.si-audio-stage__disc-groove {
+    position: absolute;
+    inset: 5%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    pointer-events: none;
+}
+
+.si-audio-stage__disc-groove::after {
+    content: '';
+    position: absolute;
+    inset: 8%;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* Center spindle */
+.si-audio-stage__disc-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--si-bg-deep);
+    border: 2px solid rgba(212, 168, 83, 0.3);
+}
+
+@media ( max-width: 640px ) {
+    .si-audio-stage__disc-center {
+        width: 10px;
+        height: 10px;
+    }
+}
+
+/* Play button */
+.si-audio-stage__play-btn {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 2px solid rgba( 212, 168, 83, 0.35 );
+    background: rgba( 212, 168, 83, 0.08 );
+    color: var(--si-accent-warm);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s ease, border-color 0.3s ease,
+                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.3s ease;
+}
+
+@media ( max-width: 640px ) {
+    .si-audio-stage__play-btn {
+        width: 52px;
+        height: 52px;
+    }
+}
+
+.si-audio-stage__play-btn:hover {
+    background: rgba( 212, 168, 83, 0.15 );
+    border-color: var(--si-accent-warm);
+    transform: scale( 1.08 );
+    box-shadow: 0 0 32px rgba( 212, 168, 83, 0.25 );
+}
+
+.si-audio-stage__play-btn:focus-visible {
+    outline: 2px solid var(--si-accent-warm);
+    outline-offset: 3px;
+}
+
+.si-audio-stage.is-playing .si-audio-stage__play-btn {
+    background: rgba( 212, 168, 83, 0.15 );
+    border-color: var(--si-accent-warm);
+    box-shadow: 0 0 36px rgba( 212, 168, 83, 0.2 );
+    animation: si-play-pulse 2s ease-in-out infinite;
+}
+
+@keyframes si-play-pulse {
+    0%, 100% { box-shadow: 0 0 36px rgba( 212, 168, 83, 0.2 ); }
+    50%       { box-shadow: 0 0 52px rgba( 212, 168, 83, 0.35 ); }
+}
+
+/* Play/pause icon swap on stage and mini-player */
+.si-pause-icon                                 { display: none; }
+.si-audio-stage__play-btn.is-playing .si-play-icon  { display: none;  }
+.si-audio-stage__play-btn.is-playing .si-pause-icon { display: block; }
+
+/* ── Info column ───────────────────────────────────────── */
+.si-audio-stage__info-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    min-width: 0;
+}
+
 .si-audio-stage__meta {
     display: flex;
     flex-direction: column;
-    gap: 0.6rem;
+    gap: 0.5rem;
 }
 
 .si-audio-stage__genre {
@@ -587,13 +790,19 @@
     align-self: flex-start;
 }
 
-.si-audio-stage__title {
+/* Now-playing title — prominent display */
+.si-audio-stage__now-playing {
     font-family: var(--si-font-display);
-    font-size: clamp( 1.5rem, 3.5vw, 2.25rem );
+    font-size: clamp( 1.6rem, 3.5vw, 2.5rem );
     font-weight: 400;
     color: var(--si-text-primary) !important;
-    margin: 0.25rem 0 0;
+    margin: 0;
     line-height: 1.15;
+    transition: color 0.3s ease;
+}
+
+.si-audio-stage.is-playing .si-audio-stage__now-playing {
+    color: var(--si-accent-glow) !important;
 }
 
 .si-audio-stage__credit {
@@ -605,31 +814,43 @@
     margin: 0;
 }
 
-/* Description / brief — full-width, clearly readable */
+/* Description / brief */
 .si-audio-stage__description {
-    font-size: 1rem;
-    color: #D4CAB8 !important;
-    line-height: 1.75;
-    max-width: 76ch;
+    font-size: 0.92rem;
+    color: var(--si-text-secondary) !important;
+    line-height: 1.7;
+    max-width: 60ch;
     margin: 0;
-    min-height: 1.75rem;
+    min-height: 1.5rem;
 }
 
-/* ── Stage controls row (full-width below meta) ─────────── */
-.si-audio-stage__right {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-}
-
-/* Waveform visualisation */
+/* Waveform visualisation — taller, more dramatic */
 .si-audio-stage__waveform {
     display: flex;
     align-items: flex-end;
     gap: 2px;
-    height: 80px;
+    height: 100px;
     overflow: hidden;
     width: 100%;
+    position: relative;
+}
+
+/* Glow reflection below waveform */
+.si-audio-stage__waveform::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(212, 168, 83, 0.06), transparent);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.si-audio-stage.is-playing .si-audio-stage__waveform::after {
+    opacity: 1;
 }
 
 .si-audio-stage__waveform span {
@@ -637,13 +858,14 @@
     flex: 1;
     min-width: 1px;
     border-radius: 2px 2px 0 0;
-    background: rgba( 212, 168, 83, 0.22 );
+    background: rgba( 212, 168, 83, 0.18 );
     transform-origin: bottom center;
-    transition: background 0.4s ease;
+    transition: background 0.4s ease, box-shadow 0.4s ease;
 }
 
 .si-audio-stage.is-playing .si-audio-stage__waveform span {
-    background: rgba( 212, 168, 83, 0.55 );
+    background: rgba( 212, 168, 83, 0.5 );
+    box-shadow: 0 0 6px rgba( 212, 168, 83, 0.15 );
     animation: si-stage-bounce 1.0s ease-in-out infinite alternate;
 }
 
@@ -658,56 +880,8 @@
     to   { transform: scaleY( 1.0  ); opacity: 1;    }
 }
 
-/* Controls row: play btn + scrubber */
-.si-audio-stage__controls {
-    display: flex;
-    align-items: center;
-    gap: 1.25rem;
-}
-
-/* Play button */
-.si-audio-stage__play-btn {
-    flex-shrink: 0;
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    border: 2px solid rgba( 212, 168, 83, 0.4 );
-    background: rgba( 212, 168, 83, 0.1 );
-    color: var(--si-accent-warm);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background 0.25s ease, border-color 0.25s ease,
-                transform 0.25s ease, box-shadow 0.25s ease;
-}
-
-.si-audio-stage__play-btn:hover {
-    background: rgba( 212, 168, 83, 0.2 );
-    border-color: var(--si-accent-warm);
-    transform: scale( 1.07 );
-    box-shadow: 0 0 24px rgba( 212, 168, 83, 0.25 );
-}
-
-.si-audio-stage__play-btn:focus-visible {
-    outline: 2px solid var(--si-accent-warm);
-    outline-offset: 3px;
-}
-
-.si-audio-stage.is-playing .si-audio-stage__play-btn {
-    background: rgba( 212, 168, 83, 0.18 );
-    border-color: var(--si-accent-warm);
-    box-shadow: 0 0 28px rgba( 212, 168, 83, 0.2 );
-}
-
-/* Play/pause icon swap on stage and mini-player */
-.si-pause-icon                                 { display: none; }
-.si-audio-stage__play-btn.is-playing .si-play-icon  { display: none;  }
-.si-audio-stage__play-btn.is-playing .si-pause-icon { display: block; }
-
 /* Scrubber */
 .si-audio-stage__scrub-wrap {
-    flex: 1;
     display: flex;
     flex-direction: column;
     gap: 0.45rem;
@@ -743,7 +917,7 @@
     transform: translate( -50%, -50% ) scale( 0 );
     transition: transform 0.2s ease, left 0.1s linear;
     pointer-events: none;
-    box-shadow: 0 0 8px rgba( 212, 168, 83, 0.5 );
+    box-shadow: 0 0 12px rgba( 212, 168, 83, 0.5 );
 }
 
 .si-audio-stage__scrub:hover .si-audio-stage__scrub-thumb {
@@ -845,7 +1019,7 @@
     transition: color 0.2s ease;
 }
 
-.si-track-item.is-active .si-track-item__brief { color: #B89E6B; }
+.si-track-item.is-active .si-track-item__brief { color: var(--si-accent-warm); opacity: 0.75; }
 
 /* Duration */
 .si-track-item__dur {
@@ -1018,5 +1192,7 @@
     .si-audio-stage__waveform span,
     .si-track-item__indicator span,
     .si-mini-player__waveform span { animation: none !important; }
+    .si-audio-stage__disc { animation: none !important; }
+    .si-audio-stage__play-btn { animation: none !important; }
     .si-mini-player { transition: none; }
 }

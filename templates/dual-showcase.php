@@ -1,9 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit;
 
-// ── Composition: first track with an audio file ──────────
+// ── Composition: top 3 tracks with audio files ───────────
 $comp_args = array(
     'post_type'      => 'si_portfolio',
-    'posts_per_page' => 1,
+    'posts_per_page' => 3,
     'post_status'    => 'publish',
     'meta_query'     => array(
         'relation' => 'AND',
@@ -21,10 +21,6 @@ $comp_args = array(
     'order'   => 'ASC',
 );
 $comp_query = new WP_Query( $comp_args );
-$comp_post  = $comp_query->have_posts() ? $comp_query->posts[0] : null;
-
-$comp_audio = $comp_post ? get_post_meta( $comp_post->ID, '_si_audio_file', true ) : '';
-$comp_title = $comp_post ? get_the_title( $comp_post ) : '';
 
 // ── Learning Design: up to 9 posts ────────────────────────
 $ld_args = array(
@@ -44,6 +40,7 @@ $ld_query = new WP_Query( $ld_args );
 ?>
 
 <section class="si-scope si-dual-showcase" aria-label="Featured Work">
+    <?php $variant = 'subtle'; include SI_PLUGIN_DIR . 'templates/partials/stave-motif.php'; ?>
     <div class="si-dual-showcase__inner">
 
         <!-- ── Composition card ───────────────────────────── -->
@@ -54,35 +51,45 @@ $ld_query = new WP_Query( $ld_args );
                 <h3 class="si-dual-showcase__title"><?php esc_html_e( 'Every project deserves its own sound', 'si-portfolio' ); ?></h3>
                 <p class="si-dual-showcase__sub"><?php esc_html_e( 'No templates. No stock. Bespoke music for every brief.', 'si-portfolio' ); ?></p>
 
-                <?php if ( $comp_audio ) : ?>
-                <div class="si-home-player" id="si-home-player">
+                <?php if ( $comp_query->have_posts() ) : ?>
+                <div class="si-home-players">
+                    <?php
+                    $pi = 0;
+                    while ( $comp_query->have_posts() ) :
+                        $comp_query->the_post();
+                        $c_audio = get_post_meta( get_the_ID(), '_si_audio_file', true );
+                        $c_title = get_the_title();
+                        if ( ! $c_audio ) { continue; }
+                        $pi++;
+                    ?>
+                    <div class="si-home-player" data-si-home-player>
 
-                    <audio id="si-home-audio"
-                           src="<?php echo esc_url( $comp_audio ); ?>"
-                           preload="none"
-                           aria-hidden="true"></audio>
+                        <audio data-si-home-audio
+                               src="<?php echo esc_url( $c_audio ); ?>"
+                               preload="none"
+                               aria-hidden="true"></audio>
 
-                    <button class="si-home-player__btn" id="si-home-play"
-                            aria-label="<?php esc_attr_e( 'Play', 'si-portfolio' ); ?>">
-                        <svg class="si-play-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                            <path d="M8 5.14v14l11-7-11-7z"/>
-                        </svg>
-                        <svg class="si-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
-                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-                        </svg>
-                    </button>
+                        <button class="si-home-player__btn" data-si-home-play
+                                aria-label="<?php echo esc_attr( sprintf( __( 'Play %s', 'si-portfolio' ), $c_title ) ); ?>">
+                            <svg class="si-play-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                                <path d="M8 5.14v14l11-7-11-7z"/>
+                            </svg>
+                            <svg class="si-pause-icon" viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+                                <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                            </svg>
+                        </button>
 
-                    <div class="si-home-player__track">
-                        <?php if ( $comp_title ) : ?>
-                        <span class="si-home-player__title"><?php echo esc_html( $comp_title ); ?></span>
-                        <?php endif; ?>
-                        <div class="si-home-player__bar" aria-hidden="true">
-                            <div class="si-home-player__fill" id="si-home-fill"></div>
+                        <div class="si-home-player__track">
+                            <span class="si-home-player__title"><?php echo esc_html( $c_title ); ?></span>
+                            <div class="si-home-player__bar" aria-hidden="true">
+                                <div class="si-home-player__fill" data-si-home-fill></div>
+                            </div>
                         </div>
+
+                        <span class="si-home-player__time" data-si-home-time aria-live="off">0:00</span>
+
                     </div>
-
-                    <span class="si-home-player__time" id="si-home-time" aria-live="off">0:00</span>
-
+                    <?php endwhile; wp_reset_postdata(); ?>
                 </div>
                 <?php endif; ?>
 

@@ -7,6 +7,43 @@
    back to a readable column.
    ============================================================ */
 
+/* ── Page-level dark background ────────────────────────── */
+/* Ensure the entire page canvas is dark, even standard WP pages */
+body,
+body.page,
+body.single,
+body.archive {
+    background: var(--si-bg-deep) !important;
+    color: var(--si-text-primary);
+}
+
+/* Push content below the fixed header */
+body:not(.home) .entry-content,
+body:not(.home) .page-content,
+body:not(.home) #primary,
+body:not(.home) .site-main,
+body:not(.home) main {
+    padding-top: 80px;
+}
+
+/* Only add header padding once — prevent stacking */
+body:not(.home) .entry-content .entry-content,
+body:not(.home) .page-content .page-content {
+    padding-top: 0;
+}
+
+/* Ensure the content wrapper area is dark */
+.entry-content,
+.page-content,
+#primary,
+.site-main,
+main,
+article {
+    background: var(--si-bg-deep) !important;
+    color: var(--si-text-secondary);
+    font-family: var(--si-font-body);
+}
+
 /* ── Content column constraints ─────────────────────────── */
 
 /* Direct children of content area that are NOT plugin shortcodes
@@ -18,6 +55,19 @@
     margin-right: auto !important;
     padding-left: 2rem;
     padding-right: 2rem;
+    box-sizing: border-box;
+}
+
+/* Also handle nested content areas from themes */
+.site-main > article > .entry-content > *:not(.si-scope),
+#content > .entry-content > *:not(.si-scope),
+.post-content > *:not(.si-scope) {
+    max-width: 820px;
+    margin-left: auto  !important;
+    margin-right: auto !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
 }
 
 /* Wide alignment overrides */
@@ -31,6 +81,12 @@
     max-width: none;
     padding-left: 0;
     padding-right: 0;
+}
+
+/* Content area bottom padding for breathing room */
+.entry-content,
+.page-content {
+    padding-bottom: 4rem;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
@@ -233,6 +289,44 @@
 .entry-content .wp-block-columns,
 .page-content  .wp-block-columns {
     gap: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.entry-content .wp-block-column,
+.page-content  .wp-block-column {
+    background: transparent;
+}
+
+/* ── Group block ────────────────────────────────────────── */
+
+.entry-content .wp-block-group,
+.page-content  .wp-block-group {
+    background: transparent;
+}
+
+.entry-content .wp-block-group.has-background,
+.page-content  .wp-block-group.has-background {
+    border-radius: var(--si-radius-md);
+    padding: 2rem;
+}
+
+/* ── Spacer ─────────────────────────────────────────────── */
+
+.entry-content .wp-block-spacer,
+.page-content  .wp-block-spacer {
+    background: transparent !important;
+}
+
+/* ── Gallery ────────────────────────────────────────────── */
+
+.entry-content .wp-block-gallery,
+.page-content  .wp-block-gallery {
+    gap: 8px;
+}
+
+.entry-content .wp-block-gallery img,
+.page-content  .wp-block-gallery img {
+    border-radius: 8px;
 }
 
 /* ── Cover block ─────────────────────────────────────────── */
