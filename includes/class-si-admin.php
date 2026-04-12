@@ -85,11 +85,11 @@ class SI_Admin {
 
         // Plain text / short strings
         $text_fields = array(
-            'home_tagline',
+            'home_tagline',       'home_btn_primary', 'home_btn_secondary',
             'comp_hero_headline', 'comp_hero_sub',
             'ld_hero_headline',   'ld_hero_sub',
             'cta_headline',       'cta_sub',       'cta_button_text',
-            'about_tagline',
+            'about_tagline',      'connect_heading', 'connect_sub',
             'form_comp_success',  'form_ld_success',
         );
         foreach ( $text_fields as $f ) {
@@ -162,6 +162,16 @@ class SI_Admin {
                         'Bespoke music and scores, lovingly crafted to your exact requirements. Learning experiences that actually work.',
                         'The paragraph shown beneath your name on the home page.'
                     ); ?>
+                    <?php self::field_text(
+                        $s, 'home_btn_primary', 'Primary button text',
+                        'Hear the Work',
+                        'Left CTA button on the home hero.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'home_btn_secondary', 'Secondary button text',
+                        'See the Portfolio',
+                        'Right CTA button on the home hero.'
+                    ); ?>
                 </div>
 
                 <!-- ── Ticker / Marquee ─────────────────────────── -->
@@ -232,6 +242,16 @@ class SI_Admin {
                         $s, 'about_tagline', 'Hero Tagline',
                         'Composer. Learning Designer. Obsessive Perfectionist.',
                         'The one-liner that appears below your name.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'connect_heading', 'Connect Heading',
+                        "Let's Work Together",
+                        'Heading on the Connect section.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'connect_sub', 'Connect Sub-text',
+                        'Currently based in Didcot, UK. Available for composition and learning design projects worldwide.',
+                        'Text beneath the Connect heading.'
                     ); ?>
                 </div>
 

@@ -9,7 +9,7 @@
     justify-content: center;
     padding: 10rem 2rem 8rem;
     overflow: hidden;
-    background: #07070A !important;
+    background: var(--si-bg-deep) !important;
 }
 
 /* Fine drifting sheet-music lines */
@@ -129,11 +129,11 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 2.25rem;
 }
 
@@ -141,31 +141,31 @@
     display: block;
     width: 40px;
     height: 1px;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     opacity: 0.5;
     flex-shrink: 0;
 }
 
 /* Headline */
 .si-composition-hero__headline {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 2.75rem, 7vw, 5.5rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.08;
     margin: 0 0 0.5em;
     letter-spacing: -0.02em;
 }
 
 .si-composition-hero__word--accent {
-    color: #D4A853 !important;
+    color: var(--si-accent-warm) !important;
     font-style: italic;
 }
 
 /* Sub-headline */
 .si-composition-hero__sub {
     font-size: clamp( 1rem, 2vw, 1.1rem );
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.8;
     max-width: 560px;
     margin: 0 auto 2.75rem;
@@ -195,7 +195,7 @@
     display: block;
     width: 2px;
     border-radius: 2px;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     animation: si-waveform-idle 3s ease-in-out infinite;
     animation-delay: calc( var(--bar-i, 0) * 40ms );
 }
@@ -266,7 +266,7 @@
    ============================================================ */
 .si-scope.si-benefits-list {
     padding: 6rem 2rem;
-    background: #111113 !important;
+    background: var(--si-bg-surface) !important;
 }
 
 .si-benefits-list__inner {
@@ -280,19 +280,19 @@
 }
 
 .si-benefits-list__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 1rem;
 }
 
 .si-benefits-list__heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.75rem, 4vw, 2.75rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0;
     line-height: 1.2;
 }
@@ -316,7 +316,7 @@
 }
 
 .si-benefits-list__item + .si-benefits-list__item {
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
 }
 
 /* Animated gold underline on reveal */
@@ -326,7 +326,7 @@
     left: 3rem;
     right: 0;
     height: 1px;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     transform: scaleX( 0 );
     transform-origin: left;
     transition: transform 0.6s cubic-bezier( 0.16, 1, 0.3, 1);
@@ -338,26 +338,26 @@
 }
 
 .si-benefits-list__num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     opacity: 0.6;
     padding-top: 0.3rem;
     letter-spacing: 0.05em;
 }
 
 .si-benefits-list__text {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.25rem, 2.5vw, 1.6rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 0.5rem;
     line-height: 1.25;
 }
 
 .si-benefits-list__detail {
     font-size: 0.9rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     margin: 0;
     line-height: 1.6;
 }
@@ -367,7 +367,7 @@
    ============================================================ */
 .si-scope.si-process-timeline {
     padding: 6rem 2rem;
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
 }
 
 .si-process-timeline__inner {
@@ -381,19 +381,19 @@
 }
 
 .si-process-timeline__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 1rem;
 }
 
 .si-process-timeline__heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.75rem, 4vw, 2.75rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0;
     line-height: 1.2;
 }
@@ -422,8 +422,8 @@
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: #D4A853;
-    border: 2px solid #D4A853;
+    background: var(--si-accent-warm);
+    border: 2px solid var(--si-accent-warm);
     box-shadow: 0 0 0 4px rgba( 212, 168, 83, 0.15 );
     flex-shrink: 0;
     transition: box-shadow 0.3s ease;
@@ -437,7 +437,7 @@
     width: 1px;
     flex: 1;
     min-height: 2.5rem;
-    background: linear-gradient( to bottom, #D4A853, rgba( 212, 168, 83, 0.15 ) );
+    background: linear-gradient( to bottom, var(--si-accent-warm), rgba( 212, 168, 83, 0.15 ) );
     margin: 6px 0;
 }
 
@@ -447,25 +447,25 @@
 
 .si-process-timeline__num {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.08em;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     opacity: 0.6;
     margin-bottom: 0.35rem;
 }
 
 .si-process-timeline__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1.5rem;
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 0.5rem;
 }
 
 .si-process-timeline__desc {
     font-size: 0.925rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     margin: 0;
     line-height: 1.7;
 }
@@ -476,7 +476,7 @@
    ============================================================ */
 .si-scope.si-audio-showcase {
     padding: 6rem 1.5rem 8rem;
-    background: #07070A !important;
+    background: var(--si-bg-deep) !important;
 }
 
 .si-audio-showcase__inner {
@@ -490,32 +490,32 @@
 }
 
 .si-audio-showcase__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 0.75rem;
 }
 
 .si-audio-showcase__heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 2rem, 4vw, 3rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0;
 }
 
 .si-audio-showcase__empty {
     text-align: center;
     padding: 4rem 2rem;
-    color: #5C5A54 !important;
+    color: var(--si-text-dim) !important;
     font-style: italic;
 }
 
 /* ── Player shell ───────────────────────────────────────── */
 .si-audio-player {
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 20px;
     overflow: hidden;
     background: #111115;
@@ -576,11 +576,11 @@
 
 .si-audio-stage__genre {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     border: 1px solid rgba( 212, 168, 83, 0.3 );
     border-radius: 4px;
     padding: 0.2em 0.6em;
@@ -588,20 +588,20 @@
 }
 
 .si-audio-stage__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.5rem, 3.5vw, 2.25rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0.25rem 0 0;
     line-height: 1.15;
 }
 
 .si-audio-stage__credit {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0;
 }
 
@@ -673,7 +673,7 @@
     border-radius: 50%;
     border: 2px solid rgba( 212, 168, 83, 0.4 );
     background: rgba( 212, 168, 83, 0.1 );
-    color: #D4A853;
+    color: var(--si-accent-warm);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -684,19 +684,19 @@
 
 .si-audio-stage__play-btn:hover {
     background: rgba( 212, 168, 83, 0.2 );
-    border-color: #D4A853;
+    border-color: var(--si-accent-warm);
     transform: scale( 1.07 );
     box-shadow: 0 0 24px rgba( 212, 168, 83, 0.25 );
 }
 
 .si-audio-stage__play-btn:focus-visible {
-    outline: 2px solid #D4A853;
+    outline: 2px solid var(--si-accent-warm);
     outline-offset: 3px;
 }
 
 .si-audio-stage.is-playing .si-audio-stage__play-btn {
     background: rgba( 212, 168, 83, 0.18 );
-    border-color: #D4A853;
+    border-color: var(--si-accent-warm);
     box-shadow: 0 0 28px rgba( 212, 168, 83, 0.2 );
 }
 
@@ -725,7 +725,7 @@
 
 .si-audio-stage__scrub-fill {
     height: 100%;
-    background: linear-gradient( to right, #D4A853, #E8C675 );
+    background: linear-gradient( to right, var(--si-accent-warm), var(--si-accent-glow) );
     border-radius: 5px;
     width: 0%;
     transition: width 0.1s linear;
@@ -739,7 +739,7 @@
     width: 14px;
     height: 14px;
     border-radius: 50%;
-    background: #E8C675;
+    background: var(--si-accent-glow);
     transform: translate( -50%, -50% ) scale( 0 );
     transition: transform 0.2s ease, left 0.1s linear;
     pointer-events: none;
@@ -753,15 +753,15 @@
 .si-audio-stage__time {
     display: flex;
     justify-content: space-between;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
-    color: #5C5A54 !important;
+    color: var(--si-text-dim) !important;
     letter-spacing: 0.06em;
 }
 
 /* ── Track list ─────────────────────────────────────────── */
 .si-audio-tracklist {
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
 }
 
 .si-track-item {
@@ -788,9 +788,9 @@
 
 /* Track number */
 .si-track-item__num {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     letter-spacing: 0.08em;
     flex-shrink: 0;
     width: 1.8rem;
@@ -812,23 +812,23 @@
 }
 
 .si-track-item__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     transition: color 0.2s ease;
 }
 
-.si-track-item.is-active .si-track-item__title { color: #D4A853; }
+.si-track-item.is-active .si-track-item__title { color: var(--si-accent-warm); }
 
 .si-track-item__credit {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.07em;
     text-transform: uppercase;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -836,7 +836,7 @@
 
 .si-track-item__brief {
     font-size: 0.78rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -849,9 +849,9 @@
 
 /* Duration */
 .si-track-item__dur {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     letter-spacing: 0.06em;
     flex-shrink: 0;
     padding-top: 0.2rem;
@@ -878,7 +878,7 @@
     width: 3px;
     height: 40%;
     border-radius: 2px;
-    background: #D4A853;
+    background: var(--si-accent-warm);
 }
 
 .si-track-item.is-playing .si-track-item__indicator span {
@@ -937,7 +937,7 @@
 }
 
 .si-mini-player.is-playing .si-mini-player__waveform span {
-    background: #D4A853;
+    background: var(--si-accent-warm);
     animation: si-mini-bounce 0.75s ease-in-out infinite alternate;
 }
 .si-mini-player.is-playing .si-mini-player__waveform span:nth-child(2) { animation-delay: 0.1s; }
@@ -959,9 +959,9 @@
 }
 
 .si-mini-player__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 0.9rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -976,7 +976,7 @@
 
 .si-mini-player__fill {
     height: 100%;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     border-radius: 3px;
     width: 0%;
     transition: width 0.1s linear;
@@ -984,9 +984,9 @@
 }
 
 .si-mini-player__time {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     flex-shrink: 0;
     letter-spacing: 0.06em;
 }
@@ -998,7 +998,7 @@
     border-radius: 50%;
     background: rgba( 212, 168, 83, 0.1 );
     border: 1px solid rgba( 212, 168, 83, 0.3 );
-    color: #D4A853;
+    color: var(--si-accent-warm);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -1007,7 +1007,7 @@
 }
 .si-mini-player__btn:hover {
     background: rgba( 212, 168, 83, 0.2 );
-    border-color: #D4A853;
+    border-color: var(--si-accent-warm);
     transform: scale( 1.08 );
 }
 .si-mini-player .si-pause-icon               { display: none;  }

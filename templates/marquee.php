@@ -25,7 +25,7 @@ if ( ! empty( $text ) ) {
     <div class="si-marquee-track">
         <?php foreach ( $items as $item ) : ?>
         <span class="si-marquee-item"><?php echo esc_html( $item ); ?></span>
-        <span class="si-marquee-sep">&middot;</span>
+        <span class="si-marquee-sep" aria-hidden="true"><span></span><span></span><span></span></span>
         <?php endforeach; ?>
     </div>
 </div>

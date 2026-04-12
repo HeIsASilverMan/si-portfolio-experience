@@ -33,7 +33,7 @@
 .si-scope.si-home-hero {
     position: relative;
     min-height: 100vh;
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,14 +57,14 @@
 
 .si-home-hero__orb--left {
     width: 500px; height: 500px;
-    background: radial-gradient(circle, #D4A853 0%, transparent 70%);
+    background: radial-gradient(circle, var(--si-accent-warm) 0%, transparent 70%);
     top: -150px; left: -180px;
     animation-delay: 0s;
 }
 
 .si-home-hero__orb--right {
     width: 400px; height: 400px;
-    background: radial-gradient(circle, #D4A853 0%, transparent 70%);
+    background: radial-gradient(circle, var(--si-accent-warm) 0%, transparent 70%);
     bottom: -100px; right: -120px;
     animation-delay: -8s;
     opacity: 0.08;
@@ -93,7 +93,7 @@
 .si-hero-logo {
     width: 100%;
     height: 100%;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     overflow: hidden;
 }
 
@@ -133,9 +133,9 @@
    HERO NAME
    ============================================================ */
 .si-home-hero__name {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp(2.8rem, 9vw, 5.5rem);
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     margin: 0;
     letter-spacing: -0.02em;
     line-height: 1;
@@ -145,7 +145,7 @@
 
 .si-home-hero__tagline {
     font-size: clamp(1rem, 2.5vw, 1.15rem);
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     margin: 0 !important;
     max-width: 440px;
     line-height: 1.7;
@@ -189,11 +189,11 @@
 }
 
 .si-home-hero__half-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     opacity: 0.5;
 }
 
@@ -224,11 +224,11 @@
     flex-direction: column;
     align-items: center;
     gap: 0.5rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     font-size: 0.65rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     opacity: 0;
     animation: si-hero-fade 0.6s ease 2.5s forwards;
 }
@@ -236,7 +236,7 @@
 .si-home-hero__scroll-line {
     width: 1px;
     height: 40px;
-    background: linear-gradient(to bottom, #D4A853, transparent);
+    background: linear-gradient(to bottom, var(--si-accent-warm), transparent);
     animation: si-scroll-line 2s ease-in-out 2.5s infinite;
 }
 
@@ -295,14 +295,14 @@
     display: block;
     width: 100%;
     height: 1.5px;
-    background: #9B978E;
+    background: var(--si-text-secondary);
     border-radius: 2px;
     transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s;
     transform-origin: center;
 }
 
 .si-nav-toggle[aria-expanded="true"] span {
-    background: #F0EDE6;
+    background: var(--si-text-primary);
 }
 
 .si-nav-toggle[aria-expanded="true"] span:nth-child(1) {
@@ -350,9 +350,9 @@
 
 .si-nav__link {
     display: block;
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp(2rem, 8vw, 3.5rem);
-    color: #5C5A54;
+    color: var(--si-text-dim);
     text-decoration: none;
     padding: 0.3rem 1rem;
     transition: color 0.2s ease;
@@ -360,13 +360,13 @@
 }
 
 .si-nav__link:hover {
-    color: #F0EDE6;
+    color: var(--si-text-primary);
 }
 
 .si-nav__link--cta {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: clamp(0.8rem, 2.5vw, 1rem);
-    color: #D4A853;
+    color: var(--si-accent-warm);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     margin-top: 1.5rem;
@@ -379,7 +379,7 @@
 
 .si-nav__link--cta:hover {
     background: rgba(212,168,83,0.1);
-    color: #E8C675;
+    color: var(--si-accent-glow);
 }
 
 body {
@@ -395,9 +395,9 @@ body {
 }
 
 .si-scope.si-marquee {
-    background: #111113 !important;
-    border-top: 1px solid #2A2A2E;
-    border-bottom: 1px solid #2A2A2E;
+    background: var(--si-bg-surface) !important;
+    border-top: 1px solid var(--si-border);
+    border-bottom: 1px solid var(--si-border);
     padding: 0.875rem 0;
     overflow: hidden;
     /* Fade edges */
@@ -426,18 +426,35 @@ body {
 }
 
 .si-marquee-item {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     opacity: 0.75;
     flex-shrink: 0;
 }
 
+/* Logo-bar motif separator */
 .si-marquee-sep {
-    color: #5C5A54;
+    display: inline-flex;
+    gap: 2px;
+    align-items: center;
+    height: 12px;
     flex-shrink: 0;
+    opacity: 0.4;
+}
+
+.si-marquee-sep span {
+    display: block;
+    width: 1.5px;
+    height: 100%;
+    background: var(--si-accent-warm);
+    border-radius: 1px;
+}
+
+.si-marquee-sep span:nth-child(2) {
+    height: 70%;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -449,7 +466,7 @@ body {
    ============================================================ */
 .si-scope.si-dual-showcase {
     padding: 6rem 2rem;
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
 }
 
 .si-dual-showcase__inner {
@@ -467,8 +484,8 @@ body {
 
 /* Shared card shell */
 .si-dual-showcase__card {
-    background: #161619 !important;
-    border: 1px solid #2A2A2E;
+    background: var(--si-bg-surface) !important;
+    border: 1px solid var(--si-border);
     border-radius: 20px;
     overflow: hidden;
     display: block;
@@ -496,11 +513,11 @@ body {
 /* Label badge */
 .si-dual-showcase__label {
     display: inline-block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     border: 1px solid rgba(212,168,83,0.35);
     border-radius: 4px;
     padding: 0.25em 0.6em;
@@ -510,16 +527,16 @@ body {
 
 /* Comp card */
 .si-dual-showcase__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1.45rem;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 0.5rem;
     line-height: 1.3;
 }
 
 .si-dual-showcase__sub {
     font-size: 0.875rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     margin: 0 0 1.25rem;
     line-height: 1.6;
 }
@@ -535,7 +552,7 @@ body {
     align-items: center;
     gap: 12px;
     background: rgba(255,255,255,0.04);
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 12px;
     padding: 12px 16px;
     margin-bottom: 1.5rem;
@@ -545,8 +562,8 @@ body {
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: #D4A853;
-    color: #0D0D0F;
+    background: var(--si-accent-warm);
+    color: var(--si-bg-deep);
     border: none;
     cursor: pointer;
     display: flex;
@@ -558,7 +575,7 @@ body {
 }
 
 .si-home-player__btn:hover {
-    background: #E8C675;
+    background: var(--si-accent-glow);
     transform: scale(1.1);
 }
 
@@ -570,7 +587,7 @@ body {
 .si-home-player__title {
     display: block;
     font-size: 0.8rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -579,7 +596,7 @@ body {
 
 .si-home-player__bar {
     height: 3px;
-    background: #2A2A2E;
+    background: var(--si-border);
     border-radius: 2px;
     overflow: hidden;
     cursor: pointer;
@@ -589,16 +606,16 @@ body {
 
 .si-home-player__fill {
     height: 100%;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     width: 0%;
     border-radius: 2px;
     transition: width 0.1s linear;
 }
 
 .si-home-player__time {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
     flex-shrink: 0;
     min-width: 32px;
     text-align: right;
@@ -622,7 +639,7 @@ body {
 
 .si-dual-showcase__grid-item {
     aspect-ratio: 1;
-    background: #1E1E22;
+    background: var(--si-bg-elevated);
     overflow: hidden;
 }
 
@@ -642,7 +659,7 @@ body {
 /* CTA line at bottom of LD card */
 .si-dual-showcase__cta-line {
     font-size: 0.875rem;
-    color: #D4A853 !important;
+    color: var(--si-accent-warm) !important;
     margin: 0;
     display: flex;
     align-items: center;
@@ -658,12 +675,40 @@ body {
    TESTIMONIALS
    ============================================================ */
 .si-scope.si-testimonials {
+    position: relative;
     padding: 6rem 2rem;
-    background: #111113 !important;
+    background: var(--si-bg-surface) !important;
     text-align: center;
 }
 
-.si-testimonials__inner { max-width: 720px; margin: 0 auto; }
+/* Decorative logo-bar accents on left side */
+.si-scope.si-testimonials::before {
+    content: '';
+    position: absolute;
+    left: 3%;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 40%;
+    background: var(--si-accent-warm);
+    opacity: 0.06;
+    border-radius: 2px;
+}
+
+.si-scope.si-testimonials::after {
+    content: '';
+    position: absolute;
+    left: calc(3% + 7px);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2px;
+    height: 30%;
+    background: var(--si-accent-warm);
+    opacity: 0.04;
+    border-radius: 2px;
+}
+
+.si-testimonials__inner { max-width: 720px; margin: 0 auto; position: relative; z-index: 1; }
 
 .si-testimonials__track {
     position: relative;
@@ -690,19 +735,19 @@ body {
 }
 
 .si-testimonial-item__quote {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-style: italic;
     font-size: clamp(1.1rem, 2.5vw, 1.5rem);
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.5;
 }
 
 .si-testimonial-item__cite {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.7rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 .si-testimonials__dots {
@@ -715,7 +760,7 @@ body {
 .si-testimonials__dot {
     width: 6px; height: 6px;
     border-radius: 50%;
-    background: #2A2A2E;
+    background: var(--si-border);
     border: none;
     cursor: pointer;
     padding: 0;
@@ -723,7 +768,7 @@ body {
 }
 
 .si-testimonials__dot.is-active {
-    background: #D4A853;
+    background: var(--si-accent-warm);
     transform: scale(1.4);
 }
 
@@ -731,23 +776,51 @@ body {
    CTA BAND
    ============================================================ */
 .si-scope.si-cta-band {
+    position: relative;
     padding: 5rem 2rem;
-    background: #161619 !important;
-    border-top: 1px solid #2A2A2E;
+    background: var(--si-bg-surface) !important;
+    border-top: 1px solid var(--si-border);
     text-align: center;
+    overflow: hidden;
 }
 
-.si-cta-band__inner { max-width: 640px; margin: 0 auto; }
+/* Logo-bar motif — subtle vertical bars echoing the SI mark */
+.si-cta-band__bars {
+    position: absolute;
+    right: 5%;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 4px;
+    height: 70%;
+    opacity: 0.06;
+    pointer-events: none;
+}
+
+.si-cta-band__bars span {
+    display: block;
+    width: 3px;
+    height: 100%;
+    background: var(--si-accent-warm);
+    border-radius: 2px;
+}
+
+.si-cta-band__bars span:nth-child(2) { height: 80%; align-self: flex-end; }
+.si-cta-band__bars span:nth-child(3) { height: 90%; }
+.si-cta-band__bars span:nth-child(4) { height: 75%; align-self: flex-end; }
+.si-cta-band__bars span:nth-child(5) { width: 5px; }
+
+.si-cta-band__inner { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
 
 .si-cta-band__heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp(1.8rem, 4vw, 3rem);
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 1rem;
 }
 
 .si-cta-band__sub {
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     margin: 0 0 2rem;
     font-size: 1.05rem;
 }
@@ -780,8 +853,8 @@ body {
    SITE FOOTER
    ============================================================ */
 .si-scope.si-site-footer {
-    background: #0D0D0F !important;
-    border-top: 1px solid #2A2A2E;
+    background: var(--si-bg-deep) !important;
+    border-top: 1px solid var(--si-border);
     padding: 3rem 2rem;
 }
 
@@ -795,20 +868,28 @@ body {
     text-align: center;
 }
 
-.si-site-footer__brand { display: flex; flex-direction: column; gap: 0.25rem; }
+.si-site-footer__brand { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+
+.si-site-footer__mark {
+    width: 80px;
+    height: auto;
+    color: var(--si-accent-warm);
+    opacity: 0.35;
+    margin-bottom: 0.25rem;
+}
 
 .si-site-footer__name {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1.25rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
 }
 
 .si-site-footer__roles {
     font-size: 0.75rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
 }
 
 .si-site-footer__nav {
@@ -820,16 +901,16 @@ body {
 
 .si-site-footer__nav a {
     font-size: 0.875rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
     text-decoration: none;
     transition: color 0.2s;
 }
 
-.si-site-footer__nav a:hover { color: #D4A853; }
+.si-site-footer__nav a:hover { color: var(--si-accent-warm); }
 
 .si-site-footer__copy {
     font-size: 0.75rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     margin: 0;
 }
 

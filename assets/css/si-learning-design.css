@@ -102,7 +102,7 @@
 
 .si-scope .si-portfolio-filter__pill--active,
 .si-scope .si-portfolio-filter__pill[aria-pressed="true"] {
-    color: #0D0D0F;
+    color: var(--si-bg-deep);
     background: var(--si-accent-warm);
     border-color: var(--si-accent-warm);
 }
@@ -284,6 +284,12 @@
     background: rgba(13, 13, 15, 0.88);
     backdrop-filter: blur(6px);
     cursor: pointer;
+    animation: modal-backdrop-in 0.3s ease both;
+}
+
+@keyframes modal-backdrop-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
 }
 
 .si-project-modal__box {

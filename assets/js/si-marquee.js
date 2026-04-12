@@ -12,7 +12,9 @@
             inner.className = 'si-marquee-inner';
             marquee.appendChild( inner );
             inner.appendChild( track );
-            inner.appendChild( track.cloneNode( true ) );
+            var clone = track.cloneNode( true );
+            clone.setAttribute( 'aria-hidden', 'true' );
+            inner.appendChild( clone );
         } );
     }
 

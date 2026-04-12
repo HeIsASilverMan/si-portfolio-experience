@@ -89,13 +89,13 @@ $tagline = si_setting(
 
         <div class="si-home-hero__actions">
             <a href="/composition" class="si-btn si-btn--primary si-btn--magnetic">
-                Hear the Work
+                <?php echo esc_html( si_setting( 'home_btn_primary', 'Hear the Work' ) ); ?>
                 <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
             </a>
             <a href="/learning-design" class="si-btn si-btn--ghost">
-                See the Portfolio
+                <?php echo esc_html( si_setting( 'home_btn_secondary', 'See the Portfolio' ) ); ?>
                 <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
                     <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                 </svg>
