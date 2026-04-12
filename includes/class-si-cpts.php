@@ -30,7 +30,7 @@ class SI_CPTs {
             'has_archive'  => false,
             'show_in_menu' => true,
             'menu_icon'    => 'dashicons-portfolio',
-            'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt' ),
+            'supports'     => array( 'title', 'editor', 'thumbnail', 'excerpt', 'page-attributes' ),
             'rewrite'      => array( 'slug' => 'portfolio' ),
         ) );
     }
