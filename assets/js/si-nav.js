@@ -94,6 +94,16 @@
         var nav    = document.querySelector( '.si-nav' );
         if ( !toggle || !nav ) { return; }
 
+        var navLinks = nav.querySelectorAll( '.si-nav__link' );
+        var navFocusable = [];
+
+        function updateNavFocusable() {
+            navFocusable = Array.prototype.slice.call(
+                nav.querySelectorAll( 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])' )
+            );
+            navFocusable.push( toggle );
+        }
+
         function openNav() {
             toggle.setAttribute( 'aria-expanded', 'true' );
             toggle.setAttribute( 'aria-label', 'Close navigation' );
@@ -101,6 +111,11 @@
             document.body.classList.add( 'si-nav-open' );
             document.body.style.overflow = 'hidden';
             animateLogo( true );
+            updateNavFocusable();
+            // Focus first nav link after animation settles
+            setTimeout( function () {
+                if ( navLinks.length ) { navLinks[0].focus(); }
+            }, 200 );
         }
 
         function closeNav() {
@@ -125,11 +140,31 @@
             link.addEventListener( 'click', closeNav );
         } );
 
-        // Close on Escape
+        // Keyboard: Escape to close + focus trap
         document.addEventListener( 'keydown', function ( e ) {
-            if ( e.key === 'Escape' && nav.classList.contains( 'is-open' ) ) {
+            if ( !nav.classList.contains( 'is-open' ) ) { return; }
+
+            if ( e.key === 'Escape' ) {
                 closeNav();
                 toggle.focus();
+                return;
+            }
+
+            // Focus trap: keep Tab within nav + toggle
+            if ( e.key === 'Tab' && navFocusable.length ) {
+                var first = navFocusable[0];
+                var last  = navFocusable[ navFocusable.length - 1 ];
+                if ( e.shiftKey ) {
+                    if ( document.activeElement === first ) {
+                        e.preventDefault();
+                        last.focus();
+                    }
+                } else {
+                    if ( document.activeElement === last ) {
+                        e.preventDefault();
+                        first.focus();
+                    }
+                }
             }
         } );
     }

@@ -38,8 +38,8 @@
 .entry-content p,
 .page-content  p,
 .si-section__content p {
-    color: #9B978E;
-    font-family: 'DM Sans', system-ui, sans-serif;
+    color: var(--si-text-secondary);
+    font-family: var(--si-font-body);
     font-size: 1rem;
     line-height: 1.75;
     margin: 0 0 1.25em;
@@ -51,8 +51,8 @@
 .page-content  h4, .page-content  h5, .page-content  h6,
 .si-section__content h1, .si-section__content h2,
 .si-section__content h3, .si-section__content h4 {
-    font-family: 'Instrument Serif', Georgia, serif;
-    color: #F0EDE6;
+    font-family: var(--si-font-display);
+    color: var(--si-text-primary);
     line-height: 1.2;
     margin: 1.75em 0 0.5em;
 }
@@ -65,7 +65,7 @@
 .entry-content a,
 .page-content  a,
 .si-section__content a {
-    color: #D4A853;
+    color: var(--si-accent-warm);
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: rgba(212,168,83,0.4);
@@ -75,7 +75,7 @@
 .entry-content a:hover,
 .page-content  a:hover,
 .si-section__content a:hover {
-    color: #E8C675;
+    color: var(--si-accent-glow);
     text-decoration-color: rgba(232,198,117,0.6);
 }
 
@@ -84,7 +84,7 @@
 .entry-content ul, .entry-content ol,
 .page-content  ul, .page-content  ol,
 .si-section__content ul, .si-section__content ol {
-    color: #9B978E;
+    color: var(--si-text-secondary);
     padding-left: 1.5rem;
     margin: 0 0 1.25em;
 }
@@ -99,7 +99,7 @@
 .entry-content ul li::marker,
 .page-content  ul li::marker,
 .si-section__content ul li::marker {
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 /* ── Images ──────────────────────────────────────────────── */
@@ -116,8 +116,8 @@
 .entry-content .wp-block-image figcaption,
 .page-content  .wp-block-image figcaption,
 .si-section__content .wp-block-image figcaption {
-    color: #5C5A54;
-    font-family: 'JetBrains Mono', monospace;
+    color: var(--si-text-dim);
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.08em;
     text-align: center;
@@ -132,7 +132,7 @@
 .page-content  .wp-block-quote,
 .si-section__content blockquote,
 .si-section__content .wp-block-quote {
-    border-left: 2px solid #D4A853;
+    border-left: 2px solid var(--si-accent-warm);
     padding: 0.75rem 1.5rem;
     margin: 2rem 0;
     background: rgba(212,168,83,0.04);
@@ -142,10 +142,10 @@
 .entry-content .wp-block-quote p,
 .page-content  .wp-block-quote p,
 .si-section__content .wp-block-quote p {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-style: italic;
     font-size: 1.15rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     margin: 0;
 }
 
@@ -154,11 +154,11 @@
 .si-section__content .wp-block-quote cite {
     display: block;
     margin-top: 0.75rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     font-style: normal;
 }
 
@@ -168,7 +168,7 @@
 .page-content  .wp-block-separator,
 .si-section__content .wp-block-separator {
     border: none;
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
     margin: 3rem auto;
     max-width: 80px;
 }
@@ -181,11 +181,11 @@
 .page-content  pre,
 .si-section__content code,
 .si-section__content pre {
-    font-family: 'JetBrains Mono', monospace;
-    background: #161619;
-    border: 1px solid #2A2A2E;
+    font-family: var(--si-font-mono);
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
     border-radius: 6px;
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 .entry-content code,
@@ -204,18 +204,18 @@
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
 }
 
 .entry-content th,
 .page-content  th,
 .si-section__content th {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.63rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #D4A853;
-    border-bottom: 1px solid #2A2A2E;
+    color: var(--si-accent-warm);
+    border-bottom: 1px solid var(--si-border);
     padding: 0.75rem 1rem;
     text-align: left;
 }
@@ -223,7 +223,7 @@
 .entry-content td,
 .page-content  td,
 .si-section__content td {
-    border-bottom: 1px solid #2A2A2E;
+    border-bottom: 1px solid var(--si-border);
     padding: 0.75rem 1rem;
     vertical-align: top;
 }
@@ -248,12 +248,12 @@
 .entry-content .wp-block-button__link,
 .page-content  .wp-block-button__link {
     border-radius: 100px;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.78rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    background: #D4A853;
-    color: #0D0D0F;
+    background: var(--si-accent-warm);
+    color: var(--si-bg-deep);
     padding: 0.7em 1.8em;
     text-decoration: none;
     transition: background 0.2s ease, color 0.2s ease;
@@ -261,21 +261,21 @@
 
 .entry-content .wp-block-button__link:hover,
 .page-content  .wp-block-button__link:hover {
-    background: #E8C675;
-    color: #0D0D0F;
+    background: var(--si-accent-glow);
+    color: var(--si-bg-deep);
 }
 
 .entry-content .wp-block-button.is-style-outline .wp-block-button__link,
 .page-content  .wp-block-button.is-style-outline .wp-block-button__link {
     background: transparent;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     border: 1px solid rgba(212,168,83,0.5);
 }
 
 .entry-content .wp-block-button.is-style-outline .wp-block-button__link:hover,
 .page-content  .wp-block-button.is-style-outline .wp-block-button__link:hover {
     background: rgba(212,168,83,0.1);
-    border-color: #D4A853;
+    border-color: var(--si-accent-warm);
 }
 
 /* ── Reduced motion ──────────────────────────────────────── */

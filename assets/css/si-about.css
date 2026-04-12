@@ -4,7 +4,7 @@
 .si-scope.si-about-story {
     position: relative;
     padding: 8rem 2rem 6rem;
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
     overflow: hidden;
 }
 
@@ -52,8 +52,8 @@
     aspect-ratio: 3 / 4;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #2A2A2E;
-    background: #161619;
+    border: 1px solid var(--si-border);
+    background: var(--si-bg-surface);
     position: relative;
 }
 
@@ -75,9 +75,9 @@
 }
 
 .si-about-story__photo-hint {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
-    color: #5C5A54 !important;
+    color: var(--si-text-dim) !important;
     text-align: center;
     margin: 0;
     padding: 0 1rem;
@@ -93,20 +93,20 @@
 
 /* ── Bio column ──────────────────────────────────────────── */
 .si-about-story__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 1.25rem;
     display: block;
 }
 
 .si-about-story__headline {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.75rem, 3.5vw, 2.5rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.2;
     margin: 0 0 2rem;
     letter-spacing: -0.01em;
@@ -114,7 +114,7 @@
 
 .si-about-story__body p {
     font-size: 1rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.85;
     margin: 0 0 1.25em;
     max-width: 65ch;
@@ -126,16 +126,16 @@
 
 /* Gold left-border pull quote */
 .si-about-story__pull {
-    border-left: 3px solid #D4A853;
+    border-left: 3px solid var(--si-accent-warm);
     margin: 2.5rem 0;
     padding: 0.5rem 1.5rem;
 }
 
 .si-about-story__pull p {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.15rem, 2.5vw, 1.35rem );
     font-style: italic;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.55;
     margin: 0;
 }
@@ -146,7 +146,7 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    border-left: 1px solid #2A2A2E;
+    border-left: 1px solid var(--si-border);
     padding-left: 1.5rem;
     position: relative;
 }
@@ -168,26 +168,26 @@
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: #2A2A2E;
-    border: 2px solid #2A2A2E;
+    background: var(--si-border);
+    border: 2px solid var(--si-border);
     transition: border-color 0.2s ease, background 0.2s ease;
 }
 
 .si-about-story__milestone:hover::before {
-    background: #D4A853;
-    border-color: #D4A853;
+    background: var(--si-accent-warm);
+    border-color: var(--si-accent-warm);
 }
 
 .si-about-story__milestone:last-child::before {
-    background: #D4A853;
-    border-color: #D4A853;
+    background: var(--si-accent-warm);
+    border-color: var(--si-accent-warm);
     box-shadow: 0 0 0 4px rgba( 212, 168, 83, 0.15 );
 }
 
 .si-about-story__milestone-year {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     letter-spacing: 0.06em;
     padding-top: 0.1rem;
     flex-shrink: 0;
@@ -195,7 +195,7 @@
 
 .si-about-story__milestone-text {
     font-size: 0.88rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.55;
 }
 
@@ -204,7 +204,7 @@
    ============================================================ */
 .si-scope.si-connect {
     padding: 6rem 2rem;
-    background: #161619 !important;
+    background: var(--si-bg-surface) !important;
 }
 
 .si-connect__inner {
@@ -214,26 +214,26 @@
 }
 
 .si-connect__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 1rem;
 }
 
 .si-connect__heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 2rem, 4vw, 3rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 1rem;
     line-height: 1.15;
 }
 
 .si-connect__sub {
     font-size: 1rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.7;
     margin: 0 0 3rem;
     max-width: 50ch;
@@ -246,7 +246,7 @@
     display: flex;
     flex-direction: column;
     gap: 0;
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 3rem;
@@ -258,17 +258,17 @@
     align-items: center;
     gap: 1rem;
     padding: 1.1rem 1.5rem;
-    background: #161619;
+    background: var(--si-bg-surface);
     text-decoration: none;
     transition: background 0.18s ease, color 0.18s ease;
 }
 
 .si-connect__link + .si-connect__link {
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
 }
 
 .si-connect__link:hover {
-    background: #1E1E22;
+    background: var(--si-bg-elevated);
 }
 
 .si-connect__link-icon {
@@ -280,7 +280,7 @@
     border-radius: 8px;
     background: rgba(212, 168, 83, 0.08);
     border: 1px solid rgba(212, 168, 83, 0.18);
-    color: #D4A853;
+    color: var(--si-accent-warm);
     flex-shrink: 0;
     transition: background 0.18s ease, border-color 0.18s ease;
 }
@@ -293,7 +293,7 @@
 .si-connect__link-label {
     flex: 1;
     font-size: 0.95rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     font-weight: 400;
     transition: color 0.18s ease;
 }
@@ -303,22 +303,22 @@
 }
 
 .si-connect__link-arrow {
-    color: #5C5A54;
+    color: var(--si-text-dim);
     flex-shrink: 0;
     transition: color 0.18s ease, transform 0.18s ease;
 }
 
 .si-connect__link:hover .si-connect__link-arrow {
-    color: #D4A853;
+    color: var(--si-accent-warm);
     transform: translateX(3px);
 }
 
 /* CTA block */
 .si-connect__cta-text {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.25rem, 2.5vw, 1.65rem );
     font-style: italic;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 1.5rem;
 }
 
@@ -341,7 +341,7 @@
     justify-content: center;
     padding: 10rem 2rem 8rem;
     overflow: hidden;
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
 }
 
 /* Blueprint grid background */
@@ -430,11 +430,11 @@
     align-items: center;
     justify-content: center;
     gap: 1rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 2.25rem;
 }
 
@@ -442,31 +442,31 @@
     display: block;
     width: 40px;
     height: 1px;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     opacity: 0.5;
     flex-shrink: 0;
 }
 
 /* Headline */
 .si-ld-hero__headline {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 2.75rem, 7vw, 5.5rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.08;
     margin: 0 0 0.5em;
     letter-spacing: -0.02em;
 }
 
 .si-ld-hero__headline--accent {
-    color: #D4A853 !important;
+    color: var(--si-accent-warm) !important;
     font-style: italic;
 }
 
 /* Sub */
 .si-ld-hero__sub {
     font-size: clamp( 1rem, 2vw, 1.1rem );
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.8;
     max-width: 560px;
     margin: 0 auto 3rem;
@@ -490,26 +490,26 @@
 }
 
 .si-ld-hero__stat-num {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 2rem, 4vw, 2.75rem );
-    color: #D4A853 !important;
+    color: var(--si-accent-warm) !important;
     line-height: 1;
     font-weight: 400;
 }
 
 .si-ld-hero__stat-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #5C5A54;
+    color: var(--si-text-dim);
 }
 
 .si-ld-hero__stat-divider {
     display: block;
     width: 1px;
     height: 40px;
-    background: #2A2A2E;
+    background: var(--si-border);
     flex-shrink: 0;
 }
 
@@ -529,12 +529,12 @@
 }
 
 .si-ld-hero__tool {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.08em;
-    color: #9B978E;
+    color: var(--si-text-secondary);
     background: rgba(255, 255, 255, 0.04);
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 4px;
     padding: 0.3em 0.75em;
     transition: border-color 0.2s ease, color 0.2s ease;
@@ -542,7 +542,7 @@
 
 .si-ld-hero__tool:hover {
     border-color: rgba(212, 168, 83, 0.35);
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 /* Actions */
@@ -598,8 +598,8 @@
 }
 
 .si-ld-hero__device-bar {
-    background: #111113;
-    border-bottom: 1px solid #2A2A2E;
+    background: var(--si-bg-surface);
+    border-bottom: 1px solid var(--si-border);
     padding: 0.55rem 0.85rem;
     display: flex;
     align-items: center;
@@ -611,7 +611,7 @@
     width: 9px;
     height: 9px;
     border-radius: 50%;
-    background: #2A2A2E;
+    background: var(--si-border);
 }
 
 .si-ld-hero__device-bar span:nth-child(1) { background: #FF5F57; }
@@ -656,7 +656,7 @@
 .si-ld-screen__progress-bar span {
     display: block;
     height: 100%;
-    background: linear-gradient(to right, #D4A853, #E8C675);
+    background: linear-gradient(to right, var(--si-accent-warm), var(--si-accent-glow));
     border-radius: 4px;
 }
 
@@ -667,28 +667,28 @@
     padding: 0.55rem 0.7rem;
     border-radius: 6px;
     margin-bottom: 0.4rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.72rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
 }
 
 .si-ld-screen__module--active,
 .si-ld-screen__module--current {
     background: rgba(212,168,83,0.08);
-    color: #F0EDE6;
+    color: var(--si-text-primary);
 }
-.si-ld-screen__module--active  { border-left: 2px solid #D4A853; }
+.si-ld-screen__module--active  { border-left: 2px solid var(--si-accent-warm); }
 .si-ld-screen__module--current { border-left: 2px solid rgba(212,168,83,0.4); }
 .si-ld-screen__module--locked  { opacity: 0.4; }
-.si-ld-screen__module-icon     { font-size: 0.6rem; color: #D4A853; flex-shrink: 0; }
+.si-ld-screen__module-icon     { font-size: 0.6rem; color: var(--si-accent-warm); flex-shrink: 0; }
 .si-ld-screen__module > span:nth-child(2) { flex: 1; }
-.si-ld-screen__check { color: #7EC89B; font-size: 0.7rem; flex-shrink: 0; }
+.si-ld-screen__check { color: var(--si-success); font-size: 0.7rem; flex-shrink: 0; }
 
 .si-ld-screen__btn {
     margin-top: 1rem;
-    background: #D4A853;
-    color: #0D0D0F;
-    font-family: 'DM Sans', sans-serif;
+    background: var(--si-accent-warm);
+    color: var(--si-bg-deep);
+    font-family: var(--si-font-body);
     font-size: 0.7rem;
     font-weight: 600;
     text-align: center;
@@ -698,9 +698,9 @@
 
 /* Screen 2: Scenario */
 .si-ld-screen__slide-header {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 0.95rem;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin-bottom: 0.9rem;
 }
 
@@ -715,7 +715,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #D4A853 0%, #8B5CF6 100%);
+    background: linear-gradient(135deg, var(--si-accent-warm) 0%, #8B5CF6 100%);
     flex-shrink: 0;
 }
 
@@ -724,9 +724,9 @@
     border: 1px solid rgba(255,255,255,0.08);
     border-radius: 0 8px 8px 8px;
     padding: 0.55rem 0.75rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.72rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     line-height: 1.5;
 }
 
@@ -734,16 +734,16 @@
 
 .si-ld-screen__choice {
     padding: 0.45rem 0.75rem;
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 6px;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.7rem;
-    color: #9B978E;
+    color: var(--si-text-secondary);
 }
 
 .si-ld-screen__choice--selected {
-    border-color: #D4A853;
-    color: #F0EDE6;
+    border-color: var(--si-accent-warm);
+    color: var(--si-text-primary);
     background: rgba(212,168,83,0.08);
 }
 
@@ -759,33 +759,33 @@
 .si-ld-screen__result-icon  { font-size: 2rem; margin-bottom: 0.5rem; }
 
 .si-ld-screen__result-title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     margin-bottom: 0.75rem;
 }
 
 .si-ld-screen__score { display: flex; align-items: baseline; gap: 0.15rem; margin-bottom: 0.25rem; }
 
 .si-ld-screen__score-num {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 2.75rem;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     line-height: 1;
 }
 
 .si-ld-screen__score-pct {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 1rem;
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 .si-ld-screen__result-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: #7EC89B;
+    color: var(--si-success);
     margin-bottom: 1.25rem;
 }
 
@@ -795,9 +795,9 @@
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
-    color: #5C5A54;
+    color: var(--si-text-dim);
 }
 
 .si-ld-screen__bar-row > div {
@@ -811,7 +811,7 @@
 .si-ld-screen__bar-row > div > span {
     display: block;
     height: 100%;
-    background: linear-gradient(to right, #D4A853, #E8C675);
+    background: linear-gradient(to right, var(--si-accent-warm), var(--si-accent-glow));
     border-radius: 4px;
 }
 

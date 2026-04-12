@@ -1,15 +1,15 @@
 /* Force dark background at every level */
 html,
 body {
-    background: #0D0D0F !important;
-    color: #F0EDE6;
+    background: var(--si-bg-deep) !important;
+    color: var(--si-text-primary);
     margin: 0;
     padding: 0;
 }
 
 .si-scope {
     box-sizing: border-box;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     font-family: var(--si-font-body);
     font-size: 1rem;
     line-height: 1.6;
@@ -29,12 +29,12 @@ body {
     font-family: var(--si-font-display);
     line-height: 1.15;
     margin: 0 0 0.5em;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
 }
 
 .si-scope p {
     margin: 0 0 1em;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
 }
 
 .si-scope a {
@@ -49,7 +49,7 @@ body {
 }
 
 .si-scope section {
-    background: #0D0D0F !important;
+    background: var(--si-bg-deep) !important;
 }
 
 /* Kill any leftover theme wrappers */

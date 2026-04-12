@@ -1,6 +1,9 @@
 <?php defined( 'ABSPATH' ) || exit; ?>
 
 <section class="si-scope si-cta-band" aria-label="Call to action">
+    <div class="si-cta-band__bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
     <div class="si-cta-band__inner si-reveal">
         <h2 class="si-cta-band__heading"><?php echo esc_html( si_setting( 'cta_headline', "Let's create something extraordinary" ) ); ?></h2>
         <p class="si-cta-band__sub"><?php echo esc_html( si_setting( 'cta_sub', "Whether it's a score, a course, or something in between — get in touch." ) ); ?></p>

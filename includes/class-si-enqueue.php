@@ -12,9 +12,38 @@ class SI_Enqueue {
         ?>
         <div class="si-preloader" id="si-preloader" aria-hidden="true">
             <div class="si-preloader__inner">
-                <svg class="si-preloader__logo" width="48" height="48" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-                    <circle cx="24" cy="24" r="22" stroke="#D4A853" stroke-width="1.5" opacity="0.4"/>
-                    <text x="24" y="29" font-family="'Instrument Serif', Georgia, serif" font-size="18" fill="#D4A853" text-anchor="middle">SI</text>
+                <svg class="si-preloader__logo" viewBox="0 0 127.3 127.3" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <rect class="si-preloader__box" x="3" y="3" width="121.3" height="121.3"
+                        fill="none" stroke="currentColor" stroke-width="6"
+                        stroke-dasharray="486" stroke-dashoffset="486"/>
+                    <g class="si-preloader__mark si-preloader__mark--s">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M54.34,71.54C38.76,49.86,38.02,21.96,50.12,0H0v127.3h45.65c17.57-13.05,21.5-37.92,8.69-55.76Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bridge">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M93.66,127.3c0-42.43,0-84.86,0-127.3h-8.67c-17.73,13.01-21.74,37.99-8.88,55.89,15.54,21.63,16.31,49.46,4.3,71.4h13.24Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bar" style="--bar-i:0">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M99.45,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bar" style="--bar-i:1">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M105.25,127.3h-2.89c0-42.43,0-84.86,0-127.3h2.89v127.3Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bar" style="--bar-i:2">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M111.05,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bar" style="--bar-i:3">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M116.84,0h-2.89c0,42.43,0,84.86,0,127.3h2.89V0Z"/>
+                    </g>
+                    <g class="si-preloader__mark si-preloader__mark--bar" style="--bar-i:4">
+                        <path fill-rule="evenodd" fill="currentColor"
+                            d="M119.75,0c0,42.43,0,84.86,0,127.3h7.55V0h-7.55Z"/>
+                    </g>
                 </svg>
                 <div class="si-preloader__track" aria-hidden="true">
                     <div class="si-preloader__fill"></div>

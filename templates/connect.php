@@ -13,8 +13,8 @@ $contact_email  = si_setting( 'contact_email', 'shane@shaneivers.com' );
 
         <div class="si-connect__header si-reveal">
             <p class="si-connect__label"><?php esc_html_e( 'Connect', 'si-portfolio' ); ?></p>
-            <h2 class="si-connect__heading"><?php esc_html_e( "Let's Work Together", 'si-portfolio' ); ?></h2>
-            <p class="si-connect__sub"><?php esc_html_e( 'Currently based in Didcot, UK. Available for composition and learning design projects worldwide.', 'si-portfolio' ); ?></p>
+            <h2 class="si-connect__heading"><?php echo esc_html( si_setting( 'connect_heading', "Let's Work Together" ) ); ?></h2>
+            <p class="si-connect__sub"><?php echo esc_html( si_setting( 'connect_sub', 'Currently based in Didcot, UK. Available for composition and learning design projects worldwide.' ) ); ?></p>
         </div>
 
         <div class="si-connect__links si-reveal" role="list" aria-label="<?php esc_attr_e( 'Social and professional links', 'si-portfolio' ); ?>">

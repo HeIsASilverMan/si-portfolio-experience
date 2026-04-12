@@ -74,5 +74,3 @@
     </div><!-- /.si-ld-hero__inner -->
 
 </section>
-
-</section>

@@ -18,6 +18,16 @@
 
         if ( ! pills.length || ! cards.length ) return;
 
+        // Set initial active state on "All" pill
+        pills.forEach( function ( p ) {
+            if ( p.dataset.filter === 'all' ) {
+                p.classList.add( 'si-portfolio-filter__pill--active' );
+                p.setAttribute( 'aria-pressed', 'true' );
+            } else {
+                p.setAttribute( 'aria-pressed', 'false' );
+            }
+        } );
+
         pills.forEach( function ( pill ) {
             pill.addEventListener( 'click', function () {
                 var chosen = this.dataset.filter;
@@ -48,4 +58,4 @@
     } else {
         init();
     }
-}() );
+} )();

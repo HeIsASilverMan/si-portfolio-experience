@@ -9,7 +9,7 @@
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    background: #07070A !important;
+    background: var(--si-bg-deep) !important;
     overflow: hidden;
 }
 
@@ -20,13 +20,13 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: #2A2A2E;
+    background: var(--si-border);
     z-index: 200;
 }
 
 .si-form__progress-fill {
     height: 100%;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     width: 0%;
     transition: width 0.5s cubic-bezier( 0.16, 1, 0.3, 1 );
 }
@@ -53,8 +53,8 @@
     gap: 0.5rem;
     background: none;
     border: none;
-    color: #9B978E;
-    font-family: 'DM Sans', sans-serif;
+    color: var(--si-text-secondary);
+    font-family: var(--si-font-body);
     font-size: 0.875rem;
     cursor: pointer;
     padding: 0.5rem 0.75rem;
@@ -64,7 +64,7 @@
 }
 
 .si-form__back-btn:hover {
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     background: rgba(255,255,255,0.06);
 }
 
@@ -81,14 +81,14 @@
 
 .si-form__step-indicator {
     pointer-events: none;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.65rem;
     letter-spacing: 0.1em;
-    color: #5C5A54;
+    color: var(--si-text-dim);
 }
 
 .si-form__step-indicator .si-form__step-current {
-    color: #D4A853;
+    color: var(--si-accent-warm);
 }
 
 /* ── Steps wrapper ───────────────────────────────────────── */
@@ -137,10 +137,10 @@
 
 /* ── Question text ───────────────────────────────────────── */
 .si-form__question {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.65rem, 4vw, 2.75rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     text-align: center;
     margin: 0 0 0.5rem;
     line-height: 1.2;
@@ -149,10 +149,10 @@
 
 .si-form__question-sub {
     font-size: 0.9rem;
-    color: #5C5A54 !important;
+    color: var(--si-text-dim) !important;
     text-align: center;
     margin: 0 0 2.75rem;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     line-height: 1.5;
 }
 
@@ -169,11 +169,11 @@
 
 .si-form__option {
     background: rgba(255,255,255,0.03);
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 10px;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.95rem;
     padding: 0.9rem 1.4rem;
     text-align: left;
@@ -189,15 +189,15 @@
 .si-form__option:focus-visible {
     border-color: rgba(212, 168, 83, 0.5);
     background: rgba(212, 168, 83, 0.06);
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     outline: none;
 }
 
 .si-form__option.is-selected {
-    border-color: #D4A853;
+    border-color: var(--si-accent-warm);
     background: rgba(212, 168, 83, 0.12);
-    box-shadow: 0 0 0 1px #D4A853;
-    color: #F0EDE6;
+    box-shadow: 0 0 0 1px var(--si-accent-warm);
+    color: var(--si-text-primary);
 }
 
 /* ── Radio options ───────────────────────────────────────── */
@@ -218,7 +218,7 @@
     width: 18px;
     height: 18px;
     border-radius: 50%;
-    border: 2px solid #2A2A2E;
+    border: 2px solid var(--si-border);
     flex-shrink: 0;
     transition: border-color 0.2s ease, background 0.2s ease;
     display: flex;
@@ -227,8 +227,8 @@
 }
 
 .si-form__option.is-selected .si-form__option-radio {
-    border-color: #D4A853;
-    background: #D4A853;
+    border-color: var(--si-accent-warm);
+    background: var(--si-accent-warm);
 }
 
 .si-form__option-radio::after {
@@ -237,7 +237,7 @@
     width: 6px;
     height: 6px;
     border-radius: 50%;
-    background: #07070A;
+    background: var(--si-bg-deep);
     opacity: 0;
     transition: opacity 0.2s ease;
 }
@@ -258,9 +258,9 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 2px solid #2A2A2E;
-    color: #F0EDE6;
-    font-family: 'DM Sans', sans-serif;
+    border-bottom: 2px solid var(--si-border);
+    color: var(--si-text-primary);
+    font-family: var(--si-font-body);
     font-size: 1.1rem;
     line-height: 1.7;
     padding: 0.75rem 0;
@@ -272,21 +272,21 @@
 }
 
 .si-form__textarea::placeholder {
-    color: #5C5A54;
+    color: var(--si-text-dim);
 }
 
 .si-form__textarea:focus {
-    border-bottom-color: #D4A853;
+    border-bottom-color: var(--si-accent-warm);
 }
 
 .si-form__textarea-hint {
     position: absolute;
     bottom: -1.5rem;
     right: 0;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.08em;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     pointer-events: none;
 }
 
@@ -306,11 +306,11 @@
 
 .si-form__label {
     display: block;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     margin-bottom: 0.5rem;
 }
 
@@ -318,9 +318,9 @@
     width: 100%;
     background: transparent;
     border: none;
-    border-bottom: 2px solid #2A2A2E;
-    color: #F0EDE6;
-    font-family: 'DM Sans', sans-serif;
+    border-bottom: 2px solid var(--si-border);
+    color: var(--si-text-primary);
+    font-family: var(--si-font-body);
     font-size: 1.1rem;
     padding: 0.6rem 0;
     outline: none;
@@ -329,11 +329,11 @@
 }
 
 .si-form__input::placeholder {
-    color: #5C5A54;
+    color: var(--si-text-dim);
 }
 
 .si-form__input:focus {
-    border-bottom-color: #D4A853;
+    border-bottom-color: var(--si-accent-warm);
 }
 
 /* ── Navigation ──────────────────────────────────────────── */
@@ -350,12 +350,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     border: none;
     border-radius: 8px;
-    color: #07070A;
+    color: var(--si-bg-deep);
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.95rem;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -365,7 +365,7 @@
 }
 
 .si-form__continue-btn:hover {
-    background: #E8C675;
+    background: var(--si-accent-glow);
     transform: translateY( -1px );
 }
 
@@ -382,9 +382,9 @@
 .si-form__skip-btn {
     background: none;
     border: none;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 0.875rem;
     padding: 0.5rem;
     transition: color 0.2s ease;
@@ -393,7 +393,7 @@
 }
 
 .si-form__skip-btn:hover {
-    color: #9B978E;
+    color: var(--si-text-secondary);
 }
 
 /* ── Submit button ───────────────────────────────────────── */
@@ -401,12 +401,12 @@
     display: inline-flex;
     align-items: center;
     gap: 0.6rem;
-    background: #D4A853;
+    background: var(--si-accent-warm);
     border: none;
     border-radius: 8px;
-    color: #07070A;
+    color: var(--si-bg-deep);
     cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
     font-size: 1rem;
     font-weight: 600;
     letter-spacing: 0.02em;
@@ -417,7 +417,7 @@
 }
 
 .si-form__submit-btn:hover {
-    background: #E8C675;
+    background: var(--si-accent-glow);
     transform: translateY( -1px );
 }
 
@@ -432,7 +432,7 @@
     width: 16px;
     height: 16px;
     border: 2px solid rgba(0,0,0,0.2);
-    border-top-color: #07070A;
+    border-top-color: var(--si-bg-deep);
     border-radius: 50%;
     animation: si-spin 0.7s linear infinite;
 }
@@ -460,7 +460,7 @@
     gap: 0;
     width: 100%;
     max-width: 580px;
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 12px;
     overflow: hidden;
     margin: 1.5rem 0 0;
@@ -471,20 +471,20 @@
     grid-template-columns: 1fr auto;
     gap: 0.5rem 1.5rem;
     padding: 1rem 1.25rem;
-    background: #111113;
+    background: var(--si-bg-surface);
     align-items: start;
 }
 
 .si-form__review-item + .si-form__review-item {
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
 }
 
 .si-form__review-label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.62rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     margin-bottom: 0.2rem;
     display: block;
     grid-column: 1;
@@ -493,7 +493,7 @@
 
 .si-form__review-value {
     font-size: 0.9rem;
-    color: #F0EDE6;
+    color: var(--si-text-primary);
     line-height: 1.5;
     grid-column: 1;
     grid-row: 2;
@@ -505,11 +505,11 @@
     grid-row: 1 / 3;
     align-self: center;
     background: none;
-    border: 1px solid #2A2A2E;
+    border: 1px solid var(--si-border);
     border-radius: 5px;
-    color: #5C5A54;
+    color: var(--si-text-dim);
     cursor: pointer;
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.6rem;
     letter-spacing: 0.08em;
     padding: 0.3em 0.65em;
@@ -518,8 +518,8 @@
 }
 
 .si-form__review-edit:hover {
-    border-color: #D4A853;
-    color: #D4A853;
+    border-color: var(--si-accent-warm);
+    color: var(--si-accent-warm);
 }
 
 /* ── Success state ───────────────────────────────────────── */
@@ -531,7 +531,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #07070A;
+    background: var(--si-bg-deep);
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
@@ -548,7 +548,7 @@
     width: 80px;
     height: 80px;
     border-radius: 50%;
-    border: 2px solid #D4A853;
+    border: 2px solid var(--si-accent-warm);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -569,16 +569,16 @@
 }
 
 .si-form__success-heading {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.5rem, 4vw, 2.25rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 0.75rem;
 }
 
 .si-form__success-sub {
     font-size: 1rem;
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.7;
     max-width: 420px;
     margin: 0;
@@ -591,7 +591,7 @@
     text-align: center;
     margin-top: 0.75rem;
     min-height: 1.2em;
-    font-family: 'DM Sans', sans-serif;
+    font-family: var(--si-font-body);
 }
 
 /* ── Background decoration ───────────────────────────────── */

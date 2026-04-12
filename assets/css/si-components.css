@@ -16,12 +16,12 @@
 
 .si-scope .si-btn--primary {
     background: var(--si-accent-warm);
-    color: #0D0D0F;
+    color: var(--si-bg-deep);
 }
 
 .si-scope .si-btn--primary:hover {
     background: var(--si-accent-glow);
-    color: #0D0D0F;
+    color: var(--si-bg-deep);
     transform: translateY(-2px);
 }
 
@@ -84,27 +84,27 @@
 
 /* Label */
 .si-scope.si-section .si-section__label {
-    font-family: 'JetBrains Mono', monospace;
+    font-family: var(--si-font-mono);
     font-size: 0.68rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #D4A853;
+    color: var(--si-accent-warm);
     margin: 0 0 1rem;
 }
 
 /* Section title */
 .si-scope.si-section .si-section__title {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: clamp( 1.75rem, 4vw, 2.75rem );
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     margin: 0 0 2rem;
     line-height: 1.2;
 }
 
 /* Body text inside a section wrap */
 .si-scope.si-section .si-section__content p {
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.8;
     max-width: 72ch;
     margin: 0 0 1.25em;
@@ -118,9 +118,9 @@
 .si-scope.si-section .si-section__content h2,
 .si-scope.si-section .si-section__content h3,
 .si-scope.si-section .si-section__content h4 {
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-weight: 400;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.2;
     margin: 1.5em 0 0.5em;
 }
@@ -130,18 +130,18 @@
 .si-scope.si-section .si-section__content h4 { font-size: 1.1rem; }
 
 .si-scope.si-section .si-section__content a {
-    color: #D4A853;
+    color: var(--si-accent-warm);
     text-decoration: underline;
     text-underline-offset: 3px;
 }
 
 .si-scope.si-section .si-section__content a:hover {
-    color: #E8C675;
+    color: var(--si-accent-glow);
 }
 
 .si-scope.si-section .si-section__content ul,
 .si-scope.si-section .si-section__content ol {
-    color: #9B978E !important;
+    color: var(--si-text-secondary) !important;
     line-height: 1.8;
     padding-left: 1.5em;
     margin: 0 0 1.25em;
@@ -153,18 +153,18 @@
 
 /* Gold left-border pull quote */
 .si-scope.si-section .si-section__content blockquote {
-    border-left: 3px solid #D4A853;
+    border-left: 3px solid var(--si-accent-warm);
     margin: 2em 0;
     padding: 0.5em 1.5em;
-    font-family: 'Instrument Serif', Georgia, serif;
+    font-family: var(--si-font-display);
     font-size: 1.2em;
     font-style: italic;
-    color: #F0EDE6 !important;
+    color: var(--si-text-primary) !important;
 }
 
 /* Horizontal rule */
 .si-scope.si-section .si-section__content hr {
     border: none;
-    border-top: 1px solid #2A2A2E;
+    border-top: 1px solid var(--si-border);
     margin: 2.5em 0;
 }
