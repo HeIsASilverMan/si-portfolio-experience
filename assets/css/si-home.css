@@ -1000,20 +1000,28 @@ body {
     text-align: center;
 }
 
-.si-site-footer__brand { display: flex; flex-direction: column; align-items: center; gap: 0.5rem; }
+.si-site-footer__brand { display: flex; flex-direction: row; align-items: center; gap: 1rem; }
 
 .si-site-footer__mark {
-    width: 80px;
-    height: auto;
+    height: 28px;
+    width: auto;
+    flex-shrink: 0;
     color: var(--si-accent-warm);
     opacity: 0.35;
-    margin-bottom: 0.25rem;
+}
+
+.si-site-footer__brand-text {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+    text-align: left;
 }
 
 .si-site-footer__name {
     font-family: var(--si-font-display);
     font-size: 1.25rem;
     color: var(--si-text-primary);
+    line-height: 1.2;
 }
 
 .si-site-footer__roles {

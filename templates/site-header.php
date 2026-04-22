@@ -30,7 +30,11 @@ function si_nav_active( $slug, $active ) {
             <span></span><span></span><span></span>
         </button>
 
-        <nav class="si-nav" id="si-nav" role="navigation" aria-label="Primary navigation">
+    </div>
+
+</header>
+
+<nav class="si-nav" id="si-nav" role="navigation" aria-label="Primary navigation">
 
             <div class="si-nav__overlay-bg" aria-hidden="true">
                 <svg class="si-nav__swirl-canvas" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid slice">
@@ -95,7 +99,3 @@ function si_nav_active( $slug, $active ) {
             </div>
 
         </nav>
-
-    </div>
-
-</header>

@@ -217,17 +217,6 @@
                         autocomplete="email"
                     >
                 </div>
-                <div class="si-form__field">
-                    <label class="si-form__label" for="si-comp-phone"><?php esc_html_e( 'Phone (optional)', 'si-portfolio' ); ?></label>
-                    <input
-                        id="si-comp-phone"
-                        class="si-form__input"
-                        type="tel"
-                        name="contact_phone"
-                        placeholder="<?php esc_attr_e( '+44...', 'si-portfolio' ); ?>"
-                        autocomplete="tel"
-                    >
-                </div>
             </div>
             <div class="si-form__nav">
                 <button class="si-form__continue-btn" type="button">
