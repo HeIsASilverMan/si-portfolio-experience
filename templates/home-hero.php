@@ -101,7 +101,7 @@ $tagline = si_setting(
                 </svg>
             </a>
             <a href="/tools" class="si-btn si-btn--outline">
-                <?php esc_html_e( 'Tools I Use', 'si-portfolio' ); ?>
+                <?php esc_html_e( 'Tools', 'si-portfolio' ); ?>
             </a>
         </div>
 
