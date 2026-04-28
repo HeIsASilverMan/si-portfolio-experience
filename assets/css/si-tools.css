@@ -1,0 +1,82 @@
+/* =============================================================
+   SI TOOLS GRID
+   Extends si-learning-design.css with category layout and
+   enhanced card styling for the /tools page.
+   ============================================================= */
+
+/* -- Intro line --------------------------------------------- */
+
+.si-scope .si-tools-grid__intro {
+    font-size: 1rem;
+    color: var(--si-text-secondary);
+    line-height: 1.7;
+    margin: -1rem 0 3rem;
+    max-width: 55ch;
+}
+
+/* -- Category layout ---------------------------------------- */
+
+.si-scope .si-tools-grid__categories {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+}
+
+.si-scope .si-tools-grid__category-label {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--si-accent-warm);
+    margin: 0 0 1rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--si-border);
+}
+
+/* -- Enhanced tool cards ------------------------------------ */
+
+.si-scope .si-tools-grid__list {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 0.625rem;
+}
+
+.si-scope .si-tool-item {
+    border-left: 3px solid color-mix(in srgb, var(--tool-color, var(--si-accent-warm)) 55%, transparent);
+    padding: 0.875rem 1.125rem;
+    transition:
+        border-color var(--si-dur-fast) var(--si-ease-out),
+        background var(--si-dur-fast) var(--si-ease-out),
+        transform var(--si-dur-fast) var(--si-ease-out),
+        box-shadow var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-tool-item:hover {
+    border-color: color-mix(in srgb, var(--tool-color, var(--si-accent-warm)) 50%, transparent);
+    border-left-color: var(--tool-color, var(--si-accent-warm));
+    background: color-mix(in srgb, var(--tool-color, var(--si-accent-warm)) 6%, var(--si-bg-surface));
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.28);
+}
+
+.si-scope .si-tool-item__badge {
+    width: 52px;
+    height: 52px;
+}
+
+.si-scope .si-tool-item:hover .si-tool-item__badge {
+    transform: scale(1.1);
+    box-shadow: 0 0 14px color-mix(in srgb, var(--tool-color, var(--si-accent-warm)) 35%, transparent);
+}
+
+/* -- Responsive --------------------------------------------- */
+
+@media (max-width: 680px) {
+    .si-scope .si-tools-grid__categories {
+        gap: 2rem;
+    }
+
+    .si-scope .si-tools-grid__intro {
+        margin-bottom: 2rem;
+    }
+}
