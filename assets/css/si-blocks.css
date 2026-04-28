@@ -7,6 +7,112 @@
    back to a readable column.
    ============================================================ */
 
+/* ── Prose pages (privacy policy, terms, tools, etc.) ──────
+   body.si-prose-page is added by the plugin when the page has
+   no si_ shortcodes, so these rules only apply to plain-text
+   WP pages regardless of what wrapper classes the theme uses.
+   ─────────────────────────────────────────────────────────── */
+body.si-prose-page {
+    background: var(--si-bg-deep) !important;
+    color: var(--si-text-secondary) !important;
+    font-family: var(--si-font-body) !important;
+}
+
+/* Push below fixed plugin header */
+body.si-prose-page main,
+body.si-prose-page #main,
+body.si-prose-page .site-main,
+body.si-prose-page #primary,
+body.si-prose-page .entry-content,
+body.si-prose-page .page-content,
+body.si-prose-page .wp-block-post-content {
+    background: var(--si-bg-deep) !important;
+    padding-top: 100px !important;
+    padding-bottom: 4rem !important;
+}
+
+/* Reading column: every direct child of ANY content wrapper */
+body.si-prose-page main > *,
+body.si-prose-page #main > *,
+body.si-prose-page .site-main > *,
+body.si-prose-page article > *,
+body.si-prose-page .entry-content > *,
+body.si-prose-page .page-content > *,
+body.si-prose-page .wp-block-post-content > * {
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+    color: var(--si-text-secondary) !important;
+    font-family: var(--si-font-body) !important;
+    font-size: 1rem !important;
+    line-height: 1.75 !important;
+}
+
+/* Headings */
+body.si-prose-page h1,
+body.si-prose-page h2,
+body.si-prose-page h3,
+body.si-prose-page h4,
+body.si-prose-page h5,
+body.si-prose-page h6,
+body.si-prose-page .entry-title,
+body.si-prose-page .page-title,
+body.si-prose-page .wp-block-post-title {
+    font-family: var(--si-font-display) !important;
+    color: var(--si-text-primary) !important;
+    line-height: 1.2 !important;
+    margin-top: 1.75em !important;
+    margin-bottom: 0.5em !important;
+    max-width: 760px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    box-sizing: border-box !important;
+}
+
+body.si-prose-page h1 { font-size: clamp(2rem, 5vw, 3rem) !important; }
+body.si-prose-page h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem) !important; }
+body.si-prose-page h3 { font-size: clamp(1.2rem, 2.5vw, 1.6rem) !important; }
+body.si-prose-page h4 { font-size: 1.1rem !important; }
+
+/* Links */
+body.si-prose-page a {
+    color: var(--si-accent-warm) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+}
+body.si-prose-page a:hover {
+    color: var(--si-accent-glow) !important;
+}
+
+/* Lists */
+body.si-prose-page ul,
+body.si-prose-page ol {
+    padding-left: 2rem !important;
+}
+body.si-prose-page li {
+    margin-bottom: 0.4em !important;
+    line-height: 1.7 !important;
+}
+body.si-prose-page ul li::marker {
+    color: var(--si-accent-warm) !important;
+}
+
+/* Don't constrain the plugin header/footer on prose pages */
+body.si-prose-page .si-site-header,
+body.si-prose-page .si-site-footer,
+body.si-prose-page .si-nav {
+    max-width: none !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 /* ── Page-level dark background ────────────────────────── */
 body,
 body.page,

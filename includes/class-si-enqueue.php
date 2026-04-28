@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 class SI_Enqueue {
 
     public static function init() {
-        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ) );
+        add_action( 'wp_enqueue_scripts', array( __CLASS__, 'enqueue' ), 100 );
         add_action( 'wp_footer',          array( __CLASS__, 'preloader' ) );
     }
 

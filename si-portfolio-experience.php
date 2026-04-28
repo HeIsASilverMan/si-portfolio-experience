@@ -3,7 +3,7 @@
  * Plugin Name:       SI Portfolio Experience
  * Plugin URI:        https://shaneivers.com
  * Description:       Bespoke portfolio plugin for Shane Ivers - composer and learning designer.
- * Version:           1.9.2
+ * Version:           1.9.3
  * Author:            Shane Ivers
  * Author URI:        https://shaneivers.com
  * Text Domain:       si-portfolio
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SI_VERSION',    '1.9.2' );
+define( 'SI_VERSION',    '1.9.3' );
 define( 'SI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -32,18 +32,66 @@ function si_boot() {
 }
 add_action( 'plugins_loaded', 'si_boot' );
 
+/* ── Header ─────────────────────────────────────────────────
+   Renders once per page via whichever hook fires first:
+   wp_body_open  → fires on ALL pages in modern themes
+   si_header     → theme-specific action kept for back-compat
+   ─────────────────────────────────────────────────────────── */
 function si_render_header() {
+    if ( ! empty( $GLOBALS['si_header_rendered'] ) ) {
+        return;
+    }
+    $GLOBALS['si_header_rendered'] = true;
     $file = SI_PLUGIN_DIR . 'templates/site-header.php';
     if ( file_exists( $file ) ) {
         include $file;
     }
 }
-add_action( 'si_header', 'si_render_header' );
+add_action( 'wp_body_open', 'si_render_header', 5 );
+add_action( 'si_header',    'si_render_header' );
 
+/* ── Footer ──────────────────────────────────────────────── */
 function si_render_footer() {
+    if ( ! empty( $GLOBALS['si_footer_rendered'] ) ) {
+        return;
+    }
+    $GLOBALS['si_footer_rendered'] = true;
     $file = SI_PLUGIN_DIR . 'templates/site-footer.php';
     if ( file_exists( $file ) ) {
         include $file;
     }
 }
+add_action( 'wp_footer', 'si_render_footer', 5 );
 add_action( 'si_footer', 'si_render_footer' );
+
+/* ── Body class for prose (non-shortcode) pages ──────────── */
+function si_body_classes( $classes ) {
+    if ( is_admin() ) {
+        return $classes;
+    }
+    global $post;
+    if ( ! $post ) {
+        $classes[] = 'si-prose-page';
+        return $classes;
+    }
+    $si_shortcodes = array(
+        'si_home_hero', 'si_marquee', 'si_dual_showcase', 'si_testimonials',
+        'si_cta_band', 'si_composition_hero', 'si_benefits_list',
+        'si_process_timeline', 'si_audio_showcase', 'si_portfolio_grid',
+        'si_approach_cards', 'si_tools_grid', 'si_awards',
+        'si_education_timeline', 'si_ld_hero', 'si_about_story', 'si_connect',
+        'si_form_composition', 'si_form_learning_design',
+    );
+    $is_prose = true;
+    foreach ( $si_shortcodes as $code ) {
+        if ( has_shortcode( $post->post_content, $code ) ) {
+            $is_prose = false;
+            break;
+        }
+    }
+    if ( $is_prose ) {
+        $classes[] = 'si-prose-page';
+    }
+    return $classes;
+}
+add_filter( 'body_class', 'si_body_classes' );
