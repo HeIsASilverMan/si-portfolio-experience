@@ -23,7 +23,7 @@ body:not(.home) .page-content,
 body:not(.home) #primary,
 body:not(.home) .site-main,
 body:not(.home) main {
-    padding-top: 80px;
+    padding-top: 80px !important;
 }
 
 /* Only add header padding once — prevent stacking */
@@ -86,7 +86,23 @@ article {
 /* Content area bottom padding for breathing room */
 .entry-content,
 .page-content {
-    padding-bottom: 4rem;
+    padding-bottom: 4rem !important;
+}
+
+/* Page/post title — sits outside .entry-content in most themes */
+.entry-title,
+.page-title {
+    font-family: var(--si-font-display);
+    color: var(--si-text-primary) !important;
+    font-size: clamp(2rem, 5vw, 3rem);
+    line-height: 1.15;
+    margin: 0 0 1.25em !important;
+    max-width: 820px;
+    margin-left: auto !important;
+    margin-right: auto !important;
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
