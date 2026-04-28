@@ -90,18 +90,27 @@ $tagline = si_setting(
         <div class="si-home-hero__actions">
             <a href="/composition" class="si-btn si-btn--primary si-btn--magnetic">
                 <?php echo esc_html( si_setting( 'home_btn_primary', 'Hear the Work' ) ); ?>
+                <!-- quaver / eighth note -->
                 <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 2v7.27A2.5 2.5 0 1 1 8 7V2h2z" fill="currentColor"/>
+                    <rect x="10" y="2" width="4" height="1.5" rx="0.5" fill="currentColor"/>
                 </svg>
             </a>
             <a href="/learning-design" class="si-btn si-btn--ghost">
                 <?php echo esc_html( si_setting( 'home_btn_secondary', 'See the Portfolio' ) ); ?>
+                <!-- lightbulb -->
                 <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                    <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M8 1a4.5 4.5 0 0 0-2 8.54V11h4V9.54A4.5 4.5 0 0 0 8 1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <path d="M6 11h4v1a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1v-1z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+                    <line x1="8" y1="3.5" x2="8" y2="4.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/>
                 </svg>
             </a>
             <a href="/tools" class="si-btn si-btn--outline">
-                <?php esc_html_e( 'Tools', 'si-portfolio' ); ?>
+                <?php esc_html_e( 'Use the Tools', 'si-portfolio' ); ?>
+                <!-- wrench -->
+                <svg class="si-btn__arrow" width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                    <path d="M11.5 2a3.5 3.5 0 0 0-3.36 4.47L2.5 12.1a1.41 1.41 0 1 0 2 2l5.62-5.65A3.5 3.5 0 0 0 11.5 2zm0 1.5a2 2 0 1 1 0 4 2 2 0 0 1 0-4z" fill="currentColor"/>
+                </svg>
             </a>
         </div>
 
