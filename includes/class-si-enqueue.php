@@ -77,6 +77,10 @@ class SI_Enqueue {
             'https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=DM+Sans:wght@400;500&family=JetBrains+Mono:wght@400&display=swap',
             array(), null );
 
+        wp_enqueue_style( 'font-awesome',
+            'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+            array(), null );
+
         wp_enqueue_style( 'si-variables',    $url . 'css/si-variables.css',    array(),                  $v );
         wp_enqueue_style( 'si-base',         $url . 'css/si-base.css',         array( 'si-variables' ),  $v );
         wp_enqueue_style( 'si-blocks',       $url . 'css/si-blocks.css',       array( 'si-base' ),       $v );

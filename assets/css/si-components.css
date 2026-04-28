@@ -1,4 +1,9 @@
 /* ---- Buttons ---- */
+.si-scope .si-btn i[class*="fa-"] {
+    font-size: 0.9em;
+    line-height: 1;
+}
+
 .si-scope .si-btn {
     display: inline-flex;
     align-items: center;

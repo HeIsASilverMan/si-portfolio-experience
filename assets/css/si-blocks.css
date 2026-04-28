@@ -8,66 +8,71 @@
    ============================================================ */
 
 /* ── Page-level dark background ────────────────────────── */
-/* Ensure the entire page canvas is dark, even standard WP pages */
 body,
 body.page,
 body.single,
 body.archive {
     background: var(--si-bg-deep) !important;
-    color: var(--si-text-primary);
+    color: var(--si-text-primary) !important;
+    font-family: var(--si-font-body) !important;
 }
 
-/* Push content below the fixed header */
+/* Push content below the fixed header — covers classic + block themes */
 body:not(.home) .entry-content,
 body:not(.home) .page-content,
 body:not(.home) #primary,
 body:not(.home) .site-main,
-body:not(.home) main {
+body:not(.home) main,
+body:not(.home) .wp-block-post-content,
+body:not(.home) .wp-site-blocks > main {
     padding-top: 80px !important;
 }
 
-/* Only add header padding once — prevent stacking */
+/* Prevent double padding on nested wrappers */
 body:not(.home) .entry-content .entry-content,
-body:not(.home) .page-content .page-content {
-    padding-top: 0;
+body:not(.home) .page-content .page-content,
+body:not(.home) .wp-block-post-content .wp-block-post-content {
+    padding-top: 0 !important;
 }
 
-/* Ensure the content wrapper area is dark */
+/* Dark canvas + readable text for all content wrappers */
 .entry-content,
 .page-content,
 #primary,
 .site-main,
 main,
-article {
+article,
+.wp-block-post-content,
+.wp-site-blocks {
     background: var(--si-bg-deep) !important;
-    color: var(--si-text-secondary);
-    font-family: var(--si-font-body);
+    color: var(--si-text-secondary) !important;
+    font-family: var(--si-font-body) !important;
 }
 
 /* ── Content column constraints ─────────────────────────── */
 
-/* Direct children of content area that are NOT plugin shortcodes
-   get a sensible reading width and horizontal centering */
+/* Direct children of content area that are NOT plugin shortcodes */
 .entry-content > *:not(.si-scope),
-.page-content > *:not(.si-scope) {
-    max-width: 820px;
+.page-content > *:not(.si-scope),
+.wp-block-post-content > *:not(.si-scope) {
+    max-width: 820px !important;
     margin-left: auto  !important;
     margin-right: auto !important;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    box-sizing: border-box;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box !important;
 }
 
 /* Also handle nested content areas from themes */
 .site-main > article > .entry-content > *:not(.si-scope),
 #content > .entry-content > *:not(.si-scope),
 .post-content > *:not(.si-scope) {
-    max-width: 820px;
+    max-width: 820px !important;
     margin-left: auto  !important;
     margin-right: auto !important;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    box-sizing: border-box;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box !important;
 }
 
 /* Wide alignment overrides */
@@ -91,27 +96,27 @@ article {
 
 /* Page/post title — sits outside .entry-content in most themes */
 .entry-title,
-.page-title {
-    font-family: var(--si-font-display);
+.page-title,
+.wp-block-post-title {
+    font-family: var(--si-font-display) !important;
     color: var(--si-text-primary) !important;
-    font-size: clamp(2rem, 5vw, 3rem);
-    line-height: 1.15;
-    margin: 0 0 1.25em !important;
-    max-width: 820px;
-    margin-left: auto !important;
-    margin-right: auto !important;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    box-sizing: border-box;
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    line-height: 1.15 !important;
+    max-width: 820px !important;
+    margin: 0 auto 1.25em !important;
+    padding-left: 2rem !important;
+    padding-right: 2rem !important;
+    box-sizing: border-box !important;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
 
 .entry-content p,
 .page-content  p,
+.wp-block-post-content p,
 .si-section__content p {
-    color: var(--si-text-secondary);
-    font-family: var(--si-font-body);
+    color: var(--si-text-secondary) !important;
+    font-family: var(--si-font-body) !important;
     font-size: 1rem;
     line-height: 1.75;
     margin: 0 0 1.25em;
@@ -121,10 +126,12 @@ article {
 .entry-content h4, .entry-content h5, .entry-content h6,
 .page-content  h1, .page-content  h2, .page-content  h3,
 .page-content  h4, .page-content  h5, .page-content  h6,
+.wp-block-post-content h1, .wp-block-post-content h2,
+.wp-block-post-content h3, .wp-block-post-content h4,
 .si-section__content h1, .si-section__content h2,
 .si-section__content h3, .si-section__content h4 {
-    font-family: var(--si-font-display);
-    color: var(--si-text-primary);
+    font-family: var(--si-font-display) !important;
+    color: var(--si-text-primary) !important;
     line-height: 1.2;
     margin: 1.75em 0 0.5em;
 }
@@ -136,8 +143,9 @@ article {
 
 .entry-content a,
 .page-content  a,
+.wp-block-post-content a,
 .si-section__content a {
-    color: var(--si-accent-warm);
+    color: var(--si-accent-warm) !important;
     text-decoration: underline;
     text-underline-offset: 3px;
     text-decoration-color: rgba(212,168,83,0.4);
