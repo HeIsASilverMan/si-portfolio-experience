@@ -13,13 +13,14 @@ main .si-scope {
     color: var(--si-text-primary) !important;
 }
 
+/* color: inherit !important needed to beat .entry-content a { color: ...!important } */
 .si-scope a,
 .entry-content .si-scope a,
 .page-content .si-scope a,
 .wp-block-post-content .si-scope a,
 main .si-scope a {
     text-decoration: none !important;
-    color: inherit;
+    color: inherit !important;
 }
 
 /* -- 2. Prose page links: gold, no underline ---------------- */
