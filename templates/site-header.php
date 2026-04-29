@@ -5,8 +5,8 @@ $si_active = '';
 if ( function_exists( 'is_page' ) ) {
     if ( is_page( 'composition' ) )     { $si_active = 'composition'; }
     elseif ( is_page( 'learning-design' ) ) { $si_active = 'learning-design'; }
-    elseif ( is_page( 'about' ) )       { $si_active = 'about'; }
     elseif ( is_page( 'tools' ) )       { $si_active = 'tools'; }
+    elseif ( is_page( 'about' ) )       { $si_active = 'about'; }
 }
 
 function si_nav_active( $slug, $active ) {
@@ -95,8 +95,8 @@ function si_nav_active( $slug, $active ) {
                 <ul class="si-nav__list" role="list">
                     <li><a href="/composition"    class="si-nav__link<?php echo si_nav_active( 'composition',      $si_active ); ?>">Composition</a></li>
                     <li><a href="/learning-design" class="si-nav__link<?php echo si_nav_active( 'learning-design', $si_active ); ?>">Learning Design</a></li>
-                    <li><a href="/about"           class="si-nav__link<?php echo si_nav_active( 'about',           $si_active ); ?>">About</a></li>
                     <li><a href="/tools"           class="si-nav__link<?php echo si_nav_active( 'tools',           $si_active ); ?>">Tools</a></li>
+                    <li><a href="/about"           class="si-nav__link<?php echo si_nav_active( 'about',           $si_active ); ?>">About</a></li>
                 </ul>
             </div>
 
