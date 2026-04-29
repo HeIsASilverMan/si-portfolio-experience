@@ -62,7 +62,7 @@ class SI_Enqueue {
                 setTimeout( done, 200 );
             } else {
                 window.addEventListener( 'load', function () { setTimeout( done, 200 ); } );
-                setTimeout( done, 2000 ); // hard cap
+                setTimeout( done, 2000 );
             }
         } )();
         </script>
@@ -81,19 +81,20 @@ class SI_Enqueue {
             'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
             array(), null );
 
-        wp_enqueue_style( 'si-variables',    $url . 'css/si-variables.css',    array(),                  $v );
-        wp_enqueue_style( 'si-base',         $url . 'css/si-base.css',         array( 'si-variables' ),  $v );
-        wp_enqueue_style( 'si-blocks',       $url . 'css/si-blocks.css',       array( 'si-base' ),       $v );
-        wp_enqueue_style( 'si-components',   $url . 'css/si-components.css',   array( 'si-base' ),       $v );
-        wp_enqueue_style( 'si-animations',   $url . 'css/si-animations.css',   array( 'si-base' ),       $v );
-        wp_enqueue_style( 'si-layout',       $url . 'css/si-layout.css',       array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-home',         $url . 'css/si-home.css',         array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-composition',      $url . 'css/si-composition.css',      array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-learning-design',  $url . 'css/si-learning-design.css',  array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-about',            $url . 'css/si-about.css',            array( 'si-components' ), $v );
-        wp_enqueue_style( 'si-forms',            $url . 'css/si-forms.css',            array( 'si-components' ), $v );
+        wp_enqueue_style( 'si-variables',        $url . 'css/si-variables.css',        array(),                                   $v );
+        wp_enqueue_style( 'si-base',             $url . 'css/si-base.css',             array( 'si-variables' ),                   $v );
+        wp_enqueue_style( 'si-blocks',           $url . 'css/si-blocks.css',           array( 'si-base' ),                        $v );
+        wp_enqueue_style( 'si-components',       $url . 'css/si-components.css',       array( 'si-base' ),                        $v );
+        wp_enqueue_style( 'si-animations',       $url . 'css/si-animations.css',       array( 'si-base' ),                        $v );
+        wp_enqueue_style( 'si-layout',           $url . 'css/si-layout.css',           array( 'si-components' ),                  $v );
+        wp_enqueue_style( 'si-home',             $url . 'css/si-home.css',             array( 'si-components' ),                  $v );
+        wp_enqueue_style( 'si-composition',      $url . 'css/si-composition.css',      array( 'si-components' ),                  $v );
+        wp_enqueue_style( 'si-learning-design',  $url . 'css/si-learning-design.css',  array( 'si-components' ),                  $v );
+        wp_enqueue_style( 'si-about',            $url . 'css/si-about.css',            array( 'si-components' ),                  $v );
+        wp_enqueue_style( 'si-forms',            $url . 'css/si-forms.css',            array( 'si-components' ),                  $v );
         wp_enqueue_style( 'si-fixes',            $url . 'css/si-fixes.css',            array( 'si-blocks', 'si-learning-design' ), $v );
         wp_enqueue_style( 'si-tools',            $url . 'css/si-tools.css',            array( 'si-fixes', 'si-learning-design' ), $v );
+        wp_enqueue_style( 'si-posts',            $url . 'css/si-posts.css',            array( 'si-components' ),                  $v );
 
         wp_enqueue_script( 'si-scroll-observer', $url . 'js/si-scroll-observer.js', array(), $v, true );
         wp_enqueue_script( 'si-counters',        $url . 'js/si-counters.js',        array(), $v, true );

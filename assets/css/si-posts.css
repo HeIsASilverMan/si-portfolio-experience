@@ -1,0 +1,162 @@
+/* =============================================================
+   SI POSTS LIST
+   Periodic-table card grid for [si_posts_list]
+   ============================================================= */
+
+.si-scope.si-posts-list {
+    background: var(--si-bg-deep);
+}
+
+.si-scope .si-posts-list__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 5rem 2rem;
+}
+
+.si-scope .si-posts-list__label {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--si-accent-warm);
+    margin: 0 0 0.75rem;
+}
+
+.si-scope .si-posts-list__heading {
+    font-family: var(--si-font-display);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 400;
+    color: var(--si-text-primary);
+    margin: 0 0 3rem;
+    line-height: 1.15;
+}
+
+.si-scope .si-posts-list__grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1rem;
+}
+
+.si-scope .si-post-card {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-left: 3px solid color-mix(in srgb, var(--post-color) 60%, transparent);
+    border-radius: var(--si-radius-md);
+    transition:
+        border-color var(--si-dur-fast) var(--si-ease-out),
+        background var(--si-dur-fast) var(--si-ease-out),
+        transform var(--si-dur-fast) var(--si-ease-out),
+        box-shadow var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-post-card:hover {
+    border-left-color: var(--post-color);
+    background: color-mix(in srgb, var(--post-color) 5%, var(--si-bg-surface));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+}
+
+.si-scope .si-post-card__link {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.125rem;
+    padding: 1.25rem;
+    text-decoration: none;
+    color: inherit;
+}
+
+.si-scope .si-post-card__badge {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    border-radius: var(--si-radius-sm);
+    background: color-mix(in srgb, var(--post-color) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--post-color) 30%, transparent);
+    color: var(--post-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition:
+        transform var(--si-dur-fast) var(--si-ease-out),
+        box-shadow var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-post-card:hover .si-post-card__badge {
+    transform: scale(1.06);
+    box-shadow: 0 0 16px color-mix(in srgb, var(--post-color) 30%, transparent);
+}
+
+.si-scope .si-post-card__num {
+    position: absolute;
+    top: 4px;
+    right: 5px;
+    font-family: var(--si-font-mono);
+    font-size: 0.55rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    opacity: 0.7;
+    line-height: 1;
+}
+
+.si-scope .si-post-card__abbr {
+    font-family: var(--si-font-mono);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    line-height: 1;
+}
+
+.si-scope .si-post-card__body {
+    flex: 1;
+    min-width: 0;
+}
+
+.si-scope .si-post-card__title {
+    font-family: var(--si-font-display);
+    font-size: 1.05rem;
+    font-weight: 400;
+    color: var(--si-text-primary);
+    margin: 0 0 0.4rem;
+    line-height: 1.3;
+}
+
+.si-scope .si-post-card__excerpt {
+    font-size: 0.82rem;
+    color: var(--si-text-secondary);
+    line-height: 1.55;
+    margin: 0 0 0.75rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.si-scope .si-post-card__cta {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--post-color);
+    opacity: 0.8;
+    transition: opacity var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-post-card:hover .si-post-card__cta {
+    opacity: 1;
+}
+
+.si-scope .si-posts-list__empty {
+    color: var(--si-text-secondary);
+}
+
+@media (max-width: 680px) {
+    .si-scope .si-posts-list__inner { padding: 3.5rem 1.25rem; }
+    .si-scope .si-posts-list__grid { grid-template-columns: 1fr; }
+}

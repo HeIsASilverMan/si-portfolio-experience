@@ -28,11 +28,12 @@ class SI_Shortcodes {
             // Phase 5
             'si_form_composition'        => 'form_composition',
             'si_form_learning_design'    => 'form_learning_design',
+            // Posts
+            'si_posts_list'         => 'posts_list',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
         }
-        // Wrapping shortcode registered separately (needs $content param)
         add_shortcode( 'si_section', array( __CLASS__, 'section_wrap' ) );
         add_shortcode( 'si_button',  array( __CLASS__, 'button' ) );
     }
@@ -50,7 +51,7 @@ class SI_Shortcodes {
         return ob_get_clean();
     }
 
-    /* ── Phase 1 ─────────────────────────────────────────── */
+    /* -- Phase 1 --------------------------------------------- */
 
     public static function home_hero( $atts ) {
         return self::render( 'home-hero' );
@@ -74,7 +75,7 @@ class SI_Shortcodes {
         return self::render( 'cta-band' );
     }
 
-    /* ── Phase 2 ─────────────────────────────────────────── */
+    /* -- Phase 2 --------------------------------------------- */
 
     public static function composition_hero( $atts ) {
         return self::render( 'composition-hero' );
@@ -92,7 +93,7 @@ class SI_Shortcodes {
         return self::render( 'audio-showcase' );
     }
 
-    /* ── Phase 3 ─────────────────────────────────────────── */
+    /* -- Phase 3 --------------------------------------------- */
 
     public static function portfolio_grid( $atts ) {
         $atts = shortcode_atts( array( 'type' => 'learning_design' ), $atts, 'si_portfolio_grid' );
@@ -115,7 +116,7 @@ class SI_Shortcodes {
         return self::render( 'education-timeline' );
     }
 
-    /* ── Phase 4 ─────────────────────────────────────────── */
+    /* -- Phase 4 --------------------------------------------- */
 
     public static function ld_hero( $atts ) {
         return self::render( 'ld-hero' );
@@ -129,7 +130,7 @@ class SI_Shortcodes {
         return self::render( 'connect' );
     }
 
-    /* ── Phase 5 ─────────────────────────────────────────── */
+    /* -- Phase 5 --------------------------------------------- */
 
     public static function form_composition( $atts ) {
         return self::render( 'form-composition' );
@@ -139,40 +140,45 @@ class SI_Shortcodes {
         return self::render( 'form-learning-design' );
     }
 
-    /* ── Utility: CTA button ────────────────────────────── */
+    /* -- Posts ----------------------------------------------- */
 
-    /**
-     * [si_button url="/page" text="Label" style="primary|ghost" size="normal|large"
-     *            align="left|center|right" target="_self|_blank" magnetic="true|false"]
-     */
+    public static function posts_list( $atts ) {
+        $atts = shortcode_atts( array(
+            'category' => '',
+            'count'    => 12,
+            'label'    => 'Free Tools',
+            'heading'  => 'Built to share',
+        ), $atts, 'si_posts_list' );
+        return self::render( 'posts-list', array( 'atts' => $atts ) );
+    }
+
+    /* -- Utility: CTA button --------------------------------- */
+
     public static function button( $atts ) {
         $atts = shortcode_atts(
             array(
                 'url'      => '#',
                 'text'     => 'Get in Touch',
-                'style'    => 'primary',   // primary | ghost
-                'size'     => 'normal',    // normal | large
-                'align'    => '',          // left | center | right — wraps in div when set
+                'style'    => 'primary',
+                'size'     => 'normal',
+                'align'    => '',
                 'target'   => '_self',
                 'magnetic' => 'false',
-                'icon'     => 'true',      // show arrow icon
+                'icon'     => 'true',
             ),
             $atts,
             'si_button'
         );
 
         $classes = array( 'si-btn' );
-
         if ( 'ghost' === $atts['style'] ) {
             $classes[] = 'si-btn--ghost';
         } else {
             $classes[] = 'si-btn--primary';
         }
-
         if ( 'large' === $atts['size'] ) {
             $classes[] = 'si-btn--large';
         }
-
         if ( 'true' === $atts['magnetic'] ) {
             $classes[] = 'si-btn--magnetic';
         }
@@ -203,7 +209,7 @@ class SI_Shortcodes {
         return '<span class="si-scope">' . $btn . '</span>';
     }
 
-    /* ── Utility: content wrapper ────────────────────────── */
+    /* -- Utility: content wrapper ---------------------------- */
 
     public static function section_wrap( $atts, $content = '' ) {
         $atts = shortcode_atts(
