@@ -1,17 +1,6 @@
 /* =============================================================
    SI FIXES
-   Targeted overrides that correct cascade conflicts introduced
-   when si-blocks.css broadened its selectors.
-
-   1. si-scope isolation: prevents underlined links and wrong
-      text colour bleeding into shortcode sections.
-
-   2. Prose page headings: the body.si-prose-page .entry-content > *
-      rule sits at specificity (0,2,1) with !important, which beats
-      body.si-prose-page h1 at (0,1,2). Using a descendant selector
-      (.entry-content h1) gives (0,2,2) -- wins everywhere, and also
-      catches headings nested inside wp-block-group containers where
-      the direct-child > selector would not match.
+   Targeted overrides correcting cascade conflicts from si-blocks.css.
    ============================================================= */
 
 /* -- 1. si-scope isolation ----------------------------------- */
@@ -33,7 +22,36 @@ main .si-scope a {
     color: inherit;
 }
 
-/* -- 2. Prose page headings: size, colour, font -------------- */
+/* -- 2. Prose page links: gold, no underline ---------------- */
+
+body.si-prose-page a {
+    color: var(--si-accent-warm) !important;
+    text-decoration: none !important;
+}
+
+body.si-prose-page a:hover {
+    color: var(--si-accent-glow) !important;
+    text-decoration: underline !important;
+    text-underline-offset: 3px !important;
+}
+
+/* -- 3. Buttons: dark text on gold background --------------- */
+
+.entry-content .wp-block-button__link,
+.page-content .wp-block-button__link,
+body.si-prose-page .wp-block-button__link {
+    color: var(--si-bg-deep) !important;
+    text-decoration: none !important;
+}
+
+.entry-content .wp-block-button.is-style-outline .wp-block-button__link,
+.page-content .wp-block-button.is-style-outline .wp-block-button__link,
+body.si-prose-page .wp-block-button.is-style-outline .wp-block-button__link {
+    color: var(--si-accent-warm) !important;
+    text-decoration: none !important;
+}
+
+/* -- 4. Prose page headings: size, colour, font -------------- */
 
 body.si-prose-page .entry-content h1,
 body.si-prose-page .page-content h1,
@@ -83,7 +101,7 @@ body.si-prose-page article h4 {
     margin-bottom: 0.4em !important;
 }
 
-/* -- 3. Standalone page/post title -------------------------- */
+/* -- 5. Standalone page title ------------------------------- */
 
 body.si-prose-page .entry-title,
 body.si-prose-page .page-title,
@@ -92,4 +110,5 @@ body.si-prose-page .wp-block-post-title {
     color: var(--si-text-primary) !important;
     font-family: var(--si-font-display) !important;
     line-height: 1.15 !important;
+    text-decoration: none !important;
 }
