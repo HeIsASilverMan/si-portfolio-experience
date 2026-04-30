@@ -2,7 +2,7 @@
 
 $_count    = isset( $atts['count'] )    ? absint( $atts['count'] )    : 12;
 $_category = isset( $atts['category'] ) ? sanitize_text_field( $atts['category'] ) : '';
-$_label    = isset( $atts['label'] )    ? sanitize_text_field( $atts['label'] )    : 'Free Tools';
+$_label    = isset( $atts['label'] )    ? sanitize_text_field( $atts['label'] )    : 'Handy bits and bobs';
 $_heading  = isset( $atts['heading'] )  ? sanitize_text_field( $atts['heading'] )  : 'Built to share';
 
 $_palette = array(
@@ -27,7 +27,7 @@ $_posts = new WP_Query( $_query_args );
     <div class="si-posts-list__inner">
 
         <div class="si-posts-list__header si-reveal">
-            <h1 class="si-about-story__headline wp-block-heading" si-reveal="" is-visible"="">Tools</h1>
+            <h1 class="si-tools__headline wp-block-heading" si-reveal="" is-visible"="">Tools</h1>
             <p class="si-posts-list__label"><?php echo esc_html( $_label ); ?></p>
             <h2 id="si-posts-list-heading" class="si-posts-list__heading"><?php echo esc_html( $_heading ); ?></h2>
         </div>
