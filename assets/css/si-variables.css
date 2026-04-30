@@ -2,6 +2,7 @@
     --si-bg-deep:        #0D0D0F;
     --si-bg-surface:     #161619;
     --si-bg-elevated:    #1E1E22;
+    --si-bg-light:        #f5f4ef;
     --si-accent-warm:    #D4A853;
     --si-accent-glow:    #E8C675;
     --si-text-primary:   #F0EDE6;
@@ -9,6 +10,12 @@
     --si-text-dim:       #5C5A54;
     --si-border:         #2A2A2E;
     --si-success:        #7EC89B;
+    --green:             #449E90;
+    --green-dark:        #2F6E64;
+    --purple:            #90449E;
+    --red:               #FF6060;
+    --yellow:            #FFCC00;
+    --blue:              #6060FF;
 
     --si-font-display: 'Instrument Serif', Georgia, serif;
     --si-font-body:    'DM Sans', system-ui, sans-serif;
