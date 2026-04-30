@@ -40,6 +40,7 @@
 .si-scope .si-btn--ghost:hover {
     border-color: var(--si-accent-warm);
     color: var(--si-accent-warm);
+    text-decoration: none;
 }
 
 .si-scope .si-btn--outline {
