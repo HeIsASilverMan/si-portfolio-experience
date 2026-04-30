@@ -63,7 +63,7 @@ body {
     .steps li {
       counter-increment: steps;
       display: flex;
-      color: var(--text-light);
+      color: var(--si-text-primary);
       gap: 1rem;
       align-items: flex-start;
       font-size: 15px;
@@ -125,15 +125,15 @@ body {
   }
 
   .tool-card {
-    background: var(--white);
-    border-radius: var(--radius);
+    background: var(--si-bg-light);
+    border-radius: var(--si-radius-sm);
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
     padding: 2rem;
     margin-bottom: 3rem;
   }
 
   .section p {
-    color: var(--text-light);
+    color: var(--si-text-primary);
   }
 
   .btn {
@@ -141,7 +141,7 @@ body {
     background: var(--green);
     color: white;
     border: none;
-    border-radius: var(--radius);
+    border-radius: var(--si-radius-sm);
     padding: 0.7rem 1.4rem;
     font-family: inherit;
     font-size: 0.95rem;
@@ -162,7 +162,7 @@ body {
     text-align: center;
     padding: 2rem 1.5rem 3rem;
     font-size: 13px;
-    color: var(--text-muted);
+    color: var(--si-text-dim);
     font-weight: 300;
     max-width: 760px;
     margin: 0 auto;
