@@ -14,7 +14,7 @@
    ─────────────────────────────────────────────────────────── */
 body.si-prose-page {
     background: var(--si-bg-deep);
-    color: var(--si-text-secondary);
+    color: var(--si-text-primary);
     font-family: var(--si-font-body);
 }
 
@@ -45,7 +45,7 @@ body.si-prose-page .wp-block-post-content > * {
     padding-left: 1.5rem;
     padding-right: 1.5rem;
     box-sizing: border-box;
-    color: var(--si-text-secondary);
+    color: var(--si-text-primary);
     font-family: var(--si-font-body);
     font-size: 1rem;
     line-height: 1.75;
