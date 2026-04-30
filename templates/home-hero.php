@@ -96,7 +96,7 @@ $tagline = si_setting(
                 <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>
                 <?php echo esc_html( si_setting( 'home_btn_secondary', 'See the Portfolio' ) ); ?>
             </a>
-            <a href="/tools" class="si-btn si-btn--outline">
+            <a href="/toolbox" class="si-btn si-btn--outline">
                 <i class="fa-solid fa-wrench" aria-hidden="true"></i>
                 <?php esc_html_e( 'Use the Tools', 'si-portfolio' ); ?>
             </a>
