@@ -27,6 +27,7 @@ $_posts = new WP_Query( $_query_args );
     <div class="si-posts-list__inner">
 
         <div class="si-posts-list__header si-reveal">
+            <h1 class="si-about-story__headline wp-block-heading" si-reveal="" is-visible"="">Tools</h1>
             <p class="si-posts-list__label"><?php echo esc_html( $_label ); ?></p>
             <h2 id="si-posts-list-heading" class="si-posts-list__heading"><?php echo esc_html( $_heading ); ?></h2>
         </div>
