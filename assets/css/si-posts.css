@@ -2,7 +2,15 @@
    SI POSTS LIST
    Periodic-table card grid for [si_posts_list]
    ============================================================= */
-
+.si-tools__headline {
+    font-family: var(--si-font-display);
+    font-size: clamp(2.75rem, 7vw, 5.5rem);
+    font-weight: 400;
+    color: var(--si-text-primary) !important;
+    line-height: 1.08;
+    margin: 0;
+    letter-spacing: -0.02em;
+}
 .si-scope.si-posts-list {
     background: var(--si-bg-deep);
 }
