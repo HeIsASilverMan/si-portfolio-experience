@@ -30,6 +30,8 @@ class SI_Shortcodes {
             'si_form_learning_design'    => 'form_learning_design',
             // Posts
             'si_posts_list'         => 'posts_list',
+            // Interactive CV
+            'si_interactive_cv'     => 'interactive_cv',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -150,6 +152,12 @@ class SI_Shortcodes {
             'heading'  => 'Built to share',
         ), $atts, 'si_posts_list' );
         return self::render( 'posts-list', array( 'atts' => $atts ) );
+    }
+
+    /* -- Interactive CV -------------------------------------- */
+
+    public static function interactive_cv( $atts ) {
+        return self::render( 'interactive-cv' );
     }
 
     /* -- Utility: CTA button --------------------------------- */

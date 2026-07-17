@@ -74,6 +74,7 @@ function si_body_classes( $classes ) {
         'si_approach_cards', 'si_tools_grid', 'si_awards',
         'si_education_timeline', 'si_ld_hero', 'si_about_story', 'si_connect',
         'si_form_composition', 'si_form_learning_design', 'si_posts_list',
+        'si_interactive_cv',
     );
     $is_prose = true;
     foreach ( $si_shortcodes as $code ) {

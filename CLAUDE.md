@@ -102,3 +102,4 @@ si-portfolio-experience/
 | `[si_connect]` | connect.php | Phase 4 |
 | `[si_form_composition]` | form-composition.php | Phase 5 |
 | `[si_form_learning_design]` | form-learning-design.php | Phase 5 |
+| `[si_interactive_cv]` | interactive-cv.php | Done |
