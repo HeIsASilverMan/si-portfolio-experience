@@ -32,6 +32,8 @@ class SI_Shortcodes {
             'si_posts_list'         => 'posts_list',
             // Interactive CV
             'si_interactive_cv'     => 'interactive_cv',
+            // Pricing estimator
+            'si_pricing_estimator'  => 'pricing_estimator',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -158,6 +160,12 @@ class SI_Shortcodes {
 
     public static function interactive_cv( $atts ) {
         return self::render( 'interactive-cv' );
+    }
+
+    /* -- Pricing Estimator ------------------------------------ */
+
+    public static function pricing_estimator( $atts ) {
+        return self::render( 'pricing-estimator' );
     }
 
     /* -- Utility: CTA button --------------------------------- */

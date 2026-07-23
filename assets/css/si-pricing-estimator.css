@@ -1,0 +1,583 @@
+/* ============================================================
+   SI PRICING ESTIMATOR — [si_pricing_estimator]
+   "Build Sheet" — blueprint / technical-drawing aesthetic,
+   restyled onto the SI Studio Warmth token set.
+   ============================================================ */
+
+.si-scope .si-pricing {
+    position: relative;
+    padding: clamp(3rem, 6vw, 6rem) 1.25rem;
+    background: var(--si-bg-deep);
+    overflow: hidden;
+}
+
+.si-scope .si-pricing__bg {
+    position: absolute;
+    inset: 0;
+    background-image:
+        linear-gradient(var(--si-border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--si-border) 1px, transparent 1px);
+    background-size: 32px 32px;
+    opacity: 0.4;
+    mask-image: radial-gradient(ellipse at center, #000 55%, transparent 100%);
+}
+
+.si-scope .si-pricing__inner {
+    position: relative;
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+/* ---- Header ---- */
+
+.si-scope .si-pricing__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+}
+
+.si-scope .si-pricing__eyebrow {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--si-accent-warm);
+    margin: 0 0 0.4rem;
+}
+
+.si-scope .si-pricing__title {
+    font-family: var(--si-font-display);
+    font-weight: 400;
+    font-size: clamp(2rem, 5vw, 2.75rem);
+    color: var(--si-text-primary);
+    margin: 0;
+}
+
+.si-scope .si-pricing__studio {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    color: var(--si-text-secondary);
+    text-align: right;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+}
+
+.si-scope .si-pricing__intro {
+    color: var(--si-text-secondary);
+    max-width: 560px;
+    font-size: 0.9rem;
+    line-height: 1.7;
+    margin: 0 0 2rem;
+}
+
+.si-scope .si-pricing__empty-notice {
+    color: var(--si-text-secondary);
+    border: 1px dashed var(--si-border);
+    border-radius: var(--si-radius-md);
+    padding: 1.5rem;
+    font-size: 0.9rem;
+}
+
+/* ---- Complexity slider ---- */
+
+.si-scope .si-pricing__complexity {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-md);
+    padding: 1.5rem 1.5rem 1.75rem;
+    margin-bottom: 1.5rem;
+}
+
+.si-scope .si-pricing__complexity-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+}
+
+.si-scope .si-pricing__complexity-label {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--si-text-secondary);
+}
+
+.si-scope .si-pricing__complexity-tier {
+    font-family: var(--si-font-display);
+    font-size: 1.25rem;
+    color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__dim-line {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0.5rem 0;
+}
+
+.si-scope .si-pricing__tick {
+    width: 6px;
+    height: 6px;
+    background: var(--si-accent-warm);
+    transform: rotate(45deg);
+    flex-shrink: 0;
+}
+
+.si-scope .si-pricing__rule {
+    flex: 1;
+    border-top: 1px solid var(--si-accent-warm);
+    opacity: 0.5;
+}
+
+.si-scope .si-pricing__slider {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 4px;
+    border-radius: 999px;
+    background: var(--si-border);
+    outline-offset: 4px;
+    margin: 0.75rem 0 0.5rem;
+}
+
+.si-scope .si-pricing__slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--si-accent-warm);
+    border: 3px solid var(--si-bg-deep);
+    box-shadow: 0 0 0 1px var(--si-accent-warm);
+    cursor: pointer;
+    transition: transform var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.si-scope .si-pricing__slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: var(--si-accent-warm);
+    border: 3px solid var(--si-bg-deep);
+    box-shadow: 0 0 0 1px var(--si-accent-warm);
+    cursor: pointer;
+}
+
+.si-scope .si-pricing__complexity-scale {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--si-font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.02em;
+    color: var(--si-text-dim);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    gap: 0.5rem;
+}
+
+.si-scope .si-pricing__complexity-scale span {
+    flex: 1;
+    text-align: center;
+}
+
+.si-scope .si-pricing__complexity-scale span:first-child { text-align: left; }
+.si-scope .si-pricing__complexity-scale span:last-child  { text-align: right; }
+
+.si-scope .si-pricing__complexity-desc {
+    color: var(--si-text-secondary);
+    font-size: 0.85rem;
+    line-height: 1.6;
+    margin: 0;
+    min-height: 2.6em;
+}
+
+/* ---- Layout grid ---- */
+
+.si-scope .si-pricing__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+}
+
+@media (min-width: 1024px) {
+    .si-scope .si-pricing__grid {
+        grid-template-columns: 1fr 340px;
+        align-items: start;
+    }
+}
+
+.si-scope .si-pricing__services {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* ---- Service cards (JS-rendered) ---- */
+
+.si-scope .si-pricing__card {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-md);
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    transition: border-color var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__card--active {
+    border-color: rgba(212, 168, 83, 0.4);
+}
+
+.si-scope .si-pricing__card-icon {
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-sm);
+    padding: 0.5rem;
+    color: var(--si-text-secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    transition: all var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__card--active .si-pricing__card-icon {
+    border-color: var(--si-accent-warm);
+    color: var(--si-accent-warm);
+    background: rgba(212, 168, 83, 0.12);
+}
+
+.si-scope .si-pricing__card-info {
+    flex: 1;
+    min-width: 180px;
+}
+
+.si-scope .si-pricing__card-name {
+    font-family: var(--si-font-body);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--si-text-primary);
+}
+
+.si-scope .si-pricing__card-desc {
+    color: var(--si-text-secondary);
+    font-size: 0.78rem;
+    margin-top: 2px;
+}
+
+.si-scope .si-pricing__card-rate {
+    font-family: var(--si-font-mono);
+    color: var(--si-accent-warm);
+    font-size: 0.78rem;
+    margin-top: 6px;
+}
+
+.si-scope .si-pricing__stepper {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.si-scope .si-pricing__stepper-btn {
+    border: 1px solid var(--si-border);
+    background: transparent;
+    color: var(--si-text-primary);
+    border-radius: var(--si-radius-sm);
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 1.1rem;
+    line-height: 1;
+    transition: border-color var(--si-dur-fast) var(--si-ease-out), color var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__stepper-btn:hover,
+.si-scope .si-pricing__stepper-btn:focus-visible {
+    border-color: var(--si-accent-warm);
+    color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__stepper-qty {
+    font-family: var(--si-font-mono);
+    width: 40px;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--si-text-primary);
+}
+
+.si-scope .si-pricing__include-btn {
+    border: 1px solid var(--si-accent-warm);
+    background: transparent;
+    color: var(--si-accent-warm);
+    border-radius: var(--si-radius-sm);
+    padding: 0.6rem 1rem;
+    font-family: var(--si-font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__include-btn--on {
+    background: var(--si-accent-warm);
+    color: var(--si-bg-deep);
+}
+
+/* ---- Retainer toggle ---- */
+
+.si-scope .si-pricing__retainer {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-md);
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
+    text-align: left;
+    width: 100%;
+    font-family: inherit;
+    transition: border-color var(--si-dur-fast) var(--si-ease-out), background var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__retainer--on {
+    background: rgba(212, 168, 83, 0.08);
+    border-color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__retainer-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--si-text-primary);
+}
+
+.si-scope .si-pricing__retainer-desc {
+    color: var(--si-text-secondary);
+    font-size: 0.78rem;
+    margin-top: 2px;
+}
+
+.si-scope .si-pricing__switch {
+    width: 38px;
+    height: 22px;
+    border-radius: 999px;
+    border: 1px solid var(--si-text-dim);
+    position: relative;
+    flex-shrink: 0;
+    transition: border-color var(--si-dur-fast) var(--si-ease-out), background var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__switch--on {
+    background: var(--si-accent-warm);
+    border-color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__switch-knob {
+    width: 16px;
+    height: 16px;
+    border-radius: 999px;
+    background: var(--si-text-dim);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: left var(--si-dur-fast) var(--si-ease-out), background var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__switch--on .si-pricing__switch-knob {
+    background: var(--si-bg-deep);
+    left: 18px;
+}
+
+/* ---- Summary panel ---- */
+
+.si-scope .si-pricing__summary-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.si-scope .si-pricing__panel {
+    background: var(--si-bg-surface);
+    border: 1px solid var(--si-border);
+    border-radius: var(--si-radius-md);
+    padding: 1.5rem;
+    position: sticky;
+    top: 20px;
+}
+
+.si-scope .si-pricing__panel-title {
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--si-text-secondary);
+    margin: 0 0 1rem;
+}
+
+.si-scope .si-pricing__empty-lines {
+    color: var(--si-text-secondary);
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 1.5rem 0;
+}
+
+.si-scope .si-pricing__line-item {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5rem;
+    font-size: 0.78rem;
+    margin-bottom: 0.5rem;
+}
+
+.si-scope .si-pricing__line-item span:first-child {
+    color: var(--si-text-secondary);
+}
+
+.si-scope .si-pricing__line-item span:last-child {
+    font-family: var(--si-font-mono);
+    color: var(--si-text-primary);
+    white-space: nowrap;
+}
+
+.si-scope .si-pricing__subtotal-block {
+    border-top: 1px dashed var(--si-border);
+    padding-top: 0.75rem;
+    margin-top: 0.25rem;
+}
+
+.si-scope .si-pricing__subtotal-row,
+.si-scope .si-pricing__discount-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.78rem;
+    margin-bottom: 0.4rem;
+    font-family: var(--si-font-mono);
+}
+
+.si-scope .si-pricing__subtotal-row span:first-child {
+    font-family: var(--si-font-body);
+    color: var(--si-text-secondary);
+}
+
+.si-scope .si-pricing__discount-row {
+    color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__total-wrap {
+    margin-top: 1.25rem;
+}
+
+.si-scope .si-pricing__total-block {
+    text-align: center;
+    padding: 0.5rem 0;
+}
+
+.si-scope .si-pricing__total-label {
+    display: block;
+    font-family: var(--si-font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--si-text-secondary);
+}
+
+.si-scope .si-pricing__total-amount {
+    display: block;
+    font-family: var(--si-font-display);
+    font-size: 2rem;
+    color: var(--si-accent-warm);
+}
+
+.si-scope .si-pricing__actions {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.25rem;
+}
+
+.si-scope .si-pricing__action-btn {
+    flex: 1;
+    border-radius: var(--si-radius-sm);
+    padding: 0.65rem;
+    font-family: var(--si-font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid var(--si-border);
+    background: transparent;
+    color: var(--si-text-primary);
+    transition: all var(--si-dur-fast) var(--si-ease-out);
+}
+
+.si-scope .si-pricing__action-btn:hover {
+    border-color: var(--si-accent-warm);
+    color: var(--si-accent-warm);
+    text-decoration: none;
+}
+
+.si-scope .si-pricing__action-btn--primary {
+    background: var(--si-accent-warm);
+    color: var(--si-bg-deep);
+    border-color: var(--si-accent-warm);
+    font-weight: 600;
+}
+
+.si-scope .si-pricing__action-btn--primary:hover {
+    background: var(--si-accent-glow);
+    border-color: var(--si-accent-glow);
+    color: var(--si-bg-deep);
+}
+
+.si-scope .si-pricing__action-btn:disabled,
+.si-scope .si-pricing__action-btn.is-disabled {
+    opacity: 0.45;
+    pointer-events: none;
+}
+
+.si-scope .si-pricing__note {
+    color: var(--si-text-dim);
+    font-size: 0.78rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    padding: 0 0.25rem;
+}
+
+/* ---- Reduced motion ---- */
+
+@media (prefers-reduced-motion: reduce) {
+    .si-scope .si-pricing__card,
+    .si-scope .si-pricing__card-icon,
+    .si-scope .si-pricing__stepper-btn,
+    .si-scope .si-pricing__include-btn,
+    .si-scope .si-pricing__retainer,
+    .si-scope .si-pricing__switch,
+    .si-scope .si-pricing__switch-knob,
+    .si-scope .si-pricing__action-btn,
+    .si-scope .si-pricing__slider::-webkit-slider-thumb {
+        transition: none;
+    }
+}

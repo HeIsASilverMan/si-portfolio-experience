@@ -91,10 +91,26 @@ class SI_Admin {
             'cta_headline',       'cta_sub',       'cta_button_text',
             'about_tagline',      'connect_heading', 'connect_sub',
             'form_comp_success',  'form_ld_success',
+            'pricing_eyebrow',    'pricing_heading',
+            'pricing_studio_name', 'pricing_studio_sub',
+            'pricing_complexity_label',
+            'pricing_retainer_label', 'pricing_retainer_desc',
+            'pricing_email_subject',
         );
         foreach ( $text_fields as $f ) {
             $clean[ $f ] = isset( $input[ $f ] ) ? sanitize_text_field( $input[ $f ] ) : '';
         }
+
+        // Pricing estimator — textareas
+        $pricing_textareas = array( 'pricing_intro', 'pricing_note' );
+        foreach ( $pricing_textareas as $f ) {
+            $clean[ $f ] = isset( $input[ $f ] ) ? sanitize_textarea_field( $input[ $f ] ) : '';
+        }
+
+        // Pricing estimator — retainer discount percentage (0-100)
+        $clean['pricing_retainer_percent'] = isset( $input['pricing_retainer_percent'] )
+            ? max( 0, min( 100, floatval( $input['pricing_retainer_percent'] ) ) )
+            : '';
 
         // Marquee phrases — one per line, textarea
         if ( isset( $input['marquee_phrases'] ) ) {
@@ -292,6 +308,60 @@ class SI_Admin {
                     ); ?>
                 </div>
 
+                <!-- ── Pricing Estimator ─────────────────────────── -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Pricing Estimator', 'si-portfolio' ); ?></h2>
+                    <p class="si-hint" style="margin:-.5rem 0 1.25rem;">
+                        <?php esc_html_e( 'The individual services and complexity tiers are managed under Pricing Builder in the main admin menu. These fields control the surrounding copy.', 'si-portfolio' ); ?>
+                    </p>
+
+                    <?php self::field_text(
+                        $s, 'pricing_eyebrow', 'Eyebrow label',
+                        'SPEC · 01 / PROJECT ESTIMATOR'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_heading', 'Heading',
+                        'Build Sheet'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_studio_name', 'Studio name (top right)',
+                        'SHANE IVERS'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_studio_sub', 'Studio sub-line (top right)',
+                        'LEARNING EXPERIENCE DESIGN'
+                    ); ?>
+                    <?php self::field_textarea(
+                        $s, 'pricing_intro', 'Intro paragraph',
+                        'Select the scope of work below to generate an indicative estimate. Rates reflect senior-level instructional design and delivery — final quotes are confirmed after a short discovery call.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_complexity_label', 'Complexity slider label',
+                        'Project Complexity'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_retainer_label', 'Retainer toggle label',
+                        'Retainer client'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_retainer_desc', 'Retainer toggle description',
+                        'Ongoing engagement discount',
+                        'The discount percentage below is appended automatically, e.g. "Ongoing engagement discount — 12% off subtotal".'
+                    ); ?>
+                    <?php self::field_number(
+                        $s, 'pricing_retainer_percent', 'Retainer discount (%)',
+                        '12'
+                    ); ?>
+                    <?php self::field_textarea(
+                        $s, 'pricing_note', 'Disclaimer note',
+                        'Indicative only. Scope, timelines and final pricing are confirmed following a discovery call.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'pricing_email_subject', 'Email export subject line',
+                        'Project estimate — Learning Experience Design'
+                    ); ?>
+                </div>
+
                 <!-- ── Custom CSS ───────────────────────────────── -->
                 <div class="si-section">
                     <h2><?php esc_html_e( 'Custom CSS', 'si-portfolio' ); ?></h2>
@@ -351,6 +421,33 @@ class SI_Admin {
         echo '<input type="email" id="' . esc_attr( $id ) . '" name="' . esc_attr( self::OPTION_KEY . '[' . $key . ']' ) . '"'
             . ' value="' . esc_attr( $val ) . '"'
             . ' placeholder="' . esc_attr( $placeholder ) . '">';
+        if ( $hint ) {
+            echo '<span class="si-hint">' . esc_html( $hint ) . '</span>';
+        }
+        echo '</div>';
+    }
+
+    private static function field_number( $s, $key, $label, $placeholder = '', $hint = '' ) {
+        $id  = 'si_' . $key;
+        $val = isset( $s[ $key ] ) ? $s[ $key ] : '';
+        echo '<div class="si-row">';
+        echo '<label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
+        echo '<input type="number" step="0.1" min="0" max="100" id="' . esc_attr( $id ) . '" name="' . esc_attr( self::OPTION_KEY . '[' . $key . ']' ) . '"'
+            . ' value="' . esc_attr( $val ) . '"'
+            . ' placeholder="' . esc_attr( $placeholder ) . '" style="max-width:120px;">';
+        if ( $hint ) {
+            echo '<span class="si-hint">' . esc_html( $hint ) . '</span>';
+        }
+        echo '</div>';
+    }
+
+    private static function field_textarea( $s, $key, $label, $placeholder = '', $hint = '' ) {
+        $id  = 'si_' . $key;
+        $val = isset( $s[ $key ] ) ? $s[ $key ] : '';
+        echo '<div class="si-row">';
+        echo '<label for="' . esc_attr( $id ) . '">' . esc_html( $label ) . '</label>';
+        echo '<textarea id="' . esc_attr( $id ) . '" name="' . esc_attr( self::OPTION_KEY . '[' . $key . ']' ) . '"'
+            . ' style="width:100%;height:90px;" placeholder="' . esc_attr( $placeholder ) . '">' . esc_textarea( $val ) . '</textarea>';
         if ( $hint ) {
             echo '<span class="si-hint">' . esc_html( $hint ) . '</span>';
         }

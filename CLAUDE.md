@@ -103,3 +103,4 @@ si-portfolio-experience/
 | `[si_form_composition]` | form-composition.php | Phase 5 |
 | `[si_form_learning_design]` | form-learning-design.php | Phase 5 |
 | `[si_interactive_cv]` | interactive-cv.php | Done |
+| `[si_pricing_estimator]` | pricing-estimator.php | Done |
