@@ -59,7 +59,7 @@ $si_pricing_data = array(
         <?php if ( empty( $si_pricing_services ) ) : ?>
 
             <p class="si-pricing__empty-notice">
-                <?php esc_html_e( 'No pricing services have been added yet. Go to Pricing Builder in the WordPress admin menu to add your first service.', 'si-portfolio' ); ?>
+                <?php esc_html_e( 'No pricing services have been added yet. Go to Portfolio Projects > Pricing Services in the admin menu to add your first service.', 'si-portfolio' ); ?>
             </p>
 
         <?php else : ?>

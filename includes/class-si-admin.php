@@ -312,7 +312,7 @@ class SI_Admin {
                 <div class="si-section">
                     <h2><?php esc_html_e( 'Pricing Estimator', 'si-portfolio' ); ?></h2>
                     <p class="si-hint" style="margin:-.5rem 0 1.25rem;">
-                        <?php esc_html_e( 'The individual services and complexity tiers are managed under Pricing Builder in the main admin menu. These fields control the surrounding copy.', 'si-portfolio' ); ?>
+                        <?php esc_html_e( 'The individual services and complexity tiers are managed under Portfolio Projects > Pricing Services / Complexity Tiers in the admin menu. These fields control the surrounding copy.', 'si-portfolio' ); ?>
                     </p>
 
                     <?php self::field_text(

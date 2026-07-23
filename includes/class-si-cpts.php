@@ -108,15 +108,14 @@ class SI_CPTs {
             'singular_name' => 'Pricing Service',
             'add_new_item'  => 'Add New Service',
             'edit_item'     => 'Edit Service',
-            'all_items'     => 'Services',
-            'menu_name'     => 'Pricing Builder',
+            'all_items'     => 'Pricing Services',
+            'menu_name'     => 'Pricing Services',
         );
         register_post_type( 'si_pricing_service', array(
             'labels'       => $labels,
             'public'       => false,
             'show_ui'      => true,
-            'show_in_menu' => true,
-            'menu_icon'    => 'dashicons-calculator',
+            'show_in_menu' => 'edit.php?post_type=si_portfolio',
             'supports'     => array( 'title', 'page-attributes' ),
         ) );
     }
@@ -133,7 +132,7 @@ class SI_CPTs {
             'labels'       => $labels,
             'public'       => false,
             'show_ui'      => true,
-            'show_in_menu' => 'edit.php?post_type=si_pricing_service',
+            'show_in_menu' => 'edit.php?post_type=si_portfolio',
             'supports'     => array( 'title', 'page-attributes' ),
         ) );
     }
