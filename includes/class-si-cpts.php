@@ -480,18 +480,21 @@ class SI_CPTs {
     public static function render_pricing_service_meta_box( $post ) {
         wp_nonce_field( 'si_save_pricing_service', 'si_pricing_service_nonce' );
 
-        $rate      = get_post_meta( $post->ID, '_si_rate', true );
-        $unit      = get_post_meta( $post->ID, '_si_unit', true );
-        $desc      = get_post_meta( $post->ID, '_si_desc', true );
-        $icon      = get_post_meta( $post->ID, '_si_icon', true );
-        $step      = get_post_meta( $post->ID, '_si_step', true );
-        $max       = get_post_meta( $post->ID, '_si_max', true );
-        $is_fixed  = get_post_meta( $post->ID, '_si_fixed', true );
-        $scalable  = get_post_meta( $post->ID, '_si_scalable', true );
+        $rate         = get_post_meta( $post->ID, '_si_rate', true );
+        $unit         = get_post_meta( $post->ID, '_si_unit', true );
+        $desc         = get_post_meta( $post->ID, '_si_desc', true );
+        $icon         = get_post_meta( $post->ID, '_si_icon', true );
+        $step         = get_post_meta( $post->ID, '_si_step', true );
+        $max          = get_post_meta( $post->ID, '_si_max', true );
+        $is_fixed     = get_post_meta( $post->ID, '_si_fixed', true );
+        $scalable     = get_post_meta( $post->ID, '_si_scalable', true );
+        $duration     = get_post_meta( $post->ID, '_si_duration', true );
+        $minute_step  = get_post_meta( $post->ID, '_si_minute_step', true );
 
-        if ( '' === $step ) $step = '1';
-        if ( '' === $max )  $max  = '40';
-        if ( ! $icon )      $icon = 'general';
+        if ( '' === $step )        $step        = '1';
+        if ( '' === $max )         $max         = '40';
+        if ( '' === $minute_step ) $minute_step = '15';
+        if ( ! $icon )             $icon        = 'general';
 
         echo '<p style="color:#666;font-size:12px;margin-bottom:14px;">This becomes one selectable line item on the front-end Build Sheet. The title shown here is the service name.</p>';
 
@@ -510,10 +513,10 @@ class SI_CPTs {
 
         echo '<div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;">';
 
-        echo '<div style="flex:1;min-width:140px;"><p><strong>Step</strong> <span style="color:#666;font-weight:normal;">(quantity increment)</span></p>';
+        echo '<div style="flex:1;min-width:140px;"><p><strong>Step</strong> <span style="color:#666;font-weight:normal;">(quantity increment &mdash; ignored when duration mode is on)</span></p>';
         echo '<input type="number" step="0.5" min="0.5" name="si_step" value="' . esc_attr( $step ) . '" style="width:100%"></div>';
 
-        echo '<div style="flex:1;min-width:140px;"><p><strong>Max quantity</strong></p>';
+        echo '<div style="flex:1;min-width:140px;"><p><strong>Max quantity</strong> <span style="color:#666;font-weight:normal;">(max hours, in duration mode)</span></p>';
         echo '<input type="number" step="0.5" min="0" name="si_max" value="' . esc_attr( $max ) . '" style="width:100%"></div>';
 
         echo '<div style="flex:1;min-width:180px;"><p><strong>Icon</strong></p>';
@@ -529,6 +532,15 @@ class SI_CPTs {
         echo '<div style="margin-top:16px;">';
         echo '<label style="display:block;margin-bottom:8px;"><input type="checkbox" name="si_fixed" value="1" ' . checked( $is_fixed, '1', false ) . '> ';
         echo '<strong>Fixed-price item</strong> <span style="color:#666;">&mdash; shown as an Include toggle instead of a quantity stepper (e.g. a one-off audit)</span></label>';
+
+        echo '<label style="display:block;margin-bottom:8px;"><input type="checkbox" name="si_duration" value="1" ' . checked( $duration, '1', false ) . '> ';
+        echo '<strong>Quantity is a duration (hours &amp; minutes)</strong> <span style="color:#666;">&mdash; shown as separate hour / minute steppers instead of a decimal quantity, e.g. &ldquo;2h 30m&rdquo; rather than &ldquo;2.5&rdquo; (best for hourly services like Module Build)</span></label>';
+
+        echo '<div style="margin:0 0 8px 26px;">';
+        echo '<label><strong style="font-weight:600;">Minute increment</strong> ';
+        echo '<input type="number" min="1" max="59" step="1" name="si_minute_step" value="' . esc_attr( $minute_step ) . '" style="width:70px;margin-left:6px;">';
+        echo '</label> <span style="color:#666;font-size:12px;">controls the minutes +/&minus; step when duration mode is on, e.g. 15 or 30</span>';
+        echo '</div>';
 
         echo '<label style="display:block;"><input type="checkbox" name="si_scalable" value="1" ' . checked( $scalable, '1', false ) . '> ';
         echo '<strong>Scales with project complexity</strong> <span style="color:#666;">&mdash; the complexity slider multiplier applies to this line item (tick for build/development-type services)</span></label>';
@@ -679,8 +691,14 @@ class SI_CPTs {
                     update_post_meta( $post_id, '_si_icon', $icon );
                 }
             }
+            if ( isset( $_POST['si_minute_step'] ) ) {
+                $minute_step = (int) $_POST['si_minute_step'];
+                $minute_step = max( 1, min( 59, $minute_step ) );
+                update_post_meta( $post_id, '_si_minute_step', $minute_step );
+            }
             update_post_meta( $post_id, '_si_fixed',    isset( $_POST['si_fixed'] )    ? '1' : '' );
             update_post_meta( $post_id, '_si_scalable', isset( $_POST['si_scalable'] ) ? '1' : '' );
+            update_post_meta( $post_id, '_si_duration', isset( $_POST['si_duration'] ) ? '1' : '' );
         }
 
         // Pricing tier
@@ -718,15 +736,17 @@ class SI_CPTs {
                 'scale' => false,
             ),
             array(
-                'title' => 'Module Build',
-                'desc'  => 'Interactive e-learning development, priced per finished hour',
-                'rate'  => 2200,
-                'unit'  => 'finished hr',
-                'icon'  => 'build',
-                'step'  => 0.5,
-                'max'   => 20,
-                'fixed' => false,
-                'scale' => true,
+                'title'    => 'Module Build',
+                'desc'     => 'Interactive e-learning development, priced per finished hour',
+                'rate'     => 2200,
+                'unit'     => 'finished hr',
+                'icon'     => 'build',
+                'step'     => 0.5,
+                'max'      => 20,
+                'fixed'    => false,
+                'scale'    => true,
+                'duration' => true,
+                'minute_step' => 30,
             ),
             array(
                 'title' => 'Behaviour-Change Consulting',
@@ -771,14 +791,16 @@ class SI_CPTs {
                 'menu_order'  => $i,
             ) );
             if ( $post_id && ! is_wp_error( $post_id ) ) {
-                update_post_meta( $post_id, '_si_desc',      $svc['desc'] );
-                update_post_meta( $post_id, '_si_rate',      $svc['rate'] );
-                update_post_meta( $post_id, '_si_unit',      $svc['unit'] );
-                update_post_meta( $post_id, '_si_icon',      $svc['icon'] );
-                update_post_meta( $post_id, '_si_step',      $svc['step'] );
-                update_post_meta( $post_id, '_si_max',       $svc['max'] );
-                update_post_meta( $post_id, '_si_fixed',     $svc['fixed'] ? '1' : '' );
-                update_post_meta( $post_id, '_si_scalable',  $svc['scale'] ? '1' : '' );
+                update_post_meta( $post_id, '_si_desc',        $svc['desc'] );
+                update_post_meta( $post_id, '_si_rate',        $svc['rate'] );
+                update_post_meta( $post_id, '_si_unit',        $svc['unit'] );
+                update_post_meta( $post_id, '_si_icon',        $svc['icon'] );
+                update_post_meta( $post_id, '_si_step',        $svc['step'] );
+                update_post_meta( $post_id, '_si_max',         $svc['max'] );
+                update_post_meta( $post_id, '_si_fixed',       $svc['fixed'] ? '1' : '' );
+                update_post_meta( $post_id, '_si_scalable',    $svc['scale'] ? '1' : '' );
+                update_post_meta( $post_id, '_si_duration',    ! empty( $svc['duration'] ) ? '1' : '' );
+                update_post_meta( $post_id, '_si_minute_step', isset( $svc['minute_step'] ) ? $svc['minute_step'] : 15 );
             }
         }
 
@@ -852,6 +874,8 @@ class SI_CPTs {
                 'max'    => (float) ( get_post_meta( $post->ID, '_si_max', true ) ? get_post_meta( $post->ID, '_si_max', true ) : 40 ),
                 'fixed'  => (bool) get_post_meta( $post->ID, '_si_fixed', true ),
                 'scale'  => (bool) get_post_meta( $post->ID, '_si_scalable', true ),
+                'duration'   => (bool) get_post_meta( $post->ID, '_si_duration', true ),
+                'minuteStep' => (float) ( get_post_meta( $post->ID, '_si_minute_step', true ) ? get_post_meta( $post->ID, '_si_minute_step', true ) : 15 ),
             );
         }
         return $out;

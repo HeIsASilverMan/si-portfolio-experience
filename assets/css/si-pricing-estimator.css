@@ -294,6 +294,20 @@
     flex-shrink: 0;
 }
 
+.si-scope .si-pricing__duration {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+}
+
+.si-scope .si-pricing__duration-group {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .si-scope .si-pricing__stepper-btn {
     border: 1px solid var(--si-border);
     background: transparent;

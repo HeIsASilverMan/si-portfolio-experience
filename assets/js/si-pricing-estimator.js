@@ -51,10 +51,28 @@
         var tierLabelEl  = root.querySelector( '#si-pricing-tier-label' );
         var tierDescEl   = root.querySelector( '#si-pricing-tier-desc' );
 
-        var qty       = {};
-        services.forEach( function ( s ) { qty[ s.id ] = 0; } );
+        var qty             = {};
+        var durationMinutes = {};
+        services.forEach( function ( s ) {
+            qty[ s.id ] = 0;
+            durationMinutes[ s.id ] = 0;
+        } );
         var retainer  = false;
         var tierIndex = 0;
+
+        function effectiveQty( s ) {
+            return s.duration ? ( durationMinutes[ s.id ] || 0 ) / 60 : qty[ s.id ];
+        }
+
+        function formatDuration( totalMinutes ) {
+            var mins = Math.max( 0, Math.round( totalMinutes ) );
+            var h = Math.floor( mins / 60 );
+            var m = mins % 60;
+            var parts = [];
+            if ( h > 0 ) parts.push( h + 'h' );
+            if ( m > 0 || h === 0 ) parts.push( m + 'm' );
+            return parts.join( ' ' );
+        }
 
         if ( slider && tiers.length ) {
             updateTierDisplay( tiers[ 0 ] );
@@ -87,7 +105,7 @@
             servicesEl.innerHTML = '';
 
             services.forEach( function ( s ) {
-                var active = qty[ s.id ] > 0;
+                var active = effectiveQty( s ) > 0;
 
                 var card = document.createElement( 'div' );
                 card.className = 'si-pricing__card' + ( active ? ' si-pricing__card--active' : '' );
@@ -118,6 +136,29 @@
                         renderAll();
                     } );
                     card.appendChild( toggle );
+                } else if ( s.duration ) {
+                    var mins = durationMinutes[ s.id ] || 0;
+                    var hrs  = Math.floor( mins / 60 );
+                    var rem  = mins % 60;
+
+                    var duration = document.createElement( 'div' );
+                    duration.className = 'si-pricing__duration';
+
+                    duration.appendChild( buildDurationGroup(
+                        hrs + 'h',
+                        'Decrease ' + s.name + ' hours', 'Increase ' + s.name + ' hours',
+                        function () { adjustDuration( s, -60 ); },
+                        function () { adjustDuration( s, 60 ); }
+                    ) );
+
+                    duration.appendChild( buildDurationGroup(
+                        rem + 'm',
+                        'Decrease ' + s.name + ' minutes', 'Increase ' + s.name + ' minutes',
+                        function () { adjustDuration( s, -s.minuteStep ); },
+                        function () { adjustDuration( s, s.minuteStep ); }
+                    ) );
+
+                    card.appendChild( duration );
                 } else {
                     var stepper = document.createElement( 'div' );
                     stepper.className = 'si-pricing__stepper';
@@ -173,6 +214,42 @@
             servicesEl.appendChild( retainerBtn );
         }
 
+        function buildDurationGroup( valueText, decLabel, incLabel, onDec, onInc ) {
+            var group = document.createElement( 'div' );
+            group.className = 'si-pricing__duration-group';
+
+            var dec = document.createElement( 'button' );
+            dec.type = 'button';
+            dec.className = 'si-pricing__stepper-btn';
+            dec.textContent = '−';
+            dec.setAttribute( 'aria-label', decLabel );
+            dec.addEventListener( 'click', onDec );
+
+            var val = document.createElement( 'span' );
+            val.className = 'si-pricing__stepper-qty';
+            val.textContent = valueText;
+
+            var inc = document.createElement( 'button' );
+            inc.type = 'button';
+            inc.className = 'si-pricing__stepper-btn';
+            inc.textContent = '+';
+            inc.setAttribute( 'aria-label', incLabel );
+            inc.addEventListener( 'click', onInc );
+
+            group.appendChild( dec );
+            group.appendChild( val );
+            group.appendChild( inc );
+            return group;
+        }
+
+        function adjustDuration( s, deltaMinutes ) {
+            var totalMax = s.max * 60;
+            var cur = durationMinutes[ s.id ] || 0;
+            var next = Math.max( 0, Math.min( totalMax, cur + deltaMinutes ) );
+            durationMinutes[ s.id ] = next;
+            renderAll();
+        }
+
         function changeQty( s, dir ) {
             var val = qty[ s.id ] + dir * s.step;
             val = Math.max( 0, Math.min( s.max, val ) );
@@ -185,13 +262,16 @@
             return services
                 .map( function ( s ) {
                     var appliedRate = s.scale ? s.rate * mult : s.rate;
+                    var q = effectiveQty( s );
                     return {
                         id: s.id,
                         name: s.name,
                         unit: s.unit,
                         fixed: s.fixed,
-                        qty: qty[ s.id ],
-                        lineTotal: appliedRate * qty[ s.id ]
+                        duration: s.duration,
+                        minutes: durationMinutes[ s.id ] || 0,
+                        qty: q,
+                        lineTotal: appliedRate * q
                     };
                 } )
                 .filter( function ( l ) { return l.lineTotal > 0; } );
@@ -208,7 +288,9 @@
                 linesEl.innerHTML = '<div class="si-pricing__empty-lines">Select services to build an estimate</div>';
             } else {
                 linesEl.innerHTML = lines.map( function ( l ) {
-                    var qtyLabel = l.fixed ? '' : ' · ' + l.qty + ' ' + l.unit;
+                    var qtyLabel = l.fixed
+                        ? ''
+                        : ' · ' + ( l.duration ? formatDuration( l.minutes ) : l.qty + ' ' + l.unit );
                     return '<div class="si-pricing__line-item">' +
                         '<span>' + escHtml( l.name ) + qtyLabel + '</span>' +
                         '<span>' + fmt( l.lineTotal ) + '</span>' +
@@ -250,7 +332,9 @@
         function summaryText( lines, subtotal, discount, total, pct ) {
             var tierLine = tiers.length ? ( 'Complexity: ' + tiers[ tierIndex ].label + '\n' ) : '';
             var rows = lines.map( function ( l ) {
-                var qtyPart = l.fixed ? '' : l.qty + ' ' + l.unit + ' × ';
+                var qtyPart = l.fixed
+                    ? ''
+                    : ( l.duration ? formatDuration( l.minutes ) : l.qty + ' ' + l.unit ) + ' × ';
                 return l.name + ' — ' + qtyPart + fmt( l.lineTotal / ( l.fixed ? 1 : ( l.qty || 1 ) ) ) + ' = ' + fmt( l.lineTotal );
             } ).join( '\n' );
 
