@@ -261,8 +261,17 @@
             var mult = tiers.length ? ( tiers[ tierIndex ].mult || 1 ) : 1;
             return services
                 .map( function ( s ) {
-                    var appliedRate = s.scale ? s.rate * mult : s.rate;
+                    // Complexity only ever scales hourly (duration) rates -- day-rate
+                    // and fixed-price work already scales by adding more days/units.
+                    var appliedRate = ( s.scale && s.duration ) ? s.rate * mult : s.rate;
                     var q = effectiveQty( s );
+                    var rawTotal = appliedRate * q;
+                    var lineTotal = rawTotal;
+                    var minApplied = false;
+                    if ( q > 0 && s.minPrice > 0 && rawTotal < s.minPrice ) {
+                        lineTotal = s.minPrice;
+                        minApplied = true;
+                    }
                     return {
                         id: s.id,
                         name: s.name,
@@ -271,7 +280,8 @@
                         duration: s.duration,
                         minutes: durationMinutes[ s.id ] || 0,
                         qty: q,
-                        lineTotal: appliedRate * q
+                        lineTotal: lineTotal,
+                        minApplied: minApplied
                     };
                 } )
                 .filter( function ( l ) { return l.lineTotal > 0; } );
@@ -291,6 +301,7 @@
                     var qtyLabel = l.fixed
                         ? ''
                         : ' · ' + ( l.duration ? formatDuration( l.minutes ) : l.qty + ' ' + l.unit );
+                    if ( l.minApplied ) qtyLabel += ' · min applied';
                     return '<div class="si-pricing__line-item">' +
                         '<span>' + escHtml( l.name ) + qtyLabel + '</span>' +
                         '<span>' + fmt( l.lineTotal ) + '</span>' +
@@ -335,6 +346,9 @@
                 var qtyPart = l.fixed
                     ? ''
                     : ( l.duration ? formatDuration( l.minutes ) : l.qty + ' ' + l.unit ) + ' × ';
+                if ( l.minApplied ) {
+                    return l.name + ' — ' + qtyPart + fmt( l.lineTotal ) + ' (minimum applied)';
+                }
                 return l.name + ' — ' + qtyPart + fmt( l.lineTotal / ( l.fixed ? 1 : ( l.qty || 1 ) ) ) + ' = ' + fmt( l.lineTotal );
             } ).join( '\n' );
 

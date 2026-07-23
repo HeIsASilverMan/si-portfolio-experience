@@ -23,6 +23,7 @@ class SI_CPTs {
         add_filter( 'manage_si_pricing_tier_posts_columns',       array( __CLASS__, 'pricing_tier_columns' ) );
         add_action( 'manage_si_pricing_tier_posts_custom_column', array( __CLASS__, 'pricing_tier_column_content' ), 10, 2 );
         add_action( 'admin_init', array( __CLASS__, 'maybe_seed_pricing_defaults' ) );
+        add_action( 'admin_init', array( __CLASS__, 'maybe_fix_pricing_entities' ) );
     }
 
     public static function register_portfolio() {
@@ -467,13 +468,30 @@ class SI_CPTs {
      */
     public static function pricing_icon_options() {
         return array(
-            'instructional' => 'Instructional design (map)',
-            'build'         => 'Build (box)',
-            'consulting'    => 'Consulting (people)',
-            'multimedia'    => 'Multimedia (play)',
-            'audit'         => 'Audit (magnifier)',
-            'interactive'   => 'Interactive / gamified (game pad)',
-            'general'       => 'General (spark)',
+            'instructional' => 'Instructional design',
+            'build'         => 'Build',
+            'consulting'    => 'Consulting',
+            'multimedia'    => 'Multimedia',
+            'audit'         => 'Audit',
+            'interactive'   => 'Interactive / gamified',
+            'general'       => 'General',
+        );
+    }
+
+    /**
+     * Inline SVG markup for each icon option, kept in sync with the ICONS map
+     * in assets/js/si-pricing-estimator.js so the admin picker previews match
+     * what actually renders on the front end.
+     */
+    public static function pricing_icon_svgs() {
+        return array(
+            'instructional' => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 19 7-7 3 3-7 7-3-3z"></path><path d="m18 13-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"></path><path d="m2 2 7.586 7.586"></path><circle cx="11" cy="11" r="2"></circle></svg>',
+            'build'         => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"></rect><path d="M8 21h8M12 17v4"></path><path d="m10 8 4 2.5L10 13V8z"></path></svg>',
+            'consulting'    => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+            'multimedia'    => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 8-6 4 6 4V8z"></path><rect x="2" y="6" width="20" height="12" rx="2"></rect></svg>',
+            'audit'         => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>',
+            'interactive'   => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="6" x2="10" y1="12" y2="12"></line><line x1="8" x2="8" y1="10" y2="14"></line><line x1="15" x2="15.01" y1="13" y2="13"></line><line x1="18" x2="18.01" y1="11" y2="11"></line><rect x="2" y="6" width="20" height="12" rx="6"></rect></svg>',
+            'general'       => '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v18M3 12h18"></path></svg>',
         );
     }
 
@@ -490,6 +508,7 @@ class SI_CPTs {
         $scalable     = get_post_meta( $post->ID, '_si_scalable', true );
         $duration     = get_post_meta( $post->ID, '_si_duration', true );
         $minute_step  = get_post_meta( $post->ID, '_si_minute_step', true );
+        $min_price    = get_post_meta( $post->ID, '_si_min_price', true );
 
         if ( '' === $step )        $step        = '1';
         if ( '' === $max )         $max         = '40';
@@ -509,7 +528,12 @@ class SI_CPTs {
         echo '<div style="flex:1;min-width:140px;"><p><strong>Unit label</strong> <span style="color:#666;font-weight:normal;">(e.g. day, finished hr, fixed)</span></p>';
         echo '<input type="text" name="si_unit" value="' . esc_attr( $unit ) . '" style="width:100%" placeholder="day"></div>';
 
+        echo '<div style="flex:1;min-width:140px;"><p><strong>Minimum price (&pound;)</strong> <span style="color:#666;font-weight:normal;">(optional)</span></p>';
+        echo '<input type="number" step="0.01" min="0" name="si_min_price" value="' . esc_attr( $min_price ) . '" style="width:100%" placeholder="0"></div>';
+
         echo '</div>';
+
+        echo '<p style="color:#666;font-size:12px;margin-top:4px;">If set, the line total for this service is never shown below this amount once it&rsquo;s selected &mdash; useful for a minimum engagement fee. Leave at 0 for no minimum.</p>';
 
         echo '<div style="display:flex;gap:16px;margin-top:14px;flex-wrap:wrap;">';
 
@@ -519,14 +543,20 @@ class SI_CPTs {
         echo '<div style="flex:1;min-width:140px;"><p><strong>Max quantity</strong> <span style="color:#666;font-weight:normal;">(max hours, in duration mode)</span></p>';
         echo '<input type="number" step="0.5" min="0" name="si_max" value="' . esc_attr( $max ) . '" style="width:100%"></div>';
 
-        echo '<div style="flex:1;min-width:180px;"><p><strong>Icon</strong></p>';
-        echo '<select name="si_icon" style="width:100%;">';
-        foreach ( self::pricing_icon_options() as $val => $label ) {
-            $sel = selected( $icon, $val, false );
-            echo '<option value="' . esc_attr( $val ) . '" ' . $sel . '>' . esc_html( $label ) . '</option>';
-        }
-        echo '</select></div>';
+        echo '</div>';
 
+        echo '<p style="margin-top:14px;"><strong>Icon</strong> <span style="color:#666;font-weight:normal;">(shown on the front-end card)</span></p>';
+        echo '<style>.si-icon-option{border-color:#ccc;}.si-icon-option:has(input:checked){border-color:#D4A853;background:#fff8ec;}</style>';
+        echo '<div style="display:flex;flex-wrap:wrap;gap:8px;">';
+        $icon_svgs = self::pricing_icon_svgs();
+        foreach ( self::pricing_icon_options() as $val => $label ) {
+            $is_checked = ( $icon === $val );
+            echo '<label class="si-icon-option" style="display:flex;flex-direction:column;align-items:center;gap:4px;width:84px;padding:10px 6px;border:2px solid #ccc;border-radius:4px;cursor:pointer;text-align:center;">';
+            echo '<input type="radio" name="si_icon" value="' . esc_attr( $val ) . '" ' . checked( $is_checked, true, false ) . ' style="margin:0;">';
+            echo '<span style="color:#D4A853;">' . $icon_svgs[ $val ] . '</span>';
+            echo '<span style="font-size:11px;color:#444;line-height:1.3;">' . esc_html( $label ) . '</span>';
+            echo '</label>';
+        }
         echo '</div>';
 
         echo '<div style="margin-top:16px;">';
@@ -543,7 +573,7 @@ class SI_CPTs {
         echo '</div>';
 
         echo '<label style="display:block;"><input type="checkbox" name="si_scalable" value="1" ' . checked( $scalable, '1', false ) . '> ';
-        echo '<strong>Scales with project complexity</strong> <span style="color:#666;">&mdash; the complexity slider multiplier applies to this line item (tick for build/development-type services)</span></label>';
+        echo '<strong>Scales with project complexity</strong> <span style="color:#666;">&mdash; the complexity slider multiplier applies to this line item&rsquo;s rate. Only takes effect on hourly (duration) services &mdash; day-rate and fixed-price work already scales by adding more days, so this is ignored unless &ldquo;Quantity is a duration&rdquo; above is also ticked.</span></label>';
         echo '</div>';
 
         echo '<p style="margin-top:14px;color:#666;font-size:12px;">Use the <strong>Order</strong> field in the Attributes box (right-hand side) to control the order services appear in on the front end.</p>';
@@ -678,6 +708,9 @@ class SI_CPTs {
             if ( isset( $_POST['si_rate'] ) ) {
                 update_post_meta( $post_id, '_si_rate', floatval( $_POST['si_rate'] ) );
             }
+            if ( isset( $_POST['si_min_price'] ) ) {
+                update_post_meta( $post_id, '_si_min_price', max( 0, floatval( $_POST['si_min_price'] ) ) );
+            }
             if ( isset( $_POST['si_step'] ) ) {
                 update_post_meta( $post_id, '_si_step', floatval( $_POST['si_step'] ) );
             }
@@ -697,8 +730,13 @@ class SI_CPTs {
                 update_post_meta( $post_id, '_si_minute_step', $minute_step );
             }
             update_post_meta( $post_id, '_si_fixed',    isset( $_POST['si_fixed'] )    ? '1' : '' );
-            update_post_meta( $post_id, '_si_scalable', isset( $_POST['si_scalable'] ) ? '1' : '' );
             update_post_meta( $post_id, '_si_duration', isset( $_POST['si_duration'] ) ? '1' : '' );
+            // The complexity multiplier only applies to hourly (duration) work --
+            // day-rate and fixed-price services already scale via quantity/days,
+            // so a rate multiplier on top of that would inflate the price for no
+            // extra time spent (punishing an efficient day-rate delivery).
+            $scalable_allowed = isset( $_POST['si_scalable'] ) && isset( $_POST['si_duration'] );
+            update_post_meta( $post_id, '_si_scalable', $scalable_allowed ? '1' : '' );
         }
 
         // Pricing tier
@@ -750,7 +788,7 @@ class SI_CPTs {
             ),
             array(
                 'title' => 'Behaviour-Change Consulting',
-                'desc'  => 'Performance &amp; behaviour-change programme design',
+                'desc'  => 'Performance and behaviour-change programme design',
                 'rate'  => 650,
                 'unit'  => 'day',
                 'icon'  => 'consulting',
@@ -806,8 +844,8 @@ class SI_CPTs {
 
         $tiers = array(
             array(
-                'title' => 'Linear &amp; static',
-                'desc'  => 'Text and next &mdash; page-turner content with minimal interactivity. Read, click, continue.',
+                'title' => 'Linear and static',
+                'desc'  => 'Text and next - page-turner content with minimal interactivity. Read, click, continue.',
                 'mult'  => 1,
             ),
             array(
@@ -827,7 +865,7 @@ class SI_CPTs {
             ),
             array(
                 'title' => 'Fully gamified',
-                'desc'  => 'Game mechanics, scoring, leaderboards &mdash; a fully immersive, bespoke build.',
+                'desc'  => 'Game mechanics, scoring, leaderboards - a fully immersive, bespoke build.',
                 'mult'  => 2.5,
             ),
         );
@@ -848,6 +886,55 @@ class SI_CPTs {
         update_option( 'si_pricing_seeded', 1 );
     }
 
+    /**
+     * One-time cleanup: earlier seed data stored HTML entities (&amp;, &mdash;)
+     * directly in post titles/meta. Those values are sent to the front end as
+     * plain-text JSON and inserted via textContent, so the entity codes were
+     * showing up literally instead of being rendered. This fixes existing rows;
+     * new seed data no longer contains entities.
+     */
+    public static function maybe_fix_pricing_entities() {
+        if ( get_option( 'si_pricing_entities_fixed' ) ) {
+            return;
+        }
+
+        $map = array(
+            '&amp;'   => 'and',
+            '&mdash;' => ' - ',
+            '&ndash;' => '-',
+            '&rsquo;' => "'",
+            '&lsquo;' => "'",
+            '&ldquo;' => '"',
+            '&rdquo;' => '"',
+        );
+
+        $post_types = array( 'si_pricing_service', 'si_pricing_tier' );
+        foreach ( $post_types as $post_type ) {
+            $posts = get_posts( array(
+                'post_type'      => $post_type,
+                'post_status'    => 'any',
+                'posts_per_page' => -1,
+            ) );
+            foreach ( $posts as $post ) {
+                $title = strtr( $post->post_title, $map );
+                if ( $title !== $post->post_title ) {
+                    wp_update_post( array( 'ID' => $post->ID, 'post_title' => $title ) );
+                }
+                foreach ( array( '_si_desc', '_si_tier_desc' ) as $meta_key ) {
+                    $val = get_post_meta( $post->ID, $meta_key, true );
+                    if ( $val ) {
+                        $new_val = strtr( $val, $map );
+                        if ( $new_val !== $val ) {
+                            update_post_meta( $post->ID, $meta_key, $new_val );
+                        }
+                    }
+                }
+            }
+        }
+
+        update_option( 'si_pricing_entities_fixed', 1 );
+    }
+
     // -------------------------------------------------------
     // Front-end data helpers
     // -------------------------------------------------------
@@ -863,6 +950,7 @@ class SI_CPTs {
 
         $out = array();
         foreach ( $posts as $post ) {
+            $is_duration = (bool) get_post_meta( $post->ID, '_si_duration', true );
             $out[] = array(
                 'id'     => 'svc-' . $post->ID,
                 'name'   => get_the_title( $post ),
@@ -873,9 +961,12 @@ class SI_CPTs {
                 'step'   => (float) ( get_post_meta( $post->ID, '_si_step', true ) ? get_post_meta( $post->ID, '_si_step', true ) : 1 ),
                 'max'    => (float) ( get_post_meta( $post->ID, '_si_max', true ) ? get_post_meta( $post->ID, '_si_max', true ) : 40 ),
                 'fixed'  => (bool) get_post_meta( $post->ID, '_si_fixed', true ),
-                'scale'  => (bool) get_post_meta( $post->ID, '_si_scalable', true ),
-                'duration'   => (bool) get_post_meta( $post->ID, '_si_duration', true ),
+                // The complexity multiplier only ever applies to hourly (duration)
+                // services -- day-rate/fixed work already scales via quantity.
+                'scale'  => $is_duration && (bool) get_post_meta( $post->ID, '_si_scalable', true ),
+                'duration'   => $is_duration,
                 'minuteStep' => (float) ( get_post_meta( $post->ID, '_si_minute_step', true ) ? get_post_meta( $post->ID, '_si_minute_step', true ) : 15 ),
+                'minPrice'   => (float) get_post_meta( $post->ID, '_si_min_price', true ),
             );
         }
         return $out;
