@@ -104,3 +104,46 @@ si-portfolio-experience/
 | `[si_form_learning_design]` | form-learning-design.php | Phase 5 |
 | `[si_interactive_cv]` | interactive-cv.php | Done |
 | `[si_pricing_estimator]` | pricing-estimator.php | Done |
+| `[si_thread_hero]` | thread-hero.php | Done |
+| `[si_thread_who]` | thread-who.php | Done |
+| `[si_thread_method]` | thread-method.php | Done |
+| `[si_thread_portfolio]` | thread-portfolio.php | Done |
+| `[si_thread_guarantee]` | thread-guarantee.php | Done |
+| `[si_thread_cta]` | thread-cta.php | Done |
+| `[si_thread_contact]` | thread-contact.php | Done |
+| `[si_thread_finder]` | thread-finder.php | Done |
+| `[si_lead_magnet]` | lead-magnet.php | Done |
+
+## Game Music Landing Page ("Weaving the Thread")
+
+A separate, draft-only page built from the `si_thread_*` shortcodes above —
+it does **not** touch `/composition` (composition-hero.php, benefits-list.php,
+process-timeline.php, audio-showcase.php, form-composition.php are all
+untouched). Assemble a new WordPress page from `[si_thread_hero]`,
+`[si_thread_who]`, `[si_thread_method]`, `[si_thread_portfolio]`,
+`[si_thread_guarantee]`, `[si_thread_cta]` in that order, plus a second page
+carrying `[si_thread_contact]` (its URL goes in Settings > SI Portfolio >
+Game Music Landing Page > Contact page URL, which the other shortcodes' CTA
+buttons link to). Keep both pages in Draft or password-protected until
+ready to go live — nothing in the code publishes them.
+
+`[si_thread_finder]` (the full 15-question Thread Finder) is **not** linked
+from the landing page. It's a private follow-up tool: put it on its own
+unlisted page and send the link directly to a client once they've been in
+touch and want a proposal.
+
+All three forms (`si_thread_contact`, `si_thread_finder`, and the existing
+`si_form_composition` / `si_form_learning_design`) share the same backend —
+`SI_Forms::handle_submission()` in `class-si-forms.php`, saving to the
+`si_enquiry` CPT and emailing `notify_email` via `wp_mail()`. The Thread
+Finder's question bank lives in `SI_Forms::thread_finder_steps()` — it's the
+single source of truth for both the template's rendering and the emailed
+answers, so edit it there rather than in the template.
+
+`[si_lead_magnet]` is a standalone email-capture widget (its own AJAX action,
+`si_lead_magnet_signup`) — signups are stored in a new `si_subscriber` CPT
+(Portfolio Projects > Subscribers) and the configured file link is emailed
+once via `wp_mail()`, no autoresponder sequence. Configure the default
+magnet's name/file under Settings > SI Portfolio > Lead Magnet; a specific
+placement can override both via the `magnet="slug"` attribute plus matching
+`lead_magnet_{slug}_name` / `lead_magnet_{slug}_file` settings.

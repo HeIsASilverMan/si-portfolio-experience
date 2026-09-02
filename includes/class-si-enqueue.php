@@ -97,6 +97,7 @@ class SI_Enqueue {
         wp_enqueue_style( 'si-posts',            $url . 'css/si-posts.css',            array( 'si-components' ),                  $v );
         wp_enqueue_style( 'si-interactive-cv',   $url . 'css/si-interactive-cv.css',   array( 'si-components', 'si-animations' ),  $v );
         wp_enqueue_style( 'si-pricing-estimator', $url . 'css/si-pricing-estimator.css', array( 'si-components' ),                 $v );
+        wp_enqueue_style( 'si-thread',           $url . 'css/si-thread.css',           array( 'si-components', 'si-forms' ),       $v );
 
         wp_enqueue_script( 'si-scroll-observer', $url . 'js/si-scroll-observer.js', array(), $v, true );
         wp_enqueue_script( 'si-counters',        $url . 'js/si-counters.js',        array(), $v, true );
@@ -109,7 +110,12 @@ class SI_Enqueue {
         wp_enqueue_script( 'si-forms',             $url . 'js/si-forms.js',             array(), $v, true );
         wp_enqueue_script( 'si-interactive-cv',    $url . 'js/si-interactive-cv.js',    array(), $v, true );
         wp_enqueue_script( 'si-pricing-estimator', $url . 'js/si-pricing-estimator.js', array(), $v, true );
+        wp_enqueue_script( 'si-thread',            $url . 'js/si-thread.js',            array(), $v, true );
         wp_localize_script( 'si-forms', 'siFormsConfig', array(
+            'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+            'nonce'   => wp_create_nonce( 'si_form_nonce' ),
+        ) );
+        wp_localize_script( 'si-thread', 'siFormsConfig', array(
             'ajaxUrl' => admin_url( 'admin-ajax.php' ),
             'nonce'   => wp_create_nonce( 'si_form_nonce' ),
         ) );

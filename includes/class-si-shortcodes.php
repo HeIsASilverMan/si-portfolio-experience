@@ -34,6 +34,20 @@ class SI_Shortcodes {
             'si_interactive_cv'     => 'interactive_cv',
             // Pricing estimator
             'si_pricing_estimator'  => 'pricing_estimator',
+            // Game music landing page ("Weaving the Thread") — draft, not linked
+            // from primary navigation. See templates/thread-*.php.
+            'si_thread_hero'        => 'thread_hero',
+            'si_thread_who'         => 'thread_who',
+            'si_thread_method'      => 'thread_method',
+            'si_thread_portfolio'   => 'thread_portfolio',
+            'si_thread_guarantee'   => 'thread_guarantee',
+            'si_thread_cta'         => 'thread_cta',
+            'si_thread_contact'     => 'thread_contact',
+            // Standalone follow-up questionnaire — send the link directly to
+            // clients after they've been in touch, not part of the landing page.
+            'si_thread_finder'      => 'thread_finder',
+            // Lead magnet / email capture
+            'si_lead_magnet'        => 'lead_magnet',
         );
         foreach ( $codes as $tag => $method ) {
             add_shortcode( $tag, array( __CLASS__, $method ) );
@@ -166,6 +180,58 @@ class SI_Shortcodes {
 
     public static function pricing_estimator( $atts ) {
         return self::render( 'pricing-estimator' );
+    }
+
+    /* -- Game Music Landing Page ("Weaving the Thread") ------ */
+
+    public static function thread_hero( $atts ) {
+        return self::render( 'thread-hero' );
+    }
+
+    public static function thread_who( $atts ) {
+        return self::render( 'thread-who' );
+    }
+
+    public static function thread_method( $atts ) {
+        return self::render( 'thread-method' );
+    }
+
+    public static function thread_portfolio( $atts ) {
+        return self::render( 'thread-portfolio' );
+    }
+
+    public static function thread_guarantee( $atts ) {
+        return self::render( 'thread-guarantee' );
+    }
+
+    public static function thread_cta( $atts ) {
+        return self::render( 'thread-cta' );
+    }
+
+    public static function thread_contact( $atts ) {
+        return self::render( 'thread-contact' );
+    }
+
+    /** Standalone follow-up questionnaire, not linked from the landing page. */
+    public static function thread_finder( $atts ) {
+        return self::render( 'thread-finder' );
+    }
+
+    /* -- Lead Magnet ------------------------------------------ */
+
+    public static function lead_magnet( $atts ) {
+        $atts = shortcode_atts(
+            array(
+                'magnet'      => 'default',
+                'heading'     => 'Get the free guide',
+                'body'        => "Drop your email and I'll send it straight over.",
+                'button_text' => 'Send it to me',
+                'name_field'  => 'false',
+            ),
+            $atts,
+            'si_lead_magnet'
+        );
+        return self::render( 'lead-magnet', array( 'atts' => $atts ) );
     }
 
     /* -- Utility: CTA button --------------------------------- */
