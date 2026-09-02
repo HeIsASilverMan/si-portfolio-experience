@@ -1,16 +1,31 @@
 <?php defined( 'ABSPATH' ) || exit;
 
+// $featured is passed by SI_Shortcodes::audio_showcase() -- true for
+// [si_audio_showcase featured="true"], which narrows the catalogue below to
+// entries ticked "Feature on the game-music landing page" in the Portfolio
+// Project admin screen. Default (false, used on /composition) is unchanged:
+// every composition-type entry, in Portfolio order.
+$featured = isset( $featured ) ? (bool) $featured : false;
+
+$meta_query = array(
+    array(
+        'key'   => '_si_project_type',
+        'value' => 'composition',
+    ),
+);
+if ( $featured ) {
+    $meta_query[] = array(
+        'key'   => '_si_game_music_feature',
+        'value' => '1',
+    );
+}
+
 $query = new WP_Query( array(
     'post_type'      => 'si_portfolio',
     'posts_per_page' => 20,
-    'meta_query'     => array(
-        array(
-            'key'   => '_si_project_type',
-            'value' => 'composition',
-        ),
-    ),
-    'orderby' => 'menu_order date',
-    'order'   => 'ASC',
+    'meta_query'     => $meta_query,
+    'orderby'        => 'menu_order date',
+    'order'          => 'ASC',
 ) );
 ?>
 
@@ -109,7 +124,10 @@ $query = new WP_Query( array(
                     $year        = get_post_meta( get_the_ID(), '_si_year', true );
                     $genre       = get_post_meta( get_the_ID(), '_si_project_genre', true );
                     $thumb_url   = has_post_thumbnail() ? get_the_post_thumbnail_url( get_the_ID(), 'medium' ) : '';
-                    $description = get_post_meta( get_the_ID(), '_si_brief', true );
+                    $description = $featured ? get_post_meta( get_the_ID(), '_si_game_music_blurb', true ) : '';
+                    if ( ! $description ) {
+                        $description = get_post_meta( get_the_ID(), '_si_brief', true );
+                    }
                     if ( ! $description ) {
                         $description = has_excerpt() ? get_the_excerpt() : '';
                     }

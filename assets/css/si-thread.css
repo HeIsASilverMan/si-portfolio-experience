@@ -2,21 +2,26 @@
    SI THREAD — Game Music Landing Page ("Weaving the Thread")
    si-thread.css
    Covers: si_thread_hero, si_thread_who, si_thread_method,
-   si_thread_portfolio, si_thread_guarantee, si_thread_cta,
-   si_thread_contact, si_thread_finder, si_lead_magnet.
+   si_thread_guarantee, si_thread_cta, si_thread_finder,
+   si_lead_magnet.
+
+   The "Hear the Work" section reuses [si_audio_showcase] (styled in
+   si-composition.css, already enqueued site-wide) rather than a
+   bespoke widget here -- see si_audio_showcase's `featured` attribute
+   and the "Feature on the game-music landing page" checkbox on
+   Portfolio Project entries.
 
    The multi-step chrome classes (.si-form__*) are defined in
-   si-forms.css and enqueued site-wide, so [si_thread_finder] and
-   [si_thread_contact] reuse them directly — this file only adds
-   what those two need on top (the wrapper, intro screen, and
-   stacked multi-question blocks) plus the landing-page sections.
+   si-forms.css and enqueued site-wide, so [si_thread_finder] reuses
+   them directly — this file only adds what it needs on top (the
+   wrapper, intro screen, and stacked multi-question blocks) plus the
+   landing-page sections.
    ============================================================ */
 
 /* ── Shared section rhythm ───────────────────────────────── */
 .si-thread-hero,
 .si-thread-who,
 .si-thread-method,
-.si-thread-portfolio,
 .si-thread-guarantee,
 .si-thread-cta {
     position: relative;
@@ -259,102 +264,6 @@
     margin: 0;
 }
 
-/* ── Portfolio ("Hear the Work") ─────────────────────────── */
-.si-thread-portfolio__inner {
-    position: relative;
-    z-index: 1;
-    max-width: 760px;
-    margin: 0 auto;
-}
-
-.si-thread-portfolio__header {
-    text-align: center;
-    margin-bottom: 3rem;
-}
-
-.si-thread-portfolio__label {
-    font-family: var(--si-font-mono);
-    font-size: 0.68rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--si-accent-warm) !important;
-    margin: 0 0 0.75rem;
-}
-
-.si-thread-portfolio__heading {
-    font-family: var(--si-font-display);
-    font-weight: 400;
-    font-size: clamp( 1.8rem, 4vw, 2.4rem );
-    color: var(--si-text-primary) !important;
-    margin: 0;
-}
-
-.si-thread-portfolio__list {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-}
-
-.si-thread-portfolio__item {
-    display: flex;
-    gap: 1.5rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid var(--si-border);
-}
-
-.si-thread-portfolio__item:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
-}
-
-.si-thread-portfolio__num {
-    font-family: var(--si-font-mono);
-    font-size: 0.8rem;
-    color: var(--si-text-dim) !important;
-    flex-shrink: 0;
-    padding-top: 0.2rem;
-}
-
-.si-thread-portfolio__title {
-    font-family: var(--si-font-display);
-    font-weight: 400;
-    font-size: 1.3rem;
-    color: var(--si-text-primary) !important;
-    margin: 0 0 0.5rem;
-}
-
-.si-thread-portfolio__desc {
-    font-family: var(--si-font-body);
-    font-size: 0.94rem;
-    line-height: 1.65;
-    color: var(--si-text-secondary) !important;
-    margin: 0 0 0.9rem;
-}
-
-.si-thread-portfolio__audio {
-    width: 100%;
-    max-width: 420px;
-    height: 36px;
-}
-
-.si-thread-portfolio__link {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    color: var(--si-accent-warm) !important;
-    font-family: var(--si-font-body);
-    font-size: 0.9rem;
-    font-weight: 600;
-    text-decoration: none;
-}
-
-.si-thread-portfolio__link:hover {
-    color: var(--si-accent-glow) !important;
-}
-
 /* ── Concept Guarantee ───────────────────────────────────── */
 .si-thread-guarantee {
     padding: 5rem 1.5rem;
@@ -514,79 +423,6 @@
     margin-top: 0.5rem;
 }
 
-/* ── Contact form (single screen, not multi-step) ────────── */
-.si-thread-contact-form {
-    padding: 6rem 1.5rem;
-    background: var(--si-bg-deep);
-}
-
-.si-thread-contact-form__inner {
-    max-width: 560px;
-    margin: 0 auto;
-}
-
-.si-thread-contact-form__heading {
-    font-family: var(--si-font-display);
-    font-weight: 400;
-    font-size: clamp( 1.8rem, 4vw, 2.4rem );
-    color: var(--si-text-primary) !important;
-    margin: 0 0 0.75rem;
-}
-
-.si-thread-contact-form__intro {
-    font-family: var(--si-font-body);
-    color: var(--si-text-secondary) !important;
-    line-height: 1.7;
-    margin: 0 0 2.25rem;
-}
-
-.si-thread-contact-form__fields {
-    display: flex;
-    flex-direction: column;
-    gap: 1.75rem;
-}
-
-.si-thread-contact-form__textarea {
-    max-width: none;
-    min-height: 110px;
-}
-
-.si-thread-contact-form__submit-btn {
-    align-self: flex-start;
-}
-
-.si-thread-contact-form__form-error {
-    text-align: left;
-}
-
-.si-thread-contact-form.is-submitted .si-thread-contact-form__fields {
-    display: none;
-}
-
-.si-thread-contact-form__success {
-    display: none;
-    text-align: center;
-    padding: 2rem 0;
-}
-
-.si-thread-contact-form.is-submitted .si-thread-contact-form__success {
-    display: block;
-}
-
-/* Generic <select> to match .si-form__input (si-forms.css has no select style) */
-.si-form__select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%235C5A54' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.2rem center;
-    padding-right: 1.5rem;
-}
-
-.si-form__select option {
-    background: var(--si-bg-surface);
-    color: var(--si-text-primary);
-}
-
 /* ── Lead magnet ──────────────────────────────────────────── */
 .si-lead-magnet {
     position: relative;
@@ -664,15 +500,13 @@
     .si-thread-hero,
     .si-thread-who,
     .si-thread-method,
-    .si-thread-portfolio,
     .si-thread-guarantee,
     .si-thread-cta {
         padding-left: 1.25rem;
         padding-right: 1.25rem;
     }
 
-    .si-thread-method__step,
-    .si-thread-portfolio__item {
+    .si-thread-method__step {
         gap: 1rem;
     }
 

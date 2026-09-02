@@ -415,6 +415,16 @@ class SI_CPTs {
         echo '<p style="color:#666;font-size:12px;margin:-4px 0 6px;">Describe the use-case this piece was composed for. e.g. &ldquo;Perfect for YouTube reviews that need a modern, funky background track.&rdquo;</p>';
         $brief = get_post_meta( $post->ID, '_si_brief', true );
         echo '<textarea name="si_brief" style="width:100%;height:80px;">' . esc_textarea( $brief ) . '</textarea>';
+
+        echo '<hr style="margin:12px 0;">';
+        $featured = get_post_meta( $post->ID, '_si_game_music_feature', true );
+        echo '<label style="display:block;"><input type="checkbox" name="si_game_music_feature" value="1" ' . checked( $featured, '1', false ) . '> ';
+        echo '<strong>Feature on the game-music landing page</strong></label>';
+        echo '<p style="color:#666;font-size:12px;margin:4px 0 8px;">Shown by [si_audio_showcase featured="true"], in Portfolio order (the Order field above). Leave unticked for everything else on the main /composition audio showcase &mdash; that stays untouched.</p>';
+
+        $gm_blurb = get_post_meta( $post->ID, '_si_game_music_blurb', true );
+        echo '<p><strong>Game-music page blurb (optional)</strong> <span style="color:#666;font-weight:normal;">overrides Brief / Context above, only when featured there</span></p>';
+        echo '<textarea name="si_game_music_blurb" style="width:100%;height:70px;">' . esc_textarea( $gm_blurb ) . '</textarea>';
     }
 
     public static function render_ld_meta_box( $post ) {
@@ -696,6 +706,11 @@ class SI_CPTs {
 
             if ( isset( $_POST['si_brief'] ) ) {
                 update_post_meta( $post_id, '_si_brief', sanitize_textarea_field( $_POST['si_brief'] ) );
+            }
+
+            update_post_meta( $post_id, '_si_game_music_feature', isset( $_POST['si_game_music_feature'] ) ? '1' : '' );
+            if ( isset( $_POST['si_game_music_blurb'] ) ) {
+                update_post_meta( $post_id, '_si_game_music_blurb', sanitize_textarea_field( $_POST['si_game_music_blurb'] ) );
             }
         }
 

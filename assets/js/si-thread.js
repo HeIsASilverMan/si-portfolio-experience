@@ -1,8 +1,10 @@
 /**
  * SI Thread — game-music landing page widgets.
- * Handles the single-screen enquiry form ([si_thread_contact]), the
- * standalone Thread Finder questionnaire ([si_thread_finder]), and the
- * lead-magnet email capture widget ([si_lead_magnet]).
+ * Handles the standalone Thread Finder questionnaire ([si_thread_finder])
+ * and the lead-magnet email capture widget ([si_lead_magnet]). The
+ * landing page's "get in touch" CTAs link to the existing composition
+ * enquiry form ([si_form_composition], handled by si-forms.js) rather than
+ * a separate contact form.
  *
  * Deliberately separate from si-forms.js: that engine assumes one field per
  * step, and the Thread Finder needs several textareas per step plus
@@ -39,111 +41,6 @@
     function honeypotFilled( root ) {
         var hp = root.querySelector( '[name="si_honeypot"]' );
         return !! ( hp && hp.value );
-    }
-
-    // ==========================================================
-    // Simple single-screen contact form ([si_thread_contact])
-    // ==========================================================
-
-    document.querySelectorAll( '.si-thread-contact-form' ).forEach( initContactForm );
-
-    function initContactForm( form ) {
-        var submitBtn = form.querySelector( '.si-thread-contact-form__submit-btn' );
-        var formError = form.querySelector( '.si-thread-contact-form__form-error' );
-        if ( ! submitBtn ) return;
-
-        submitBtn.addEventListener( 'click', function () {
-            if ( form.classList.contains( 'is-submitted' ) ) return;
-
-            [ 'si-tc-name-error', 'si-tc-email-error', 'si-tc-link-error', 'si-tc-message-error' ].forEach( function ( id ) {
-                var el = form.querySelector( '#' + id );
-                if ( el ) el.textContent = '';
-            } );
-            if ( formError ) formError.textContent = '';
-
-            var name    = form.querySelector( '#si-tc-name' );
-            var email   = form.querySelector( '#si-tc-email' );
-            var company = form.querySelector( '#si-tc-company' );
-            var link    = form.querySelector( '#si-tc-link' );
-            var message = form.querySelector( '#si-tc-message' );
-            var referral = form.querySelector( '#si-tc-referral' );
-
-            var valid = true;
-
-            if ( ! name.value.trim() ) {
-                setError( 'si-tc-name-error', 'Please enter your name.' );
-                valid = false;
-            }
-            if ( ! email.value.trim() || ! isValidEmail( email.value.trim() ) ) {
-                setError( 'si-tc-email-error', 'Please enter a valid email address.' );
-                valid = false;
-            }
-            if ( link.value.trim() && ! link.checkValidity() ) {
-                setError( 'si-tc-link-error', 'Please enter a valid URL (starting with https://).' );
-                valid = false;
-            }
-            if ( ! message.value.trim() ) {
-                setError( 'si-tc-message-error', 'Please add a short message.' );
-                valid = false;
-            }
-
-            if ( ! valid ) return;
-
-            if ( honeypotFilled( form ) ) {
-                showSubmitted();
-                return;
-            }
-
-            if ( ! window.siFormsConfig ) {
-                if ( formError ) formError.textContent = 'Configuration error. Please reload the page.';
-                return;
-            }
-
-            form.classList.add( 'si-form--submitting' );
-            submitBtn.disabled = true;
-
-            var payload = new FormData();
-            payload.append( 'action', 'si_submit_enquiry' );
-            payload.append( 'nonce', siFormsConfig.nonce );
-            payload.append( 'form_type', 'game_music_contact' );
-            payload.append( 'contact_name', name.value.trim() );
-            payload.append( 'contact_email', email.value.trim() );
-            if ( company.value.trim() ) payload.append( 'contact_company', company.value.trim() );
-            payload.append( 'form_data', JSON.stringify( {
-                project_link:     link.value.trim(),
-                message:          message.value.trim(),
-                referral_source:  referral ? referral.value : '',
-            } ) );
-
-            fetch( siFormsConfig.ajaxUrl, { method: 'POST', credentials: 'same-origin', body: payload } )
-                .then( function ( res ) { return res.json(); } )
-                .then( function ( json ) {
-                    if ( json.success ) {
-                        showSubmitted();
-                    } else {
-                        form.classList.remove( 'si-form--submitting' );
-                        submitBtn.disabled = false;
-                        if ( formError ) formError.textContent = json.data || 'Something went wrong. Please try again.';
-                    }
-                } )
-                .catch( function () {
-                    form.classList.remove( 'si-form--submitting' );
-                    submitBtn.disabled = false;
-                    if ( formError ) formError.textContent = 'Network error. Please check your connection and try again.';
-                } );
-
-            function setError( id, msg ) {
-                var el = form.querySelector( '#' + id );
-                if ( el ) el.textContent = msg;
-            }
-
-            function showSubmitted() {
-                form.classList.remove( 'si-form--submitting' );
-                form.classList.add( 'is-submitted' );
-                var heading = form.querySelector( '.si-form__success-heading' );
-                if ( heading ) heading.focus();
-            }
-        } );
     }
 
     // ==========================================================
