@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || exit;
 
-$contact_url = si_setting( 'thread_contact_url', '/game-music-composition/contact/' );
+$contact_url = si_setting( 'thread_contact_url', 'https://shaneivers.com/composition-enquiry/' );
 ?>
 
 <section class="si-scope si-thread-cta" aria-label="<?php esc_attr_e( 'Call to action', 'si-portfolio' ); ?>">

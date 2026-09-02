@@ -76,8 +76,8 @@ function si_body_classes( $classes ) {
         'si_form_composition', 'si_form_learning_design', 'si_posts_list',
         'si_interactive_cv', 'si_pricing_estimator',
         'si_thread_hero', 'si_thread_who', 'si_thread_method',
-        'si_thread_portfolio', 'si_thread_guarantee', 'si_thread_cta',
-        'si_thread_contact', 'si_thread_finder', 'si_lead_magnet',
+        'si_thread_guarantee', 'si_thread_cta',
+        'si_thread_finder', 'si_lead_magnet',
     );
     $is_prose = true;
     foreach ( $si_shortcodes as $code ) {

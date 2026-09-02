@@ -39,10 +39,8 @@ class SI_Shortcodes {
             'si_thread_hero'        => 'thread_hero',
             'si_thread_who'         => 'thread_who',
             'si_thread_method'      => 'thread_method',
-            'si_thread_portfolio'   => 'thread_portfolio',
             'si_thread_guarantee'   => 'thread_guarantee',
             'si_thread_cta'         => 'thread_cta',
-            'si_thread_contact'     => 'thread_contact',
             // Standalone follow-up questionnaire — send the link directly to
             // clients after they've been in touch, not part of the landing page.
             'si_thread_finder'      => 'thread_finder',
@@ -108,7 +106,8 @@ class SI_Shortcodes {
     }
 
     public static function audio_showcase( $atts ) {
-        return self::render( 'audio-showcase' );
+        $atts = shortcode_atts( array( 'featured' => 'false' ), $atts, 'si_audio_showcase' );
+        return self::render( 'audio-showcase', array( 'featured' => 'true' === $atts['featured'] ) );
     }
 
     /* -- Phase 3 --------------------------------------------- */
@@ -196,20 +195,12 @@ class SI_Shortcodes {
         return self::render( 'thread-method' );
     }
 
-    public static function thread_portfolio( $atts ) {
-        return self::render( 'thread-portfolio' );
-    }
-
     public static function thread_guarantee( $atts ) {
         return self::render( 'thread-guarantee' );
     }
 
     public static function thread_cta( $atts ) {
         return self::render( 'thread-cta' );
-    }
-
-    public static function thread_contact( $atts ) {
-        return self::render( 'thread-contact' );
     }
 
     /** Standalone follow-up questionnaire, not linked from the landing page. */

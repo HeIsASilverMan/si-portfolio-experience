@@ -107,10 +107,8 @@ si-portfolio-experience/
 | `[si_thread_hero]` | thread-hero.php | Done |
 | `[si_thread_who]` | thread-who.php | Done |
 | `[si_thread_method]` | thread-method.php | Done |
-| `[si_thread_portfolio]` | thread-portfolio.php | Done |
 | `[si_thread_guarantee]` | thread-guarantee.php | Done |
 | `[si_thread_cta]` | thread-cta.php | Done |
-| `[si_thread_contact]` | thread-contact.php | Done |
 | `[si_thread_finder]` | thread-finder.php | Done |
 | `[si_lead_magnet]` | lead-magnet.php | Done |
 
@@ -118,22 +116,35 @@ si-portfolio-experience/
 
 A separate, draft-only page built from the `si_thread_*` shortcodes above —
 it does **not** touch `/composition` (composition-hero.php, benefits-list.php,
-process-timeline.php, audio-showcase.php, form-composition.php are all
-untouched). Assemble a new WordPress page from `[si_thread_hero]`,
-`[si_thread_who]`, `[si_thread_method]`, `[si_thread_portfolio]`,
-`[si_thread_guarantee]`, `[si_thread_cta]` in that order, plus a second page
-carrying `[si_thread_contact]` (its URL goes in Settings > SI Portfolio >
-Game Music Landing Page > Contact page URL, which the other shortcodes' CTA
-buttons link to). Keep both pages in Draft or password-protected until
-ready to go live — nothing in the code publishes them.
+process-timeline.php, form-composition.php are all untouched). Assemble a new
+WordPress page from `[si_thread_hero]`, `[si_thread_who]`,
+`[si_thread_method]`, `[si_audio_showcase featured="true"]`,
+`[si_thread_guarantee]`, `[si_thread_cta]` in that order. Keep the page in
+Draft or password-protected until ready to go live — nothing in the code
+publishes it.
+
+There is no separate contact form for this page — `[si_form_composition]`
+already handles "Game" as a project type and asks better qualifying
+questions (budget, timeline) than a bespoke lightweight form would, so the
+"Get in touch" CTAs just link to the existing composition enquiry form
+(https://shaneivers.com/composition-enquiry/, configurable via Settings >
+SI Portfolio > Game Music Landing Page > Contact page URL).
+
+"Hear the Work" reuses `[si_audio_showcase]` (the real disc/waveform player,
+already used on `/composition`) rather than a bespoke widget — its
+`featured="true"` attribute filters to Portfolio Project entries with
+"Feature on the game-music landing page" ticked in their admin screen, and
+shows each one's optional game-music blurb (falls back to the normal Brief
+field) instead of rewriting the component. Without `featured="true"` (i.e.
+on `/composition`), `[si_audio_showcase]` is completely unchanged.
 
 `[si_thread_finder]` (the full 15-question Thread Finder) is **not** linked
 from the landing page. It's a private follow-up tool: put it on its own
 unlisted page and send the link directly to a client once they've been in
 touch and want a proposal.
 
-All three forms (`si_thread_contact`, `si_thread_finder`, and the existing
-`si_form_composition` / `si_form_learning_design`) share the same backend —
+Both forms (`si_thread_finder` and the existing `si_form_composition` /
+`si_form_learning_design`) share the same backend —
 `SI_Forms::handle_submission()` in `class-si-forms.php`, saving to the
 `si_enquiry` CPT and emailing `notify_email` via `wp_mail()`. The Thread
 Finder's question bank lives in `SI_Forms::thread_finder_steps()` — it's the

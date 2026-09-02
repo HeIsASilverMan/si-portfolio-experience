@@ -1,8 +1,7 @@
 <?php
 /**
  * SI Forms — AJAX handler, rate limiting, CPT save, email notification.
- * Handles [si_form_composition], [si_form_learning_design], the game-music
- * landing page's [si_thread_contact] enquiry form, the standalone
+ * Handles [si_form_composition], [si_form_learning_design], the standalone
  * [si_thread_finder] questionnaire, and the [si_lead_magnet] email capture
  * widget.
  */
@@ -28,10 +27,9 @@ class SI_Forms {
 
     public static function type_label( $form_type ) {
         $labels = array(
-            'composition'        => 'Composition',
-            'learning_design'    => 'Learning Design',
-            'game_music_contact' => 'Game Music',
-            'thread_finder'      => 'Thread Finder',
+            'composition'     => 'Composition',
+            'learning_design' => 'Learning Design',
+            'thread_finder'   => 'Thread Finder',
         );
         return isset( $labels[ $form_type ] ) ? $labels[ $form_type ] : 'Enquiry';
     }
@@ -121,7 +119,7 @@ class SI_Forms {
         }
 
         // Form type
-        $allowed_types = array( 'composition', 'learning_design', 'game_music_contact', 'thread_finder' );
+        $allowed_types = array( 'composition', 'learning_design', 'thread_finder' );
         $form_type = isset( $_POST['form_type'] ) ? sanitize_key( $_POST['form_type'] ) : '';
         if ( ! in_array( $form_type, $allowed_types, true ) ) {
             wp_send_json_error( 'Invalid form type.' );
@@ -151,9 +149,6 @@ class SI_Forms {
         }
 
         // Per-type required fields the generic name/email check above doesn't cover.
-        if ( 'game_music_contact' === $form_type && empty( $clean_data['message'] ) ) {
-            wp_send_json_error( 'Please tell me a bit about your project.' );
-        }
         if ( 'thread_finder' === $form_type && ! $company ) {
             wp_send_json_error( 'Please let me know your game or studio name.' );
         }
@@ -217,12 +212,10 @@ class SI_Forms {
         $admin_url   = admin_url( 'post.php?post=' . $post_id . '&action=edit' );
         $dash        = "\u{2014}"; // em dash, built at runtime so no raw Unicode sits in this file
 
-        // Game music contact form and Thread Finder use the subject formats
-        // called for in the game-music spec; the older forms keep their
-        // original "[Site] New X from Name" style so nothing about them changes.
-        if ( 'game_music_contact' === $form_type ) {
-            $subject = 'New composition enquiry ' . $dash . ' ' . $name;
-        } elseif ( 'thread_finder' === $form_type ) {
+        // Thread Finder uses the subject format called for in the game-music
+        // spec; the older forms keep their original "[Site] New X from Name"
+        // style so nothing about them changes.
+        if ( 'thread_finder' === $form_type ) {
             $subject = 'Thread Finder submission ' . $dash . ' ' . ( $company ? $company : $name );
         } else {
             $subject = '[' . $site_name . '] New ' . $label . ' from ' . $name;
@@ -243,19 +236,12 @@ class SI_Forms {
             $body .= "--- DETAILS ---\n\n";
 
             if ( $company ) {
-                $body .= 'Game / studio name: ' . $company . "\n";
+                $body .= 'Company: ' . $company . "\n";
             }
-
-            $field_labels = array(
-                'project_link'    => 'Link',
-                'message'         => 'Message',
-                'referral_source' => 'How did you hear about this?',
-            );
 
             foreach ( $data as $key => $val ) {
                 if ( ! $val ) continue;
-                $key_label = isset( $field_labels[ $key ] ) ? $field_labels[ $key ] : ucwords( str_replace( '_', ' ', $key ) );
-                $body .= $key_label . ': ' . $val . "\n";
+                $body .= ucwords( str_replace( '_', ' ', $key ) ) . ': ' . $val . "\n";
             }
         }
 

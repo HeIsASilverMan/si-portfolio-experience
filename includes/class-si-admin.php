@@ -97,7 +97,7 @@ class SI_Admin {
             'pricing_complexity_label',
             'pricing_retainer_label', 'pricing_retainer_desc',
             'pricing_email_subject',
-            'form_thread_contact_success', 'form_thread_finder_success',
+            'form_thread_finder_success',
             'lead_magnet_default_name',
         );
         foreach ( $text_fields as $f ) {
@@ -315,17 +315,13 @@ class SI_Admin {
                 <div class="si-section">
                     <h2><?php esc_html_e( 'Game Music Landing Page', 'si-portfolio' ); ?></h2>
                     <p class="si-hint" style="margin:-.5rem 0 1.25rem;">
-                        <?php esc_html_e( 'Draft-only page built from [si_thread_hero], [si_thread_who], [si_thread_method], [si_thread_portfolio], [si_thread_guarantee] and [si_thread_cta]. Keep the WordPress page itself in Draft (or password-protected) until you decide to go live - nothing here publishes it for you.', 'si-portfolio' ); ?>
+                        <?php esc_html_e( 'Draft-only page built from [si_thread_hero], [si_thread_who], [si_thread_method], [si_audio_showcase featured="true"], [si_thread_guarantee] and [si_thread_cta]. Keep the WordPress page itself in Draft (or password-protected) until you decide to go live - nothing here publishes it for you.', 'si-portfolio' ); ?>
                     </p>
 
                     <?php self::field_url(
                         $s, 'thread_contact_url', 'Contact page URL',
-                        '/game-music-composition/contact/',
-                        'Where the "Get in touch" buttons on the game-music page point - the page you place [si_thread_contact] on.'
-                    ); ?>
-                    <?php self::field_text(
-                        $s, 'form_thread_contact_success', 'Contact form - success message',
-                        "Thanks - I'll read this properly and get back to you within a couple of days."
+                        'https://shaneivers.com/composition-enquiry/',
+                        'Where the "Get in touch" buttons on the game-music page point. Reuses the existing composition enquiry form - "Game" is already one of its project-type options.'
                     ); ?>
                     <?php self::field_text(
                         $s, 'form_thread_finder_success', 'Thread Finder - success message',
