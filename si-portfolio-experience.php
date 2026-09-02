@@ -3,7 +3,7 @@
  * Plugin Name:       SI Portfolio Experience
  * Plugin URI:        https://shaneivers.com
  * Description:       Bespoke portfolio plugin for Shane Ivers - composer and learning designer.
- * Version:           1.10.2
+ * Version:           1.11.0
  * Author:            Shane Ivers
  * Author URI:        https://shaneivers.com
  * Text Domain:       si-portfolio
@@ -13,7 +13,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'SI_VERSION',    '1.10.2' );
+define( 'SI_VERSION',    '1.11.0' );
 define( 'SI_PLUGIN_DIR', plugin_dir_path( __FILE__ ) );
 define( 'SI_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 
@@ -75,6 +75,9 @@ function si_body_classes( $classes ) {
         'si_education_timeline', 'si_ld_hero', 'si_about_story', 'si_connect',
         'si_form_composition', 'si_form_learning_design', 'si_posts_list',
         'si_interactive_cv', 'si_pricing_estimator',
+        'si_thread_hero', 'si_thread_who', 'si_thread_method',
+        'si_thread_portfolio', 'si_thread_guarantee', 'si_thread_cta',
+        'si_thread_contact', 'si_thread_finder', 'si_lead_magnet',
     );
     $is_prose = true;
     foreach ( $si_shortcodes as $code ) {

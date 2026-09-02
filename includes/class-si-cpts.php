@@ -8,6 +8,7 @@ class SI_CPTs {
         add_action( 'init',       array( __CLASS__, 'register_portfolio_taxonomy' ) );
         add_action( 'init',       array( __CLASS__, 'register_testimonials' ) );
         add_action( 'init',       array( __CLASS__, 'register_enquiries' ) );
+        add_action( 'init',       array( __CLASS__, 'register_subscribers' ) );
         add_action( 'init',       array( __CLASS__, 'register_pricing_services' ) );
         add_action( 'init',       array( __CLASS__, 'register_pricing_tiers' ) );
         add_action( 'add_meta_boxes', array( __CLASS__, 'add_meta_boxes' ) );
@@ -16,6 +17,9 @@ class SI_CPTs {
         add_filter( 'manage_si_enquiry_posts_columns',       array( __CLASS__, 'enquiry_columns' ) );
         add_action( 'manage_si_enquiry_posts_custom_column', array( __CLASS__, 'enquiry_column_content' ), 10, 2 );
         add_filter( 'manage_edit-si_enquiry_sortable_columns', array( __CLASS__, 'enquiry_sortable_columns' ) );
+        // Subscriber (lead magnet) admin columns
+        add_filter( 'manage_si_subscriber_posts_columns',       array( __CLASS__, 'subscriber_columns' ) );
+        add_action( 'manage_si_subscriber_posts_custom_column', array( __CLASS__, 'subscriber_column_content' ), 10, 2 );
         // Pricing service admin columns
         add_filter( 'manage_si_pricing_service_posts_columns',       array( __CLASS__, 'pricing_service_columns' ) );
         add_action( 'manage_si_pricing_service_posts_custom_column', array( __CLASS__, 'pricing_service_column_content' ), 10, 2 );
@@ -103,6 +107,29 @@ class SI_CPTs {
         ) );
     }
 
+    public static function register_subscribers() {
+        $labels = array(
+            'name'               => 'Subscribers',
+            'singular_name'      => 'Subscriber',
+            'all_items'          => 'Subscribers',
+            'view_item'          => 'View Subscriber',
+            'search_items'       => 'Search Subscribers',
+            'not_found'          => 'No subscribers yet.',
+            'not_found_in_trash' => 'No subscribers in trash.',
+        );
+        register_post_type( 'si_subscriber', array(
+            'labels'       => $labels,
+            'public'       => false,
+            'show_ui'      => true,
+            'show_in_menu' => 'edit.php?post_type=si_portfolio',
+            'supports'     => array( 'title' ),
+            'capabilities' => array(
+                'create_posts' => 'do_not_allow',
+            ),
+            'map_meta_cap' => true,
+        ) );
+    }
+
     public static function register_pricing_services() {
         $labels = array(
             'name'          => 'Pricing Services',
@@ -158,7 +185,7 @@ class SI_CPTs {
         switch ( $col ) {
             case 'si_enq_type':
                 $type = get_post_meta( $post_id, '_si_enquiry_type', true );
-                echo 'composition' === $type ? 'Composition' : 'Learning Design';
+                echo esc_html( class_exists( 'SI_Forms' ) ? SI_Forms::type_label( $type ) : $type );
                 break;
             case 'si_enq_name':
                 echo esc_html( get_post_meta( $post_id, '_si_contact_name', true ) );
@@ -189,6 +216,31 @@ class SI_CPTs {
         $cols['si_enq_status'] = 'si_enq_status';
         $cols['si_enq_type']   = 'si_enq_type';
         return $cols;
+    }
+
+    // -------------------------------------------------------
+    // Subscriber (lead magnet) admin columns
+    // -------------------------------------------------------
+
+    public static function subscriber_columns( $cols ) {
+        return array(
+            'cb'             => $cols['cb'],
+            'title'          => 'Email',
+            'si_sub_name'    => 'Name',
+            'si_sub_magnet'  => 'Lead Magnet',
+            'date'           => 'Subscribed',
+        );
+    }
+
+    public static function subscriber_column_content( $col, $post_id ) {
+        switch ( $col ) {
+            case 'si_sub_name':
+                echo esc_html( get_post_meta( $post_id, '_si_subscriber_name', true ) );
+                break;
+            case 'si_sub_magnet':
+                echo esc_html( get_post_meta( $post_id, '_si_subscriber_magnet_name', true ) );
+                break;
+        }
     }
 
     // -------------------------------------------------------

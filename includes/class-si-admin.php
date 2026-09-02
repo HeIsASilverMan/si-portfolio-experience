@@ -72,6 +72,7 @@ class SI_Admin {
         // URL fields
         $url_fields = array(
             'linkedin_url', 'spotify_url', 'soundcloud_url', 'patreon_url',
+            'thread_contact_url', 'lead_magnet_default_file',
         );
         foreach ( $url_fields as $f ) {
             $clean[ $f ] = isset( $input[ $f ] ) ? esc_url_raw( $input[ $f ] ) : '';
@@ -96,6 +97,8 @@ class SI_Admin {
             'pricing_complexity_label',
             'pricing_retainer_label', 'pricing_retainer_desc',
             'pricing_email_subject',
+            'form_thread_contact_success', 'form_thread_finder_success',
+            'lead_magnet_default_name',
         );
         foreach ( $text_fields as $f ) {
             $clean[ $f ] = isset( $input[ $f ] ) ? sanitize_text_field( $input[ $f ] ) : '';
@@ -305,6 +308,48 @@ class SI_Admin {
                     <?php self::field_text(
                         $s, 'form_ld_success', 'Learning design form — success message',
                         "You're in. Thanks for reaching out. I'll be in touch within 2 working days."
+                    ); ?>
+                </div>
+
+                <!-- ── Game Music Landing Page ───────────────────── -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Game Music Landing Page', 'si-portfolio' ); ?></h2>
+                    <p class="si-hint" style="margin:-.5rem 0 1.25rem;">
+                        <?php esc_html_e( 'Draft-only page built from [si_thread_hero], [si_thread_who], [si_thread_method], [si_thread_portfolio], [si_thread_guarantee] and [si_thread_cta]. Keep the WordPress page itself in Draft (or password-protected) until you decide to go live - nothing here publishes it for you.', 'si-portfolio' ); ?>
+                    </p>
+
+                    <?php self::field_url(
+                        $s, 'thread_contact_url', 'Contact page URL',
+                        '/game-music-composition/contact/',
+                        'Where the "Get in touch" buttons on the game-music page point - the page you place [si_thread_contact] on.'
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'form_thread_contact_success', 'Contact form - success message',
+                        "Thanks - I'll read this properly and get back to you within a couple of days."
+                    ); ?>
+                    <?php self::field_text(
+                        $s, 'form_thread_finder_success', 'Thread Finder - success message',
+                        "Got it - I'll read through this properly and get back to you.",
+                        'The Thread Finder ([si_thread_finder]) is a private follow-up questionnaire - link it directly to clients once they\'ve been in touch and want a proposal. It is not linked from the landing page itself.'
+                    ); ?>
+                </div>
+
+                <!-- Lead Magnet -->
+                <div class="si-section">
+                    <h2><?php esc_html_e( 'Lead Magnet', 'si-portfolio' ); ?></h2>
+                    <p class="si-hint" style="margin:-.5rem 0 1.25rem;">
+                        <?php esc_html_e( 'Powers [si_lead_magnet]. Upload the download to the Media Library and paste its URL below. Signups are stored under Portfolio Projects > Subscribers and the file link is emailed automatically - no autoresponder sequence, just the one delivery email plus a notice to you.', 'si-portfolio' ); ?>
+                    </p>
+
+                    <?php self::field_text(
+                        $s, 'lead_magnet_default_name', 'Default lead magnet name',
+                        'Free guide',
+                        'Shown in the signup copy and the email subject. Override per placement with the magnet="" shortcode attribute plus matching lead_magnet_{slug}_name / _file settings.'
+                    ); ?>
+                    <?php self::field_url(
+                        $s, 'lead_magnet_default_file', 'Default lead magnet file URL',
+                        'https://shaneivers.com/wp-content/uploads/...',
+                        'Direct link emailed to new subscribers.'
                     ); ?>
                 </div>
 
