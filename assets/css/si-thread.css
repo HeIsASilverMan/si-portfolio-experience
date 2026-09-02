@@ -176,6 +176,56 @@
 }
 
 /* ── The Thread Method ───────────────────────────────────── */
+
+/* Fine gold threads criss-crossing behind the section, each with a slow
+   travelling glint (a short bright dash chasing itself along the path via
+   stroke-dashoffset) -- the "weaving" idea made literal without needing JS
+   or an image. */
+.si-thread-method__threads {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.si-thread-method__threads svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+.si-thread-method__thread-base {
+    fill: none;
+    stroke: var(--si-accent-warm);
+    stroke-width: 1;
+    stroke-linecap: round;
+    opacity: 0.1;
+}
+
+.si-thread-method__thread-glint {
+    fill: none;
+    stroke: var(--si-accent-glow);
+    stroke-width: 1.4;
+    stroke-linecap: round;
+    opacity: 0.85;
+    stroke-dasharray: 5 550;
+    animation: si-thread-glint linear infinite;
+}
+
+@keyframes si-thread-glint {
+    from { stroke-dashoffset: 555;  }
+    to   { stroke-dashoffset: -555; }
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+    .si-thread-method__thread-glint {
+        animation: none;
+        stroke-dasharray: none;
+        opacity: 0.16;
+    }
+}
+
 .si-thread-method__inner {
     position: relative;
     z-index: 1;

@@ -30,6 +30,33 @@ $steps = array(
 
 <section class="si-scope si-thread-method" id="si-thread-method" aria-labelledby="si-thread-method-heading">
 
+    <!-- Fine gold threads criss-crossing behind the steps, each with a slow
+         travelling glint - the "weaving" motif made literal. Purely
+         decorative: aria-hidden, and the glint animation is switched off
+         under prefers-reduced-motion (see si-thread.css). -->
+    <div class="si-thread-method__threads si-reveal" aria-hidden="true">
+        <svg viewBox="0 0 1000 700" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <?php
+            $threads = array(
+                array( 'd' => 'M-20,120 Q400,40 1020,160',  'dur' => '9s',  'delay' => '0s'    ),
+                array( 'd' => 'M-20,460 L1020,90',          'dur' => '12s', 'delay' => '-3s'   ),
+                array( 'd' => 'M120,-20 L780,720',          'dur' => '10s', 'delay' => '-6s'   ),
+                array( 'd' => 'M880,-20 L220,720',          'dur' => '14s', 'delay' => '-1.5s' ),
+                array( 'd' => 'M-20,560 Q500,660 1020,520', 'dur' => '11s', 'delay' => '-8s'   ),
+                array( 'd' => 'M-20,650 Q500,560 1020,650', 'dur' => '13s', 'delay' => '-4.5s' ),
+            );
+            foreach ( $threads as $t ) :
+            ?>
+            <path class="si-thread-method__thread-base" d="<?php echo esc_attr( $t['d'] ); ?>"></path>
+            <path
+                class="si-thread-method__thread-glint"
+                d="<?php echo esc_attr( $t['d'] ); ?>"
+                style="animation-duration: <?php echo esc_attr( $t['dur'] ); ?>; animation-delay: <?php echo esc_attr( $t['delay'] ); ?>;"
+            ></path>
+            <?php endforeach; ?>
+        </svg>
+    </div>
+
     <div class="si-thread-method__inner">
 
         <div class="si-thread-method__header si-reveal">
